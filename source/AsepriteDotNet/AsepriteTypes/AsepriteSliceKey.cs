@@ -59,12 +59,12 @@ public class AsepriteSliceKey
     ///     <see cref="Slice"/> contains pivot information,
     ///     <see langword="null"/> if not.
     /// </summary>
-    public Point? Pivot { get; }
+    public Location? Pivot { get; }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="AsepriteSliceKey"/> class.
     /// </summary>
-    internal AsepriteSliceKey(AsepriteSlice slice, int frame, Rectangle bounds, Rectangle? center, Point? pivot)
+    internal AsepriteSliceKey(AsepriteSlice slice, int frame, Rectangle bounds, Rectangle? center, Location? pivot)
     {
         Slice = slice;
         slice.AddKey(this);

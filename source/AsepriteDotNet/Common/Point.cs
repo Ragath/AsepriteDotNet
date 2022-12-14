@@ -23,22 +23,22 @@ using System.Diagnostics.CodeAnalysis;
 namespace AsepriteDotNet.Common;
 
 /// <summary>
-///     Represents an x- and y-coordinate point in a two dimensional plane.
+///     Represents an x- and y-coordinate location in a two dimensional plane.
 /// </summary>
-public struct Point : IEquatable<Point>
+public struct Location : IEquatable<Location>
 {
 
     /// <summary>
-    ///     Represents a <see cref="Point"/> value who's x- and y-coordinate
+    ///     Represents a <see cref="Location"/> value who's x- and y-coordinate
     ///     elements are initialized to zero.
     /// </summary>
-    public static readonly Point Empty = new Point(0, 0);
+    public static readonly Location Empty = new Location(0, 0);
 
     private int _x;
     private int _y;
 
     /// <summary>
-    ///     Gets the x-coordinate element of this <see cref="Point"/>.
+    ///     Gets the x-coordinate element of this <see cref="Location"/>.
     /// </summary>
     public int X
     {
@@ -47,7 +47,7 @@ public struct Point : IEquatable<Point>
     }
 
     /// <summary>
-    ///     Gets the y-coordinate element of this <see cref="Point"/>.
+    ///     Gets the y-coordinate element of this <see cref="Location"/>.
     /// </summary>
     public int Y
     {
@@ -56,190 +56,190 @@ public struct Point : IEquatable<Point>
     }
 
     /// <summary>
-    ///     Gets a value that indicates whether this <see cref="Point"/> is
+    ///     Gets a value that indicates whether this <see cref="Location"/> is
     ///     empty, meaning that its x- and y-coordinate elements are set to
     ///     zero.
     /// </summary>
     public readonly bool IsEmpty => _x == 0 && _y == 0;
 
     /// <summary>
-    ///     Initializes a new <see cref="Point"/> value.
+    ///     Initializes a new <see cref="Location"/> value.
     /// </summary>
     /// <param name="x">
-    ///     The x-coordinate element of this <see cref="Point"/>.
+    ///     The x-coordinate element of this <see cref="Location"/>.
     /// </param>
     /// <param name="y">
-    ///     The y-coordinate element of this <see cref="Point"/>.
+    ///     The y-coordinate element of this <see cref="Location"/>.
     /// </param>
-    public Point(int x, int y) => (_x, _y) = (x, y);
+    public Location(int x, int y) => (_x, _y) = (x, y);
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 
-    ///     <see cref="object"/> is equal to this <see cref="Point"/>.
+    ///     <see cref="object"/> is equal to this <see cref="Location"/>.
     /// </summary>
     /// <param name="obj">
     ///     The <see cref="object"/> to check for equality with this 
-    ///     <see cref="Point"/>.
+    ///     <see cref="Location"/>.
     /// </param>
     /// <returns>
     ///     <see langword="true"/> if the specified <see cref="object"/> is
-    ///     equal to this <see cref="Point"/>; otherwise, 
+    ///     equal to this <see cref="Location"/>; otherwise, 
     ///     <see langword="false"/>.
     /// </returns>
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Point other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Location other && Equals(other);
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 
-    ///     <see cref="Point"/> is equal to this <see cref="Point"/>.
+    ///     <see cref="Location"/> is equal to this <see cref="Location"/>.
     /// </summary>
     /// <param name="other">
-    ///     The other <see cref="Point"/> to check for equality
+    ///     The other <see cref="Location"/> to check for equality
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the specified <see cref="Point"/> value
-    ///     is equal to this <see cref="Point"/> value; otherwise,
+    ///     <see langword="true"/> if the specified <see cref="Location"/> value
+    ///     is equal to this <see cref="Location"/> value; otherwise,
     ///     <see langword="false"/>.
     /// </returns>
-    public readonly bool Equals(Point other) => this == other;
+    public readonly bool Equals(Location other) => this == other;
 
     /// <summary>   
-    ///     Returns the hash code for this <see cref="Point"/> value.
+    ///     Returns the hash code for this <see cref="Location"/> value.
     /// </summary>
     /// <returns>
     ///     A 32-bit signed integer that is the hash code for this
-    ///     <see cref="Point"/> value.
+    ///     <see cref="Location"/> value.
     /// </returns>
     public override readonly int GetHashCode() => HashCode.Combine(_x, _y);
 
     /// <summary>
-    ///     Adds the x- and y-coordinate elements of two <see cref="Point"/>
+    ///     Adds the x- and y-coordinate elements of two <see cref="Location"/>
     ///     values.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Point"/> value on the left side of the addition
+    ///     The <see cref="Location"/> value on the left side of the addition
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Point"/> value on the right side fo the addition
+    ///     The <see cref="Location"/> value on the right side fo the addition
     ///     operator.
     /// </param>
     /// <returns>
-    ///     A new <see cref="Point"/> value who's x- and y-coordinate elements
-    ///     are the sum of the two <see cref="Point"/> values given.
+    ///     A new <see cref="Location"/> value who's x- and y-coordinate elements
+    ///     are the sum of the two <see cref="Location"/> values given.
     /// </returns>
-    public static Point operator +(Point left, Point right) => Add(left, right);
+    public static Location operator +(Location left, Location right) => Add(left, right);
 
     /// <summary>
     ///     Subtracts the x- and y-coordinate elements of one
-    ///     <see cref="Point"/> value from another.
+    ///     <see cref="Location"/> value from another.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Point"/> value on the left side of the subtraction
+    ///     The <see cref="Location"/> value on the left side of the subtraction
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Point"/> value on the right side fo the subtraction
+    ///     The <see cref="Location"/> value on the right side fo the subtraction
     ///     operator.
     /// </param>
     /// <returns>
-    ///     A new <see cref="Point"/> value who's x- and y-coordinate elements
+    ///     A new <see cref="Location"/> value who's x- and y-coordinate elements
     ///     are the result of subtracting the x- and y-coordinate elements of the
-    ///     <paramref name="right"/> <see cref="Point"/> from the x- and
+    ///     <paramref name="right"/> <see cref="Location"/> from the x- and
     ///     y-coordinate elements of the <paramref name="left"/> 
-    ///     <see cref="Point"/>.
+    ///     <see cref="Location"/>.
     /// </returns>
-    public static Point operator -(Point left, Point right) => Subtract(left, right);
+    public static Location operator -(Location left, Location right) => Subtract(left, right);
 
     /// <summary>
-    ///     Compares two <see cref="Point"/> values for equality.
+    ///     Compares two <see cref="Location"/> values for equality.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Point"/> value on the left side of the equality
+    ///     The <see cref="Location"/> value on the left side of the equality
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Point"/> value on the right side of the equality
+    ///     The <see cref="Location"/> value on the right side of the equality
     ///     operator.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the two <see cref="Point"/> values are
+    ///     <see langword="true"/> if the two <see cref="Location"/> values are
     ///     equal; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool operator ==(Point left, Point right) => left._x == right._x && left._y == right._y;
+    public static bool operator ==(Location left, Location right) => left._x == right._x && left._y == right._y;
 
     /// <summary>
-    ///     Compares two <see cref="Point"/> values for inequality.
+    ///     Compares two <see cref="Location"/> values for inequality.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Point"/> value on the left side of the inequality
+    ///     The <see cref="Location"/> value on the left side of the inequality
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Point"/> value on the right side of the inequality
+    ///     The <see cref="Location"/> value on the right side of the inequality
     ///     operator.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the two <see cref="Point"/> values are
+    ///     <see langword="true"/> if the two <see cref="Location"/> values are
     ///     unequal; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool operator !=(Point left, Point right) => !(left == right);
+    public static bool operator !=(Location left, Location right) => !(left == right);
 
     /// <summary>
     ///     Adds the x- and y-coordinate elements of <paramref name="point2"/>
     ///     to the x- and y-coordinate elements of <paramref name="point1"/>.
-    ///     The result is a new <see cref="Point"/> value where the x- and
+    ///     The result is a new <see cref="Location"/> value where the x- and
     ///     y-coordinate elements are the result of the addition.
     ///     (point1 + point2)
     /// </summary>
     /// <param name="point1">
-    ///     The <see cref="Point"/> value that will have the x- and y-coordinate
+    ///     The <see cref="Location"/> value that will have the x- and y-coordinate
     ///     elements of <paramref name="point2"/> added to its x- and
     ///     y-coordinate elements.
     /// </param>
     /// <param name="point2">
-    ///     The <see cref="Point"/> value who's x- and y-coordinate elements 
+    ///     The <see cref="Location"/> value who's x- and y-coordinate elements 
     ///     will be added to the x- and y-coordinate elements of 
     ///     <paramref name="point1"/>.
     /// </param>
     /// <returns>
-    ///     A new <see cref="Point"/> value who's x- and y-coordinate elements
+    ///     A new <see cref="Location"/> value who's x- and y-coordinate elements
     ///     are  the result of adding the x- and y-coordinate elements of
     ///     <paramref name="point2"/> to the x- and y-coordinate elements of
     ///     <paramref name="point1"/>.
     /// </returns>
-    public static Point Add(Point point1, Point point2) => new Point(unchecked(point1._x + point2._x), unchecked(point1._y + point2._y));
+    public static Location Add(Location point1, Location point2) => new Location(unchecked(point1._x + point2._x), unchecked(point1._y + point2._y));
 
     /// <summary>
     ///     Subtracts the x- and y-coordinate elements of 
     ///     <paramref name="point2"/> from the x- and y-coordinate elements of
-    ///     <paramref name="point1"/>.  The result is a new <see cref="Point"/>
+    ///     <paramref name="point1"/>.  The result is a new <see cref="Location"/>
     ///     value where the x- and y-coordinate elements are the result of the
     ///     subtraction.
     ///     (point1 - point2)
     /// </summary>
     /// <param name="point1">
-    ///     The <see cref="Point"/> value that will have the x- and y-coordinate
+    ///     The <see cref="Location"/> value that will have the x- and y-coordinate
     ///     elements of <paramref name="point2"/> subtracted from it's
     ///     x- and y-coordinate elements.
     /// </param>
     /// <param name="point2">
-    ///     The <see cref="Point"/> value who's x- and y-coordinate elements
+    ///     The <see cref="Location"/> value who's x- and y-coordinate elements
     ///     will be subtracted from the x- and y-coordinate elements of
     ///     <paramref name="point1"/>.
     /// </param>
     /// <returns>
-    ///     A new <see cref="Point"/> value who's x- and y-coordinate elements
+    ///     A new <see cref="Location"/> value who's x- and y-coordinate elements
     ///     are  the result of subtracting the x- and y-coordinate elements of
     ///     <paramref name="point2"/> from the x- and y-coordinate elements of 
     ///     <paramref name="point1"/>.
     /// </returns>
-    public static Point Subtract(Point point1, Point point2) => new Point(unchecked(point1._x - point2._x), unchecked(point1._y - point2._y));
+    public static Location Subtract(Location point1, Location point2) => new Location(unchecked(point1._x - point2._x), unchecked(point1._y - point2._y));
 
     /// <summary>
-    ///     Returns a string representation of this <see cref="Point"/>.
+    ///     Returns a string representation of this <see cref="Location"/>.
     /// </summary>
     /// <returns>
-    ///     A new string representation of this <see cref="Point"/>.
+    ///     A new string representation of this <see cref="Location"/>.
     /// </returns>
     public override readonly string ToString() => $"{{X={X}, Y={Y}}}";
 }

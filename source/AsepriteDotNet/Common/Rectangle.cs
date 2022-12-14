@@ -58,12 +58,12 @@ public struct Rectangle : IEquatable<Rectangle>
     }
 
     /// <summary>
-    ///     Gets or Sets a <see cref="Point"/> value that defines the x- and
+    ///     Gets or Sets a <see cref="Common.Location"/> value that defines the x- and
     ///     y-coordinate location of this <see cref="Rectangle"/>.
     /// </summary>
-    public Point Location
+    public Location Location
     {
-        readonly get => new Point(X, Y);
+        readonly get => new Location(X, Y);
         set
         {
             X = value.X;
@@ -155,14 +155,14 @@ public struct Rectangle : IEquatable<Rectangle>
     ///     Initializes a new <see cref="Rectangle"/> value.
     /// </summary>
     /// <param name="location">
-    ///     A <see cref="Point"/> value that defines the x- and y-coordinate
+    ///     A <see cref="Common.Location"/> value that defines the x- and y-coordinate
     ///     elements of this <see cref="Rectangle"/>.
     /// </param>
     /// <param name="size">
     ///     A <see cref="Size"/> value that defines the width and height
     ///     elements of this <see cref="Rectangle"/>.
     /// </param>
-    public Rectangle(Point location, Size size) : this(location.X, location.Y, size.Width, size.Height) { }
+    public Rectangle(Location location, Size size) : this(location.X, location.Y, size.Width, size.Height) { }
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 

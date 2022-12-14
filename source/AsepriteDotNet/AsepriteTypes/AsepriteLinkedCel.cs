@@ -37,6 +37,6 @@ public sealed class AsepriteLinkedCel : AsepriteCel
     /// </summary>
     public AsepriteCel Cel { get; }
 
-    internal AsepriteLinkedCel(AsepriteCel other, AsepriteLayer layer, Point position, int opacity)
+    internal AsepriteLinkedCel(AsepriteCel other, AsepriteLayer layer, Location position, int opacity)
         : base(layer, position, opacity) => Cel = other;
 }

@@ -23,34 +23,52 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Common;
 
-namespace AsepriteDotNet.AsepriteTypes;
+namespace AsepriteDotNet.Tests;
 
-/// <summary>
-///     Represents a single frame cel of an Aseprite image.
-/// </summary>
-public abstract class AsepriteCel : IAsepriteUserData
+public sealed class LocationTests
 {
-    /// <summary>
-    ///     Gets the <see cref="Layer"/> that this <see cref="AsepriteCel"/> is on.
-    /// </summary>
-    public AsepriteLayer Layer { get; internal set; }
+    [Fact]
+    public void Location_AddTest()
+    {
+        Location left = new Location(1, 2);
+        Location right = new Location(3, 4);
 
-    /// <summary>
-    ///     Gets the top-left coordinate position of this <see cref="AsepriteCel"/>
-    ///     relative to the bounds of the sprite.
-    /// </summary>
-    public Location Position { get; }
+        Location expected = new Location(4, 6);
 
-    /// <summary>
-    ///     Gets the opacity level of this <see cref="AsepriteCel"/>,
-    /// </summary>
-    public int Opacity { get; }
+        Assert.Equal(expected, Location.Add(left, right));
+        Assert.Equal(expected, left + right);
+    }
 
-    /// <summary>
-    ///     Gets the <see cref="UserData"/> set for this <see cref="AsepriteCel"/>.
-    /// </summary>
-    public AsepriteUserData UserData { get; set; } = new();
+    [Fact]
+    public void Location_SubtractTest()
+    {
+        Location left = new Location(1, 2);
+        Location right = new Location(3, 4);
 
-    internal AsepriteCel(AsepriteLayer layer, Location position, int opacity) =>
-        (Layer, Position, Opacity) = (layer, position, opacity);
+        Location expected = new Location(-2, -2);
+
+        Assert.Equal(expected, Location.Subtract(left, right));
+        Assert.Equal(expected, left - right);
+    }
+
+    [Fact]
+    public void Location_EqualTest()
+    {
+        Location a = new Location(1, 2);
+        Location b = new Location(1, 2);
+
+        Assert.True(a == b);
+        Assert.True(a.Equals(b));
+        Assert.True(a.Equals((object)b));
+        Assert.False(a == Location.Empty);
+        Assert.False(a.Equals(Location.Empty));
+        Assert.False(a.Equals((object)Location.Empty));
+    }
+
+    [Fact]
+    public void Location_NotEqualTest()
+    {
+        Assert.True(Location.Empty != new Location(1, 2));
+        Assert.False(Location.Empty != new Location(0, 0));
+    }
 }

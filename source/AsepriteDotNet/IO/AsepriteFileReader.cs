@@ -324,7 +324,7 @@ public static class AsepriteFileReader
                     _ = stream.ReadBytes(7);                //  For future (set to zero)
 
                     AsepriteCel cel;
-                    Point position = new Point(x, y);
+                    Location position = new Location(x, y);
                     AsepriteLayer celLayer = doc.Layers[index];
 
                     if (type == ASE_CEL_TYPE_RAW_IMAGE)
@@ -546,7 +546,7 @@ public static class AsepriteFileReader
 
                         Rectangle bounds = new Rectangle(x, y, (int)w, (int)h);
                         Rectangle? center = default;
-                        Point? pivot = default;
+                        Location? pivot = default;
 
                         if (slice.IsNinePatch)
                         {
@@ -563,7 +563,7 @@ public static class AsepriteFileReader
                             int px = stream.ReadLong(); //  Pivot X position (relative to the slice origin)
                             int py = stream.ReadLong(); //  Pivot Y position (relative to the slice origin)
 
-                            pivot = new Point(px, py);
+                            pivot = new Location(px, py);
                         }
 
                         AsepriteSliceKey key = new(slice, (int)startFrame, bounds, center, pivot);

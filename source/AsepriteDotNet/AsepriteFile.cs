@@ -403,7 +403,7 @@ public sealed class AsepriteFile
                 Rgba32 color = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                 Rectangle bounds = key.Bounds;
                 Rectangle? center = key.CenterBounds;
-                Point? pivot = key.Pivot;
+                Location? pivot = key.Pivot;
                 SpritesheetSlice sheetSlice = new(bounds, center, pivot, name, color);
 
                 if (lastKey is not null && lastKey.Frame < key.Frame)
@@ -414,7 +414,7 @@ public sealed class AsepriteFile
                         Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                         Rectangle interpolatedBounds = lastKey.Bounds;
                         Rectangle? interpolatedCenter = lastKey.CenterBounds;
-                        Point? interpolatedPivot = lastKey.Pivot;
+                        Location? interpolatedPivot = lastKey.Pivot;
 
                         SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
 
@@ -434,7 +434,7 @@ public sealed class AsepriteFile
                     Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                     Rectangle interpolatedBounds = lastKey.Bounds;
                     Rectangle? interpolatedCenter = lastKey.CenterBounds;
-                    Point? interpolatedPivot = lastKey.Pivot;
+                    Location? interpolatedPivot = lastKey.Pivot;
 
                     SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
 

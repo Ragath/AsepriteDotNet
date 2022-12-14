@@ -48,7 +48,7 @@ public sealed class SpritesheetSlice
     ///     Gets the pivot point for this slice if it has a pivot point;
     ///     otherwise, <see langword="null"/>.
     /// </summary>
-    public Point? Pivot { get; }
+    public Location? Pivot { get; }
 
     /// <summary>
     ///     Gets the name of this <see cref="SpritesheetSlice"/>.
@@ -60,6 +60,6 @@ public sealed class SpritesheetSlice
     /// </summary>
     public Rgba32 Color { get; }
 
-    internal SpritesheetSlice(Rectangle bounds, Rectangle? centerBounds, Point? pivot, string name, Rgba32 color) =>
+    internal SpritesheetSlice(Rectangle bounds, Rectangle? centerBounds, Location? pivot, string name, Rgba32 color) =>
         (Bounds, CenterBounds, Pivot, Name, Color) = (bounds, centerBounds, pivot, name, color);
 }

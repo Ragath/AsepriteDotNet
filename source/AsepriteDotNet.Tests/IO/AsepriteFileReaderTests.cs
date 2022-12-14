@@ -113,7 +113,7 @@ public sealed class AsepriteFileReaderTest
         AsepriteImageCel fgCel = Assert.IsType<AsepriteImageCel>(doc.Frames[2].Cels[1]);
         Assert.Equal("foreground", fgCel.Layer.Name);
         Assert.Equal(new Size(16, 16), fgCel.Size);
-        Assert.Equal(new Point(8, 8), fgCel.Position);
+        Assert.Equal(new Location(8, 8), fgCel.Position);
         Assert.Equal(fgCel.Size.Width * fgCel.Size.Height, fgCel.Pixels.Length);
     }
 

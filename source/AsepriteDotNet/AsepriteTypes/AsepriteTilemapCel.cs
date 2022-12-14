@@ -72,7 +72,7 @@ public sealed class AsepriteTilemapCel : AsepriteCel
     /// </remarks>
     public AsepriteTile[] Tiles { get; }
 
-    internal AsepriteTilemapCel(Size size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Point position, int opacity)
+    internal AsepriteTilemapCel(Size size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Location position, int opacity)
         : base(layer, position, opacity)
     {
         Size = size;

@@ -48,7 +48,7 @@ public sealed class AsepriteImageCel : AsepriteCel
     /// </remarks>
     public Rgba32[] Pixels { get; } = Array.Empty<Rgba32>();
 
-    internal AsepriteImageCel(Size size, Rgba32[] pixels, AsepriteLayer layer, Point position, int opacity)
+    internal AsepriteImageCel(Size size, Rgba32[] pixels, AsepriteLayer layer, Location position, int opacity)
         : base(layer, position, opacity) => (Size, Pixels) = (size, pixels);
 
     /// <summary>
