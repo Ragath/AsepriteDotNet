@@ -544,8 +544,8 @@ public static class AsepriteFileReader
                         uint w = stream.ReadDword();            //  Slice Width (can be 0 if slice is hidden)
                         uint h = stream.ReadDword();            //  Slice Height (can be 0 if slice is hidden)
 
-                        Rectangle bounds = new Rectangle(x, y, (int)w, (int)h);
-                        Rectangle? center = default;
+                        BoundingBox bounds = new BoundingBox(x, y, (int)w, (int)h);
+                        BoundingBox? center = default;
                         Location? pivot = default;
 
                         if (slice.IsNinePatch)
@@ -555,7 +555,7 @@ public static class AsepriteFileReader
                             uint cw = stream.ReadDword();   //  Center width
                             uint ch = stream.ReadDword();   //  Center height
 
-                            center = new Rectangle(cx, cy, (int)cw, (int)ch);
+                            center = new BoundingBox(cx, cy, (int)cw, (int)ch);
                         }
 
                         if (slice.HasPivot)

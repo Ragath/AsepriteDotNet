@@ -34,7 +34,7 @@ public sealed class TilesheetTile
     ///     Gets the bounds of this <see cref="TilesheetTile"/> relative to the
     ///     overall tilesheet.
     /// </summary>
-    public Rectangle SourceRectangle { get; }
+    public BoundingBox SourceRectangle { get; }
 
-    internal TilesheetTile(Rectangle source) => SourceRectangle = source;
+    internal TilesheetTile(BoundingBox source) => SourceRectangle = source;
 }

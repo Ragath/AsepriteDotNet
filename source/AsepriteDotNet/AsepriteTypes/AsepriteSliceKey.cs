@@ -46,13 +46,13 @@ public class AsepriteSliceKey
     /// <summary>
     ///     Gets the bounds of this <see cref="AsepriteSliceKey"/>.
     /// </summary>
-    public Rectangle Bounds { get; }
+    public BoundingBox Bounds { get; }
 
     /// <summary>
     ///     Gets the bounds of the 9-patch center rectangle if it is part of
     ///     a 9-patch <see cref="Slice"/>, <see langword="null"/> if not.
     /// </summary>
-    public Rectangle? CenterBounds { get; }
+    public BoundingBox? CenterBounds { get; }
 
     /// <summary>
     ///     Gets the xy-coordinate pivot point relative the origin of if the
@@ -64,7 +64,7 @@ public class AsepriteSliceKey
     /// <summary>
     ///     Initializes a new instance of the <see cref="AsepriteSliceKey"/> class.
     /// </summary>
-    internal AsepriteSliceKey(AsepriteSlice slice, int frame, Rectangle bounds, Rectangle? center, Location? pivot)
+    internal AsepriteSliceKey(AsepriteSlice slice, int frame, BoundingBox bounds, BoundingBox? center, Location? pivot)
     {
         Slice = slice;
         slice.AddKey(this);

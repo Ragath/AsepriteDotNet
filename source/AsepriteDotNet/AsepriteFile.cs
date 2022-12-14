@@ -321,7 +321,7 @@ public sealed class AsepriteFile
                 }
 
                 //  Now create the frame data
-                Rectangle sourceRectangle = new(0, 0, Size.Width, Size.Height);
+                BoundingBox sourceRectangle = new(0, 0, Size.Width, Size.Height);
                 sourceRectangle.X += options.BorderPadding;
                 sourceRectangle.Y += options.BorderPadding;
 
@@ -401,8 +401,8 @@ public sealed class AsepriteFile
 
                 string name = slice.Name;
                 Rgba32 color = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                Rectangle bounds = key.Bounds;
-                Rectangle? center = key.CenterBounds;
+                BoundingBox bounds = key.Bounds;
+                BoundingBox? center = key.CenterBounds;
                 Location? pivot = key.Pivot;
                 SpritesheetSlice sheetSlice = new(bounds, center, pivot, name, color);
 
@@ -412,8 +412,8 @@ public sealed class AsepriteFile
                     {
                         string interpolatedName = slice.Name;
                         Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                        Rectangle interpolatedBounds = lastKey.Bounds;
-                        Rectangle? interpolatedCenter = lastKey.CenterBounds;
+                        BoundingBox interpolatedBounds = lastKey.Bounds;
+                        BoundingBox? interpolatedCenter = lastKey.CenterBounds;
                         Location? interpolatedPivot = lastKey.Pivot;
 
                         SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
@@ -432,8 +432,8 @@ public sealed class AsepriteFile
                 {
                     string interpolatedName = slice.Name;
                     Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                    Rectangle interpolatedBounds = lastKey.Bounds;
-                    Rectangle? interpolatedCenter = lastKey.CenterBounds;
+                    BoundingBox interpolatedBounds = lastKey.Bounds;
+                    BoundingBox? interpolatedCenter = lastKey.CenterBounds;
                     Location? interpolatedPivot = lastKey.Pivot;
 
                     SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
