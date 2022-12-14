@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Common;
-using AsepriteDotNet.Document;
+using AsepriteDotNet.AsepriteTypes;
 using AsepriteDotNet.IO;
 
 namespace AsepriteDotNet.Tests;
@@ -67,7 +67,7 @@ public sealed class AsepriteFileReaderTest
 
         //  Validate Layers
         Assert.Equal(11, doc.Layers.Count);
-        Assert.IsType<ImageLayer>(doc.Layers[0]);
+        Assert.IsType<AsepriteImageLayer>(doc.Layers[0]);
         Assert.True(doc.Layers[0].IsBackgroundLayer);
         Assert.Equal("background", doc.Layers[0].Name);
         Assert.True(doc.Layers[0].IsVisible);
@@ -83,8 +83,8 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal("blendmode-difference", doc.Layers[5].Name);
         Assert.Equal(BlendMode.Difference, doc.Layers[5].BlendMode);
         Assert.Equal("tilemap", doc.Layers[6].Name);
-        Assert.Equal(0, Assert.IsType<TilemapLayer>(doc.Layers[6]).Tileset.ID);
-        Assert.Equal(2, Assert.IsType<GroupLayer>(doc.Layers[7]).Children.Count);
+        Assert.Equal(0, Assert.IsType<AsepriteTilemapLayer>(doc.Layers[6]).Tileset.ID);
+        Assert.Equal(2, Assert.IsType<AsepriteGroupLayer>(doc.Layers[7]).Children.Count);
         Assert.Equal(1, doc.Layers[8].ChildLevel);
         Assert.Equal(1, doc.Layers[9].ChildLevel);
 
@@ -110,7 +110,7 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal(2, doc.Frames[0].Cels.Count);  //  Background and Reference Layer cels
 
         //  Validate Cels
-        ImageCel fgCel = Assert.IsType<ImageCel>(doc.Frames[2].Cels[1]);
+        AsepriteImageCel fgCel = Assert.IsType<AsepriteImageCel>(doc.Frames[2].Cels[1]);
         Assert.Equal("foreground", fgCel.Layer.Name);
         Assert.Equal(new Size(16, 16), fgCel.Size);
         Assert.Equal(new Point(8, 8), fgCel.Position);
@@ -157,7 +157,7 @@ public sealed class AsepriteFileReaderTest
             pal0, pal9, pal1, pal8, pal2, pal7, pal3, pal6, tran, tran, tran, tran, tran, tran, tran, tran
         };
 
-        ImageCel cel = Assert.IsType<ImageCel>(doc.Frames[0].Cels[0]);
+        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -201,7 +201,7 @@ public sealed class AsepriteFileReaderTest
             pal1, pal10, pal2, pal9, pal3, pal8, pal4, pal7, pal0, pal0, pal0, pal0, pal0, pal0, pal0, pal0
         };
 
-        ImageCel cel = Assert.IsType<ImageCel>(doc.Frames[0].Cels[0]);
+        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -243,7 +243,7 @@ public sealed class AsepriteFileReaderTest
             pal7, pal6, pal5, pal4, pal3, pal2, pal1, pal0, tran, tran, tran, tran, tran, tran, tran, tran
         };
 
-        ImageCel cel = Assert.IsType<ImageCel>(doc.Frames[0].Cels[0]);
+        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -266,7 +266,7 @@ public sealed class AsepriteFileReaderTest
         Color pal9 = doc.Palette[9];
 
         Assert.Single(doc.Tilesets);
-        Tileset tileset = doc.Tilesets[0];
+        AsepriteTileset tileset = doc.Tilesets[0];
         Assert.Equal("test-tileset", tileset.Name);
 
         Assert.Equal(0, tileset.ID);
@@ -378,11 +378,11 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal(expectedTilesetPixels, tileset.Pixels);
 
 
-        TilemapLayer tilesLayer = Assert.IsType<TilemapLayer>(doc.Layers[1]);
+        AsepriteTilemapLayer tilesLayer = Assert.IsType<AsepriteTilemapLayer>(doc.Layers[1]);
         Assert.Equal(tileset, tilesLayer.Tileset);
         // Assert.Equal(tileset.ID, tilesLayer.TilesetIndex);
 
-        TilemapCel tilesCel = Assert.IsType<TilemapCel>(doc.Frames[0].Cels[1]);
+        AsepriteTilemapCel tilesCel = Assert.IsType<AsepriteTilemapCel>(doc.Frames[0].Cels[1]);
 
         Assert.Equal(32, tilesCel.BitsPerTile);
         Assert.Equal((uint)0x1fffffff, tilesCel.TileIdBitmask);

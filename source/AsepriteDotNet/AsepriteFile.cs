@@ -20,7 +20,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
 using AsepriteDotNet.Common;
-using AsepriteDotNet.Document;
+using AsepriteDotNet.AsepriteTypes;
 using AsepriteDotNet.Image;
 using AsepriteDotNet.IO;
 
@@ -31,11 +31,11 @@ namespace AsepriteDotNet;
 /// </summary>
 public sealed class AsepriteFile
 {
-    private List<Frame> _frames = new();
-    private List<Layer> _layers = new();
-    private List<Tag> _tags = new();
-    private List<Slice> _slices = new();
-    private List<Tileset> _tilesets = new();
+    private List<AsepriteFrame> _frames = new();
+    private List<AsepriteLayer> _layers = new();
+    private List<AsepriteTag> _tags = new();
+    private List<AsepriteSlice> _slices = new();
+    private List<AsepriteTileset> _tilesets = new();
     private List<string> _warnings = new();
 
     /// <summary>
@@ -51,34 +51,34 @@ public sealed class AsepriteFile
     public ColorDepth ColorDepth { get; }
 
     /// <summary>
-    ///     Gets a read-only collection of all <see cref="Frame"/> elements for
+    ///     Gets a read-only collection of all <see cref="AsepriteFrame"/> elements for
     ///     this <see cref="AsepriteFile"/>.
     /// </summary>
-    public ReadOnlyCollection<Frame> Frames { get; }
+    public ReadOnlyCollection<AsepriteFrame> Frames { get; }
 
     /// <summary>
-    ///     Gets a read-only collection of all <see cref="Layer"/> elements for
+    ///     Gets a read-only collection of all <see cref="AsepriteLayer"/> elements for
     ///     this <see cref="AsepriteFile"/>.
     /// </summary>
-    public ReadOnlyCollection<Layer> Layers { get; }
+    public ReadOnlyCollection<AsepriteLayer> Layers { get; }
 
     /// <summary>
-    ///     Gets a read-only collection of all <see cref="Tag"/> elements for
+    ///     Gets a read-only collection of all <see cref="AsepriteTag"/> elements for
     ///     this <see cref="AsepriteFile"/>.
     /// </summary>
-    public ReadOnlyCollection<Tag> Tags { get; }
+    public ReadOnlyCollection<AsepriteTag> Tags { get; }
 
     /// <summary>
-    ///     Gets a read-only collection of all <see cref="Slice"/> elements for
+    ///     Gets a read-only collection of all <see cref="AsepriteSlice"/> elements for
     ///     this <see cref="AsepriteFile"/>.
     /// </summary>
-    public ReadOnlyCollection<Slice> Slices { get; }
+    public ReadOnlyCollection<AsepriteSlice> Slices { get; }
 
     /// <summary>
-    ///     Gets a read-only collection of all <see cref="Tileset"/> elements
+    ///     Gets a read-only collection of all <see cref="AsepriteTileset"/> elements
     ///     for this <see cref="AsepriteFile"/>.
     /// </summary>
-    public ReadOnlyCollection<Tileset> Tilesets { get; }
+    public ReadOnlyCollection<AsepriteTileset> Tilesets { get; }
 
     /// <summary>
     ///     Gets a read-only collection of all warnings that were produced
@@ -90,9 +90,9 @@ public sealed class AsepriteFile
     ///     Gets the <see cref="Palette"/> for this 
     ///     <see cref="AsepriteFile"/>
     /// </summary>
-    public Palette Palette { get; }
+    public AsepritePalette Palette { get; }
 
-    internal AsepriteFile(Palette palette, Size size, ColorDepth colorDepth)
+    internal AsepriteFile(AsepritePalette palette, Size size, ColorDepth colorDepth)
     {
         Size = size;
         ColorDepth = colorDepth;
@@ -105,11 +105,11 @@ public sealed class AsepriteFile
         Warnings = _warnings.AsReadOnly();
     }
 
-    internal void Add(Frame frame) => _frames.Add(frame);
-    internal void Add(Layer layer) => _layers.Add(layer);
-    internal void Add(Tag tag) => _tags.Add(tag);
-    internal void Add(Slice slice) => _slices.Add(slice);
-    internal void Add(Tileset tileset) => _tilesets.Add(tileset);
+    internal void Add(AsepriteFrame frame) => _frames.Add(frame);
+    internal void Add(AsepriteLayer layer) => _layers.Add(layer);
+    internal void Add(AsepriteTag tag) => _tags.Add(tag);
+    internal void Add(AsepriteSlice slice) => _slices.Add(slice);
+    internal void Add(AsepriteTileset tileset) => _tilesets.Add(tileset);
     internal void AddWarning(string message) => _warnings.Add(message);
 
     /// <summary>
@@ -374,7 +374,7 @@ public sealed class AsepriteFile
         //  Process Animations
         for (int tagNum = 0; tagNum < Tags.Count; tagNum++)
         {
-            Tag tag = Tags[tagNum];
+            AsepriteTag tag = Tags[tagNum];
             string name = tag.Name;
             LoopDirection direction = tag.LoopDirection;
             List<SpritesheetFrame> aFrames = new(sheetFrames.GetRange(tag.From, tag.To - tag.From + 1));
@@ -391,13 +391,13 @@ public sealed class AsepriteFile
         //  interpolate the slices per frame
         for (int sliceNum = 0; sliceNum < Slices.Count; sliceNum++)
         {
-            Slice slice = Slices[sliceNum];
+            AsepriteSlice slice = Slices[sliceNum];
 
-            SliceKey? lastKey = default;
+            AsepriteSliceKey? lastKey = default;
 
             for (int keyNum = 0; keyNum < slice.Count; keyNum++)
             {
-                SliceKey key = slice[keyNum];
+                AsepriteSliceKey key = slice[keyNum];
 
                 string name = slice.Name;
                 Color color = slice.UserData.Color ?? Color.FromRGBA(0, 0, 255, 255);

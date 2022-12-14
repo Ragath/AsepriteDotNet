@@ -24,7 +24,7 @@ SOFTWARE.
 using System.Diagnostics;
 using AsepriteDotNet.Common;
 using AsepriteDotNet.Compression;
-using AsepriteDotNet.Document;
+using AsepriteDotNet.AsepriteTypes;
 
 namespace AsepriteDotNet.IO;
 
@@ -143,7 +143,7 @@ public static class AsepriteFileReader
     {
         //  Reference to the last group layer that is read so that subsequent
         //  child layers can be added to it.
-        GroupLayer? lastGroupLayer = default;
+        AsepriteGroupLayer? lastGroupLayer = default;
 
         //  Read the Aseprite file header
         _ = reader.ReadDword();             //  File size (ignored, don't need)
@@ -184,7 +184,7 @@ public static class AsepriteFileReader
 
 
 
-        Palette palette = new(transparentIndex);
+        AsepritePalette palette = new(transparentIndex);
         AsepriteFile doc = new(palette, new Size(width, height), (ColorDepth)depth);
 
         if (!isLayerOpacityValid)
@@ -209,11 +209,11 @@ public static class AsepriteFileReader
         //  Read frame-by-frame until all frames are read.
         for (int frameNum = 0; frameNum < nFrames; frameNum++)
         {
-            List<Cel> cels = new();
+            List<AsepriteCel> cels = new();
 
             //  Reference to the last chunk that can have user data so we can
             //  apply a User Data chunk to it when one is read.
-            IUserData? lastWithUserData = default;
+            IAsepriteUserData? lastWithUserData = default;
 
             //  Tracks the iteration of the tags when reading user data for
             //  tags chunk.
@@ -277,22 +277,22 @@ public static class AsepriteFileReader
                     bool isReference = HasFlag(layerFlags, ASE_LAYER_FLAG_REFERENCE);
                     BlendMode mode = (BlendMode)blend;
 
-                    Layer layer;
+                    AsepriteLayer layer;
 
                     if (layerType == ASE_LAYER_TYPE_NORMAL)
                     {
-                        layer = new ImageLayer(isVisible, isBackground, isReference, level, mode, opacity, name);
+                        layer = new AsepriteImageLayer(isVisible, isBackground, isReference, level, mode, opacity, name);
                     }
                     else if (layerType == ASE_LAYER_TYPE_GROUP)
                     {
-                        layer = new GroupLayer(isVisible, isBackground, isReference, level, mode, opacity, name);
+                        layer = new AsepriteGroupLayer(isVisible, isBackground, isReference, level, mode, opacity, name);
                     }
                     else if (layerType == ASE_LAYER_TYPE_TILEMAP)
                     {
                         uint index = reader.ReadDword();    //  Tileset index
-                        Tileset tileset = doc.Tilesets[(int)index];
+                        AsepriteTileset tileset = doc.Tilesets[(int)index];
 
-                        layer = new TilemapLayer(tileset, isVisible, isBackground, isReference, level, mode, opacity, name);
+                        layer = new AsepriteTilemapLayer(tileset, isVisible, isBackground, isReference, level, mode, opacity, name);
                     }
                     else
                     {
@@ -305,7 +305,7 @@ public static class AsepriteFileReader
                         lastGroupLayer.AddChild(layer);
                     }
 
-                    if (layer is GroupLayer gLayer)
+                    if (layer is AsepriteGroupLayer gLayer)
                     {
                         lastGroupLayer = gLayer;
                     }
@@ -323,9 +323,9 @@ public static class AsepriteFileReader
                     ushort type = reader.ReadWord();    //  Cel type
                     _ = reader.ReadBytes(7);            //  For future (set to zero)
 
-                    Cel cel;
+                    AsepriteCel cel;
                     Point position = new Point(x, y);
-                    Layer celLayer = doc.Layers[index];
+                    AsepriteLayer celLayer = doc.Layers[index];
 
                     if (type == ASE_CEL_TYPE_RAW_IMAGE)
                     {
@@ -335,14 +335,14 @@ public static class AsepriteFileReader
 
                         Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
                         Size size = new Size(w, h);
-                        cel = new ImageCel(size, pixels, celLayer, position, opacity);
+                        cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_LINKED)
                     {
                         ushort frameIndex = reader.ReadWord();  //  Frame position to link with
 
-                        Cel otherCel = doc.Frames[frameIndex].Cels[cels.Count];
-                        cel = new LinkedCel(otherCel, celLayer, position, opacity);
+                        AsepriteCel otherCel = doc.Frames[frameIndex].Cels[cels.Count];
+                        cel = new AsepriteLinkedCel(otherCel, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_COMPRESSED_IMAGE)
                     {
@@ -353,7 +353,7 @@ public static class AsepriteFileReader
                         Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
                         Size size = new Size(w, h);
-                        cel = new ImageCel(size, pixels, celLayer, position, opacity);
+                        cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_COMPRESSED_TILEMAP)
                     {
@@ -376,7 +376,7 @@ public static class AsepriteFileReader
                         //  per tile (32 / 8 = 4).  Meaning that each tile value
                         //  is a uint (DWORD)
                         int bytesPerTile = 4;
-                        Tile[] tiles = new Tile[tileData.Length / bytesPerTile];
+                        AsepriteTile[] tiles = new AsepriteTile[tileData.Length / bytesPerTile];
 
                         for (int i = 0, b = 0; i < tiles.Length; i++, b += bytesPerTile)
                         {
@@ -387,11 +387,11 @@ public static class AsepriteFileReader
                             uint yFlip = (value & TILE_FLIP_Y_MASK);
                             uint rotate = (value & TILE_90CW_ROTATION_MASK);
 
-                            Tile tile = new(tileId, xFlip, yFlip, rotate);
+                            AsepriteTile tile = new(tileId, xFlip, yFlip, rotate);
                             tiles[i] = tile;
                         }
 
-                        cel = new TilemapCel(size, bpt, id, xFlipBitmask, yFlipBitmask, rotationBitmask, tiles, celLayer, position, opacity);
+                        cel = new AsepriteTilemapCel(size, bpt, id, xFlipBitmask, yFlipBitmask, rotationBitmask, tiles, celLayer, position, opacity);
                     }
                     else
                     {
@@ -430,7 +430,7 @@ public static class AsepriteFileReader
                         LoopDirection loopDirection = (LoopDirection)direction;
                         Color tagColor = Color.FromRGBA(r, g, b, 255);
 
-                        Tag tag = new(from, to, loopDirection, tagColor, name);
+                        AsepriteTag tag = new(from, to, loopDirection, tagColor, name);
 
                         doc.Add(tag);
                     }
@@ -493,7 +493,7 @@ public static class AsepriteFileReader
                         lastWithUserData.UserData.Text = text;
                         lastWithUserData.UserData.Color = color;
 
-                        if (lastWithUserData is Tag)
+                        if (lastWithUserData is AsepriteTag)
                         {
 
                             //  Tags are a special case, user data for tags 
@@ -533,7 +533,7 @@ public static class AsepriteFileReader
                     bool isNinePatch = HasFlag(flags, ASE_SLICE_FLAGS_IS_NINE_PATCH);
                     bool hasPivot = HasFlag(flags, ASE_SLICE_FLAGS_HAS_PIVOT);
 
-                    Slice slice = new(isNinePatch, hasPivot, name);
+                    AsepriteSlice slice = new(isNinePatch, hasPivot, name);
 
 
                     for (uint i = 0; i < nKeys; i++)
@@ -566,7 +566,7 @@ public static class AsepriteFileReader
                             pivot = new Point(px, py);
                         }
 
-                        SliceKey key = new(slice, (int)startFrame, bounds, center, pivot);
+                        AsepriteSliceKey key = new(slice, (int)startFrame, bounds, center, pivot);
                     }
 
                     doc.Add(slice);
@@ -600,7 +600,7 @@ public static class AsepriteFileReader
 
                         Size tileSize = new Size(w, h);
 
-                        Tileset tileset = new((int)id, (int)count, tileSize, name, pixels);
+                        AsepriteTileset tileset = new((int)id, (int)count, tileSize, name, pixels);
 
                         doc.Add(tileset);
                     }
@@ -648,7 +648,7 @@ public static class AsepriteFileReader
                 Debug.Assert(reader.Position == chunkEnd);
             }
 
-            Frame frame = new(duration, cels, doc.Size);
+            AsepriteFrame frame = new(duration, cels, doc.Size);
             doc.Add(frame);
         }
 
@@ -662,7 +662,7 @@ public static class AsepriteFileReader
 
     private static bool HasFlag(uint value, uint flag) => (value & flag) != 0;
 
-    internal static Color[] PixelsToColor(byte[] pixels, ColorDepth depth, Palette palette)
+    internal static Color[] PixelsToColor(byte[] pixels, ColorDepth depth, AsepritePalette palette)
     {
         return depth switch
         {
@@ -707,7 +707,7 @@ public static class AsepriteFileReader
         return results;
     }
 
-    internal static Color[] IndexedPixelsToColor(byte[] pixels, Palette palette)
+    internal static Color[] IndexedPixelsToColor(byte[] pixels, AsepritePalette palette)
     {
         int bytesPerPixel = (int)ColorDepth.Indexed / 8;
         Color[] results = new Color[pixels.Length / bytesPerPixel];

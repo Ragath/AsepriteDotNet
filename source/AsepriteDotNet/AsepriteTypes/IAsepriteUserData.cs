@@ -18,18 +18,16 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
-namespace AsepriteDotNet.Document;
+namespace AsepriteDotNet.AsepriteTypes;
 
 /// <summary>
-///     Represents an exception that is thrown when loading an Aseprite file.
+///     An interface that defines that the implementing object has a 
+///     <see cref="UserData"/> property.
 /// </summary>
-/// <remarks>
-///     This acts as a top-level exception wrapper around the different
-///     exceptions that can be thrown during the reading of an Aseprite file.
-///     Refer ot the inner exception for details on the cause of the error.
-/// </remarks>
-public sealed class AsepriteFileLoadException : Exception
+public interface IAsepriteUserData
 {
-    internal AsepriteFileLoadException(string? message, Exception? innerException)
-        : base(message, innerException) { }
+    /// <summary>
+    ///     When implemented, gets the <see cref="UserData"/> for an object.
+    /// </summary>
+    AsepriteUserData UserData { get; }
 }
