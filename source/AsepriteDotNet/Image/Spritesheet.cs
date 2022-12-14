@@ -57,9 +57,9 @@ public sealed class Spritesheet
     ///     for this <see cref="Spritesheet"/>.  Order of pixels is from
     ///     top-to-bottom, read left-to-right.
     /// </summary>
-    public ReadOnlyCollection<Color> Pixels { get; }
+    public ReadOnlyCollection<Rgba32> Pixels { get; }
 
-    internal Spritesheet(Size size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Color[] pixels)
+    internal Spritesheet(Size size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Rgba32[] pixels)
     {
         Size = size;
         Frames = frames.AsReadOnly();

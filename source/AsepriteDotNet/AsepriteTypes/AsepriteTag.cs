@@ -27,7 +27,7 @@ namespace AsepriteDotNet.AsepriteTypes;
 /// </summary>
 public sealed class AsepriteTag : IAsepriteUserData
 {
-    private Color _oldVersionColor;
+    private Rgba32 _oldVersionColor;
 
     /// <summary>
     ///     Gets the inclusive index of the frame the animation for this
@@ -50,7 +50,7 @@ public sealed class AsepriteTag : IAsepriteUserData
     /// <summary>
     ///     Gest the color of this <see cref="AsepriteTag"/>.
     /// </summary>
-    public Color Color
+    public Rgba32 Color
     {
         get
         {
@@ -73,6 +73,6 @@ public sealed class AsepriteTag : IAsepriteUserData
     /// </summary>
     public AsepriteUserData UserData { get; internal set; } = new();
 
-    internal AsepriteTag(int from, int to, LoopDirection direction, Color color, string name) =>
+    internal AsepriteTag(int from, int to, LoopDirection direction, Rgba32 color, string name) =>
         (From, To, LoopDirection, _oldVersionColor, Name) = (from, to, direction, color, name);
 }

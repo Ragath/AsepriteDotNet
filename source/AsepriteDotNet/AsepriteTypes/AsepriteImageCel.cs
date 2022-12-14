@@ -39,16 +39,16 @@ public sealed class AsepriteImageCel : AsepriteCel
     public Size Size { get; }
 
     /// <summary>
-    ///     Gets an <see cref="Array"/> of <see cref="Color"/> elements that
+    ///     Gets an <see cref="Array"/> of <see cref="Rgba32"/> elements that
     ///     represents the raw pixel data for this <see cref="AsepriteImageCel"/>.
     /// </summary>
     /// <remarks>
     ///     Order of pixels is row by row, from top to bottom, for each scanline
     ///     read pixels from left to right.
     /// </remarks>
-    public Color[] Pixels { get; } = Array.Empty<Color>();
+    public Rgba32[] Pixels { get; } = Array.Empty<Rgba32>();
 
-    internal AsepriteImageCel(Size size, Color[] pixels, AsepriteLayer layer, Point position, int opacity)
+    internal AsepriteImageCel(Size size, Rgba32[] pixels, AsepriteLayer layer, Point position, int opacity)
         : base(layer, position, opacity) => (Size, Pixels) = (size, pixels);
 
     /// <summary>

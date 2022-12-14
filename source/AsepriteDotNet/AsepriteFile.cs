@@ -188,7 +188,7 @@ public sealed class AsepriteFile
 
         //  Process frames and the pixels
 
-        Dictionary<int, Color[]> frameColorLookup = new Dictionary<int, Color[]>();
+        Dictionary<int, Rgba32[]> frameColorLookup = new Dictionary<int, Rgba32[]>();
         Dictionary<int, int> frameDuplicateMap = new Dictionary<int, int>();
 
         for (int frameNum = 0; frameNum < Frames.Count; frameNum++)
@@ -259,7 +259,7 @@ public sealed class AsepriteFile
 
         Size sheetSize = new(width, height);
 
-        Color[] sheetPixels = new Color[width * height];
+        Rgba32[] sheetPixels = new Rgba32[width * height];
 
         Dictionary<int, SpritesheetFrame> originalToDuplicateFrameLookup = new();
 
@@ -276,7 +276,7 @@ public sealed class AsepriteFile
 
                 //  Inject the pixel color data from the frame into the
                 //  final spritesheet color data array
-                Color[] pixels = frameColorLookup[frameNum];
+                Rgba32[] pixels = frameColorLookup[frameNum];
 
                 for (int pixelNum = 0; pixelNum < pixels.Length; pixelNum++)
                 {
@@ -400,7 +400,7 @@ public sealed class AsepriteFile
                 AsepriteSliceKey key = slice[keyNum];
 
                 string name = slice.Name;
-                Color color = slice.UserData.Color ?? Color.FromRGBA(0, 0, 255, 255);
+                Rgba32 color = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                 Rectangle bounds = key.Bounds;
                 Rectangle? center = key.CenterBounds;
                 Point? pivot = key.Pivot;
@@ -411,7 +411,7 @@ public sealed class AsepriteFile
                     for (int offset = 1; offset < key.Frame - lastKey.Frame; offset++)
                     {
                         string interpolatedName = slice.Name;
-                        Color interpolatedColor = slice.UserData.Color ?? Color.FromRGBA(0, 0, 255, 255);
+                        Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                         Rectangle interpolatedBounds = lastKey.Bounds;
                         Rectangle? interpolatedCenter = lastKey.CenterBounds;
                         Point? interpolatedPivot = lastKey.Pivot;
@@ -431,7 +431,7 @@ public sealed class AsepriteFile
                 for (int offset = 1; offset < sheetFrames.Count - lastKey.Frame; offset++)
                 {
                     string interpolatedName = slice.Name;
-                    Color interpolatedColor = slice.UserData.Color ?? Color.FromRGBA(0, 0, 255, 255);
+                    Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
                     Rectangle interpolatedBounds = lastKey.Bounds;
                     Rectangle? interpolatedCenter = lastKey.CenterBounds;
                     Point? interpolatedPivot = lastKey.Pivot;

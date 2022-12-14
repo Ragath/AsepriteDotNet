@@ -50,7 +50,7 @@ internal static class PngWriter
     /// <param name="data">
     ///     The pixel data of the image.
     /// </param>
-    public static void SaveTo(string path, Size size, Color[] data)
+    public static void SaveTo(string path, Size size, Rgba32[] data)
     {
         try
         {
@@ -196,7 +196,7 @@ internal static class PngWriter
     //             https://www.w3.org/TR/png-3/#10Compression
     //             https://www.w3.org/TR/png-3/#7Scanline
     //             https://www.w3.org/TR/png-3/#7Filtering
-    private static void WriteIDAT(BinaryWriter writer, Size size, Color[] data)
+    private static void WriteIDAT(BinaryWriter writer, Size size, Rgba32[] data)
     {
         void Flush(MemoryStream stream)
         {
@@ -251,7 +251,7 @@ internal static class PngWriter
                 deflate.Write(filter);
                 adler.Update(filter);
 
-                Color[] scanline = data[(i)..(i + size.Width)];
+                Rgba32[] scanline = data[(i)..(i + size.Width)];
                 for (int c = 0; c < scanline.Length; c++)
                 {
                     ReadOnlySpan<byte> pixel = new byte[4]

@@ -333,7 +333,7 @@ public static class AsepriteFileReader
                         ushort h = stream.ReadWord();               //  Height, in pixels
                         byte[] pixelData = stream.ReadTo(chunkEnd); //  Raw pixel data
 
-                        Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
+                        Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
                         Size size = new Size(w, h);
                         cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
                     }
@@ -350,7 +350,7 @@ public static class AsepriteFileReader
                         ushort h = stream.ReadWord();                   //  Height, in pixels
                         byte[] compressed = stream.ReadTo(chunkEnd);    //  Raw pixel data compressed with Zlib
                         byte[] pixelData = Zlib.Deflate(compressed);
-                        Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
+                        Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
                         Size size = new Size(w, h);
                         cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
@@ -428,7 +428,7 @@ public static class AsepriteFileReader
                         string name = stream.ReadString();  //  Tag name
 
                         LoopDirection loopDirection = (LoopDirection)direction;
-                        Color tagColor = Color.FromRGBA(r, g, b, 255);
+                        Rgba32 tagColor = Rgba32.FromRGBA(r, g, b, 255);
 
                         AsepriteTag tag = new(from, to, loopDirection, tagColor, name);
 
@@ -462,7 +462,7 @@ public static class AsepriteFileReader
                         {
                             _ = stream.ReadString();    //  Color name (ignored)
                         }
-                        doc.Palette[(int)i] = Color.FromRGBA(r, g, b, a);
+                        doc.Palette[(int)i] = Rgba32.FromRGBA(r, g, b, a);
                     }
                 }
                 else if (chunkType == ASE_CHUNK_USER_DATA)
@@ -475,7 +475,7 @@ public static class AsepriteFileReader
                         text = stream.ReadString();     //  User Data text
                     }
 
-                    Color? color = default;
+                    Rgba32? color = default;
                     if (HasFlag(flags, ASE_USER_DATA_FLAG_HAS_COLOR))
                     {
                         byte r = stream.ReadByteEx();     //  Color Red (0 - 255)
@@ -483,7 +483,7 @@ public static class AsepriteFileReader
                         byte b = stream.ReadByteEx();     //  Color Blue (0 - 255)
                         byte a = stream.ReadByteEx();     //  Color Alpha (0 - 255)
 
-                        color = Color.FromRGBA(r, g, b, a);
+                        color = Rgba32.FromRGBA(r, g, b, a);
                     }
 
                     Debug.Assert(lastWithUserData is not null);
@@ -596,7 +596,7 @@ public static class AsepriteFileReader
                         byte[] compressed = stream.ReadBytes((int)len); //  Compressed tileset image
 
                         byte[] pixelData = Zlib.Deflate(compressed);
-                        Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
+                        Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
                         Size tileSize = new Size(w, h);
 
@@ -662,7 +662,7 @@ public static class AsepriteFileReader
 
     private static bool HasFlag(uint value, uint flag) => (value & flag) != 0;
 
-    internal static Color[] PixelsToColor(byte[] pixels, ColorDepth depth, AsepritePalette palette)
+    internal static Rgba32[] PixelsToColor(byte[] pixels, ColorDepth depth, AsepritePalette palette)
     {
         return depth switch
         {
@@ -673,10 +673,10 @@ public static class AsepriteFileReader
         };
     }
 
-    internal static Color[] RGBAPixelsToColor(byte[] pixels)
+    internal static Rgba32[] RGBAPixelsToColor(byte[] pixels)
     {
         int bytesPerPixel = (int)ColorDepth.RGBA / 8;
-        Color[] results = new Color[pixels.Length / bytesPerPixel];
+        Rgba32[] results = new Rgba32[pixels.Length / bytesPerPixel];
 
         for (int i = 0, b = 0; i < results.Length; i++, b += bytesPerPixel)
         {
@@ -684,16 +684,16 @@ public static class AsepriteFileReader
             byte green = pixels[b + 1];
             byte blue = pixels[b + 2];
             byte alpha = pixels[b + 3];
-            results[i] = Color.FromRGBA(red, green, blue, alpha);
+            results[i] = Rgba32.FromRGBA(red, green, blue, alpha);
         }
 
         return results;
     }
 
-    internal static Color[] GrayscalePixelsToColor(byte[] pixels)
+    internal static Rgba32[] GrayscalePixelsToColor(byte[] pixels)
     {
         int bytesPerPixel = (int)ColorDepth.Grayscale / 8;
-        Color[] results = new Color[pixels.Length / bytesPerPixel];
+        Rgba32[] results = new Rgba32[pixels.Length / bytesPerPixel];
 
         for (int i = 0, b = 0; i < results.Length; i++, b += bytesPerPixel)
         {
@@ -701,16 +701,16 @@ public static class AsepriteFileReader
             byte green = pixels[b];
             byte blue = pixels[b];
             byte alpha = pixels[b + 1];
-            results[i] = Color.FromRGBA(red, green, blue, alpha);
+            results[i] = Rgba32.FromRGBA(red, green, blue, alpha);
         }
 
         return results;
     }
 
-    internal static Color[] IndexedPixelsToColor(byte[] pixels, AsepritePalette palette)
+    internal static Rgba32[] IndexedPixelsToColor(byte[] pixels, AsepritePalette palette)
     {
         int bytesPerPixel = (int)ColorDepth.Indexed / 8;
-        Color[] results = new Color[pixels.Length / bytesPerPixel];
+        Rgba32[] results = new Rgba32[pixels.Length / bytesPerPixel];
 
         for (int i = 0; i < pixels.Length; i++)
         {
@@ -718,7 +718,7 @@ public static class AsepriteFileReader
 
             if (index == palette.TransparentIndex)
             {
-                results[i] = Color.Transparent;
+                results[i] = Rgba32.Transparent;
             }
             else
             {

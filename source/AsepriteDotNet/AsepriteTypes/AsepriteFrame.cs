@@ -84,7 +84,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// <summary>
     ///     Flattens this <see cref="AsepriteFrame"/> by blending each <see cref="AsepriteCel"/>
     ///     staring with the top most <see cref="AsepriteCel"/> and blending down.  Te
-    ///     result is an <see cref="Array"/> of <see cref="Color"/> elements
+    ///     result is an <see cref="Array"/> of <see cref="Rgba32"/> elements
     ///     representing the final flattened image of this <see cref="AsepriteFrame"/>.
     /// </summary>
     /// <param name="onlyVisibleLayers">
@@ -92,12 +92,12 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     ///     <see cref="AsepriteLayer"/> that is visible should be included.
     /// </param>
     /// <returns>
-    ///     A new <see cref="Array"/> of <see cref="Color"/> elements that
+    ///     A new <see cref="Array"/> of <see cref="Rgba32"/> elements that
     ///     represent the flattened image of this <see cref="AsepriteFrame"/>.
     /// </returns>
-    public Color[] FlattenFrame(bool onlyVisibleLayers = true)
+    public Rgba32[] FlattenFrame(bool onlyVisibleLayers = true)
     {
-        Color[] result = new Color[Size.Width * Size.Height];
+        Rgba32[] result = new Rgba32[Size.Width * Size.Height];
 
         for (int celNum = 0; celNum < Cels.Count; celNum++)
         {
@@ -124,7 +124,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
                 continue;
             }
 
-            byte opacity = Color.MUL_UN8(imageCel.Opacity, imageCel.Layer.Opacity);
+            byte opacity = Rgba32.MUL_UN8(imageCel.Opacity, imageCel.Layer.Opacity);
 
             for (int pixelNum = 0; pixelNum < imageCel.Pixels.Length; pixelNum++)
             {
@@ -140,9 +140,9 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
                 //  ignore them.
                 if (index < 0 || index >= result.Length) { continue; }
 
-                Color backdrop = result[index];
-                Color source = imageCel.Pixels[pixelNum];
-                result[index] = Color.Blend(imageCel.Layer.BlendMode, backdrop, source, opacity);
+                Rgba32 backdrop = result[index];
+                Rgba32 source = imageCel.Pixels[pixelNum];
+                result[index] = Rgba32.Blend(imageCel.Layer.BlendMode, backdrop, source, opacity);
             }
         }
 
@@ -162,7 +162,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// </param>
     public void ToPng(string path, bool onlyVisibleLayers = true)
     {
-        Color[] frame = FlattenFrame(onlyVisibleLayers);
+        Rgba32[] frame = FlattenFrame(onlyVisibleLayers);
         PngWriter.SaveTo(path, Size, frame);
     }
 }

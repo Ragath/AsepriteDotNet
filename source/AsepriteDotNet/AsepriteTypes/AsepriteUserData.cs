@@ -51,7 +51,7 @@ public sealed class AsepriteUserData
     ///     Gets the <see cref="Color"/> set for this <see cref="AsepriteUserData"/>, or 
     ///     <see langword="null"/> if none was set.
     /// </summary>
-    public Color? Color { get; internal set; } = default;
+    public Rgba32? Color { get; internal set; } = default;
 
     internal AsepriteUserData() { }
 }

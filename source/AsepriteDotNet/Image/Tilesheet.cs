@@ -55,9 +55,9 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     ///     this <see cref="Tilesheet"/>.  Order of pixels is from 
     ///     top-to-bottom, read left-to-right.
     /// </summary>
-    public ReadOnlyCollection<Color> Pixels { get; }
+    public ReadOnlyCollection<Rgba32> Pixels { get; }
 
-    internal Tilesheet(string name, Size size, List<TilesheetTile> tiles, Color[] pixels)
+    internal Tilesheet(string name, Size size, List<TilesheetTile> tiles, Rgba32[] pixels)
     {
         Name = name;
         Size = size;
