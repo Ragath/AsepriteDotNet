@@ -23,6 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections;
 using System.Collections.ObjectModel;
+
 using AsepriteDotNet.Common;
 using AsepriteDotNet.IO.Image;
 
@@ -59,14 +60,14 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     /// </summary>
     public ReadOnlyCollection<Color> Pixels { get; }
 
-    internal Tilesheet(string name, Size size,  List<TilesheetTile> tiles, Color[] pixels)
+    internal Tilesheet(string name, Size size, List<TilesheetTile> tiles, Color[] pixels)
     {
         Name = name;
         Size = size;
         _tiles = tiles;
         Tiles = _tiles.AsReadOnly();
         _pixels = pixels;
-        Pixels = _pixels.AsReadOnly();
+        Pixels = Array.AsReadOnly(_pixels);
     }
 
     /// <summary>
