@@ -61,9 +61,17 @@ public struct Color : IEquatable<Color>
     public readonly byte B => unchecked((byte)((_value >> RGBA_B_SHIFT) & 0xFF));
 
     /// <summary>
-    ///     Gets the alpha component value fo this <see cref="Color"/>.
+    ///     Gets the alpha component value of this <see cref="Color"/>.
     /// </summary>
     public readonly byte A => unchecked((byte)((_value >> RGBA_A_SHIFT) & 0xFF));
+
+    /// <summary>
+    ///     Gets a 32-bit unsigned integer that represents the packed RGBA
+    ///     value for this <see cref="Color"/>, with the red component value
+    ///     being the most most significant octet and the alpha component being
+    ///     the least significant octet.
+    /// </summary>
+    public readonly uint Value => _value;
 
     private Color(uint value) => _value = value;
 
