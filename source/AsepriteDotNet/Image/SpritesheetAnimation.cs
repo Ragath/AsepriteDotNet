@@ -22,6 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
+
 using AsepriteDotNet.Common;
 
 namespace AsepriteDotNet.Image;
@@ -31,8 +32,6 @@ namespace AsepriteDotNet.Image;
 /// </summary>
 public sealed class SpritesheetAnimation
 {
-    private List<SpritesheetFrame> _frames;
-
     /// <summary>
     ///     Gets a read-only collection of the <see cref="SpritesheetFrame"/>
     ///     elements that make up this animation.  The order of the frames is
@@ -52,7 +51,6 @@ public sealed class SpritesheetAnimation
 
     internal SpritesheetAnimation(List<SpritesheetFrame> frames, string name, LoopDirection direction)
     {
-        _frames = frames;
         Frames = frames.AsReadOnly();
         Name = name;
         Direction = direction;

@@ -34,10 +34,6 @@ namespace AsepriteDotNet.Image;
 /// </summary>
 public sealed class Spritesheet
 {
-    private Color[] _pixels;
-    private List<SpritesheetFrame> _frames;
-    private List<SpritesheetAnimation> _animations;
-
     /// <summary>
     ///     Gets the width and height of this <see cref="Spritesheet"/>.
     /// </summary>
@@ -66,12 +62,9 @@ public sealed class Spritesheet
     internal Spritesheet(Size size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Color[] pixels)
     {
         Size = size;
-        _frames = frames;
-        Frames = _frames.AsReadOnly();
-        _animations = animations;
-        Animations = _animations.AsReadOnly();
-        _pixels = pixels;
-        Pixels = Array.AsReadOnly(_pixels);
+        Frames = frames.AsReadOnly();
+        Animations = animations.AsReadOnly();
+        Pixels = Array.AsReadOnly(pixels);
     }
 
     /// <summary>
@@ -83,6 +76,6 @@ public sealed class Spritesheet
     /// </param>
     public void ToPng(string path)
     {
-        PngWriter.SaveTo(path, Size, _pixels);
+        PngWriter.SaveTo(path, Size, Pixels.ToArray());
     }
 }

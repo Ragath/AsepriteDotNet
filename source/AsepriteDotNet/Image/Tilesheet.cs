@@ -34,9 +34,6 @@ namespace AsepriteDotNet.Image;
 /// </summary>
 public sealed class Tilesheet : IEnumerable<TilesheetTile>
 {
-    private Color[] _pixels;
-    private List<TilesheetTile> _tiles = new();
-
     /// <summary>
     ///     Gets the name of tis <see cref="Tilesheet"/>.
     /// </summary>
@@ -64,10 +61,8 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     {
         Name = name;
         Size = size;
-        _tiles = tiles;
-        Tiles = _tiles.AsReadOnly();
-        _pixels = pixels;
-        Pixels = Array.AsReadOnly(_pixels);
+        Tiles = tiles.AsReadOnly();
+        Pixels = Array.AsReadOnly(pixels);
     }
 
     /// <summary>
@@ -79,7 +74,7 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     /// </param>
     public void ToPng(string path)
     {
-        PngWriter.SaveTo(path, Size, _pixels);
+        PngWriter.SaveTo(path, Size, Pixels.ToArray());
     }
 
     /// <summary>
@@ -91,7 +86,7 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     ///     An enumerator that iterates through the <see cref="TilesheetTile"/>
     ///     elements in this <see cref="Tilesheet"/>.
     /// </returns>
-    public IEnumerator<TilesheetTile> GetEnumerator() => _tiles.GetEnumerator();
+    public IEnumerator<TilesheetTile> GetEnumerator() => Tiles.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

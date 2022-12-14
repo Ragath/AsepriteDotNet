@@ -30,8 +30,6 @@ namespace AsepriteDotNet.AsepriteTypes;
 /// </summary>
 public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
 {
-    private readonly List<AsepriteCel> _cels;
-
     /// <summary>
     ///     Gets the width and height of this <see cref="AsepriteFrame"/>.
     /// </summary>
@@ -55,7 +53,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// </returns>
     public AsepriteCel this[int index]
     {
-        get => _cels[index];
+        get => Cels[index];
     }
 
     /// <summary>
@@ -67,13 +65,9 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     internal AsepriteFrame(int duration, List<AsepriteCel> cels, Size size)
     {
         Duration = duration;
-        _cels = cels;
-        Cels = _cels.AsReadOnly();
+        Cels = cels.AsReadOnly();
         Size = size;
     }
-
-    internal void AddCel(AsepriteCel cel) => _cels.Add(cel);
-
 
     /// <summary>
     ///     Returns an enumerator that iterates through the <see cref="AsepriteCel"/>
@@ -83,9 +77,9 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     ///     An enumerator that iterates through the <see cref="AsepriteCel"/> elements
     ///     in this <see cref="AsepriteFrame"/>.
     /// </returns>
-    public IEnumerator<AsepriteCel> GetEnumerator() => _cels.GetEnumerator();
+    public IEnumerator<AsepriteCel> GetEnumerator() => Cels.GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator() => _cels.GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() => Cels.GetEnumerator();
 
     /// <summary>
     ///     Flattens this <see cref="AsepriteFrame"/> by blending each <see cref="AsepriteCel"/>

@@ -30,8 +30,6 @@ namespace AsepriteDotNet.Image;
 /// </summary>
 public sealed class AsepriteSheet
 {
-    private List<Tilesheet> _tilesheets;
-
     /// <summary>
     ///     Gets the <see cref="Spritesheet"/> that was generated from the
     ///     Aseprite file.
@@ -45,7 +43,6 @@ public sealed class AsepriteSheet
     internal AsepriteSheet(Spritesheet spritesheet, List<Tilesheet> tilesheets)
     {
         Spritesheet = spritesheet;
-        _tilesheets = tilesheets;
-        Tilesheets = _tilesheets.AsReadOnly();
+        Tilesheets = tilesheets.AsReadOnly();
     }
 }
