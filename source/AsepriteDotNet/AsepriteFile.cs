@@ -42,7 +42,7 @@ public sealed class AsepriteFile
     ///     Gets the width and height, in pixels, of the sprite in this
     ///     <see cref="AsepriteFile"/>.
     /// </summary>
-    public Size Size { get; }
+    public Dimension Size { get; }
 
     /// <summary>
     ///     Gets the <see cref="ColorDepth"/> (bits per pixel) used by this
@@ -92,7 +92,7 @@ public sealed class AsepriteFile
     /// </summary>
     public AsepritePalette Palette { get; }
 
-    internal AsepriteFile(AsepritePalette palette, Size size, ColorDepth colorDepth)
+    internal AsepriteFile(AsepritePalette palette, Dimension size, ColorDepth colorDepth)
     {
         Size = size;
         ColorDepth = colorDepth;
@@ -257,7 +257,7 @@ public sealed class AsepriteFile
                  (options.Spacing * (rows - 1)) +
                  (options.InnerPadding * 2 * rows);
 
-        Size sheetSize = new(width, height);
+        Dimension sheetSize = new(width, height);
 
         Rgba32[] sheetPixels = new Rgba32[width * height];
 

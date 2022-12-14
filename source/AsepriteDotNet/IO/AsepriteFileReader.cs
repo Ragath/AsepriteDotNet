@@ -185,7 +185,7 @@ public static class AsepriteFileReader
 
 
         AsepritePalette palette = new(transparentIndex);
-        AsepriteFile doc = new(palette, new Size(width, height), (ColorDepth)depth);
+        AsepriteFile doc = new(palette, new Dimension(width, height), (ColorDepth)depth);
 
         if (!isLayerOpacityValid)
         {
@@ -334,7 +334,7 @@ public static class AsepriteFileReader
                         byte[] pixelData = stream.ReadTo(chunkEnd); //  Raw pixel data
 
                         Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
-                        Size size = new Size(w, h);
+                        Dimension size = new Dimension(w, h);
                         cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_LINKED)
@@ -352,7 +352,7 @@ public static class AsepriteFileReader
                         byte[] pixelData = Zlib.Deflate(compressed);
                         Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
-                        Size size = new Size(w, h);
+                        Dimension size = new Dimension(w, h);
                         cel = new AsepriteImageCel(size, pixels, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_COMPRESSED_TILEMAP)
@@ -369,7 +369,7 @@ public static class AsepriteFileReader
 
                         byte[] tileData = Zlib.Deflate(compressed);
 
-                        Size size = new Size(w, h);
+                        Dimension size = new Dimension(w, h);
 
                         //  Per Aseprite file spec, the "bits" per tile is, at
                         //  the moment, always 32-bits.  This means it's 4-bytes
@@ -598,7 +598,7 @@ public static class AsepriteFileReader
                         byte[] pixelData = Zlib.Deflate(compressed);
                         Rgba32[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
-                        Size tileSize = new Size(w, h);
+                        Dimension tileSize = new Dimension(w, h);
 
                         AsepriteTileset tileset = new((int)id, (int)count, tileSize, name, pixels);
 

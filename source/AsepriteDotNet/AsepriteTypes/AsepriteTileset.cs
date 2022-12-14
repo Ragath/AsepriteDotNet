@@ -46,7 +46,7 @@ public class AsepriteTileset
     ///     Gets the width and height, in pixels of each tile in this
     ///     <see cref="AsepriteTileset"/>.
     /// </summary>
-    public Size TileSize { get; }
+    public Dimension TileSize { get; }
 
     /// <summary>
     ///     Gets the name of this <see cref="AsepriteTileset"/>.
@@ -59,7 +59,7 @@ public class AsepriteTileset
     /// </summary>
     public Rgba32[] Pixels { get; }
 
-    internal AsepriteTileset(int id, int count, Size tileSize, string name, Rgba32[] pixels) =>
+    internal AsepriteTileset(int id, int count, Dimension tileSize, string name, Rgba32[] pixels) =>
         (ID, TileCount, TileSize, Name, Pixels) = (id, count, tileSize, name, pixels);
 
     /// <summary>
@@ -138,7 +138,7 @@ public class AsepriteTileset
                  (options.Spacing * (rows - 1)) +
                  (options.InnerPadding * 2 * rows);
 
-        Size sheetSize = new(width, height);
+        Dimension sheetSize = new(width, height);
 
         Rgba32[] sheetPixels = new Rgba32[width * height];
 
@@ -274,7 +274,7 @@ public class AsepriteTileset
         //  repack the pixel data for the packing method requested
         if (method == PackingMethod.VerticalStrip)
         {
-            PngWriter.SaveTo(path, new Size(TileSize.Width, TileSize.Height * TileCount), Pixels);
+            PngWriter.SaveTo(path, new Dimension(TileSize.Width, TileSize.Height * TileCount), Pixels);
         }
         else
         {
@@ -333,7 +333,7 @@ public class AsepriteTileset
                 }
             }
 
-            PngWriter.SaveTo(path, new Size(width, height), pixels);
+            PngWriter.SaveTo(path, new Dimension(width, height), pixels);
         }
     }
 

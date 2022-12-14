@@ -93,9 +93,9 @@ public struct Rectangle : IEquatable<Rectangle>
     ///     Gets or Sets a <see cref="Size"/> value that defines the width and 
     ///     height elements of this <see cref="Rectangle"/>.
     /// </summary>
-    public Size Size
+    public Dimension Size
     {
-        readonly get => new Size(Width, Height);
+        readonly get => new Dimension(Width, Height);
         set
         {
             Width = value.Height;
@@ -162,7 +162,7 @@ public struct Rectangle : IEquatable<Rectangle>
     ///     A <see cref="Size"/> value that defines the width and height
     ///     elements of this <see cref="Rectangle"/>.
     /// </param>
-    public Rectangle(Location location, Size size) : this(location.X, location.Y, size.Width, size.Height) { }
+    public Rectangle(Location location, Dimension size) : this(location.X, location.Y, size.Width, size.Height) { }
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 

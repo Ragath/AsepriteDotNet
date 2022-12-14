@@ -36,7 +36,7 @@ public sealed class AsepriteImageCel : AsepriteCel
     ///     Gets the width and height components of this <see cref="AsepriteImageCel"/>
     ///     as a <see cref="Size"/> value.
     /// </summary> 
-    public Size Size { get; }
+    public Dimension Size { get; }
 
     /// <summary>
     ///     Gets an <see cref="Array"/> of <see cref="Rgba32"/> elements that
@@ -48,7 +48,7 @@ public sealed class AsepriteImageCel : AsepriteCel
     /// </remarks>
     public Rgba32[] Pixels { get; } = Array.Empty<Rgba32>();
 
-    internal AsepriteImageCel(Size size, Rgba32[] pixels, AsepriteLayer layer, Location position, int opacity)
+    internal AsepriteImageCel(Dimension size, Rgba32[] pixels, AsepriteLayer layer, Location position, int opacity)
         : base(layer, position, opacity) => (Size, Pixels) = (size, pixels);
 
     /// <summary>

@@ -42,7 +42,7 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     /// <summary>
     ///     Gets the width and height of this <see cref="Tilesheet"/>.
     /// </summary>
-    public Size Size { get; }
+    public Dimension Size { get; }
 
     /// <summary>
     ///     Gets a read-only collection of all <see cref="TilesheetTile"/>
@@ -57,7 +57,7 @@ public sealed class Tilesheet : IEnumerable<TilesheetTile>
     /// </summary>
     public ReadOnlyCollection<Rgba32> Pixels { get; }
 
-    internal Tilesheet(string name, Size size, List<TilesheetTile> tiles, Rgba32[] pixels)
+    internal Tilesheet(string name, Dimension size, List<TilesheetTile> tiles, Rgba32[] pixels)
     {
         Name = name;
         Size = size;

@@ -34,7 +34,7 @@ public sealed class AsepriteTilemapCel : AsepriteCel
     ///     Gets the width and height components of this 
     ///     <see cref="AsepriteTilemapCel"/> in number of tiles.
     /// </summary> 
-    public Size Size { get; }
+    public Dimension Size { get; }
 
     /// <summary>
     ///     Gets the number of bits per tile for this <see cref="AsepriteTilemapCel"/>.
@@ -72,7 +72,7 @@ public sealed class AsepriteTilemapCel : AsepriteCel
     /// </remarks>
     public AsepriteTile[] Tiles { get; }
 
-    internal AsepriteTilemapCel(Size size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Location position, int opacity)
+    internal AsepriteTilemapCel(Dimension size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Location position, int opacity)
         : base(layer, position, opacity)
     {
         Size = size;

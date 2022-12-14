@@ -37,7 +37,7 @@ public sealed class Spritesheet
     /// <summary>
     ///     Gets the width and height of this <see cref="Spritesheet"/>.
     /// </summary>
-    public Size Size { get; }
+    public Dimension Size { get; }
 
     /// <summary>
     ///     Gets a read-only collection of all <see cref="SpritesheetFrame"/>
@@ -59,7 +59,7 @@ public sealed class Spritesheet
     /// </summary>
     public ReadOnlyCollection<Rgba32> Pixels { get; }
 
-    internal Spritesheet(Size size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Rgba32[] pixels)
+    internal Spritesheet(Dimension size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Rgba32[] pixels)
     {
         Size = size;
         Frames = frames.AsReadOnly();
