@@ -18,39 +18,29 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
-using System.Diagnostics.CodeAnalysis;
-namespace AsepriteDotNet.AsepriteTypes;
+namespace AsepriteDotNet;
 
 /// <summary>
-///     Represents custom user data set for a component in an Aseprite image.
+///     Defines the values that describe an animation loop direction.
 /// </summary>
-public sealed class AsepriteUserData
+public enum LoopDirection
 {
     /// <summary>
-    ///     Gets whether <see cref="AsepriteUserData.Text"/> has been set for this
-    ///     <see cref="AsepriteUserData"/>.
+    ///     Describes that the animation loops in a forward direction staring on
+    ///     the first frame and ending on the last frame.
     /// </summary>
-    [MemberNotNullWhen(true, nameof(Text))]
-    public bool HasText => Text is not null;
+    Forward = 0,
 
     /// <summary>
-    ///     Gets whether <see cref="AsepriteUserData.Color"/> has been set for this
-    ///     <see cref="AsepriteUserData"/>.
+    ///     Describes that the animation loops in a reverse direction starting
+    ///     on the last frame and ending on the first frame.
     /// </summary>
-    [MemberNotNullWhen(true, nameof(Color))]
-    public bool HasColor => Color is not null;
+    Reverse = 1,
 
     /// <summary>
-    ///     Gets the text set for this <see cref="AsepriteUserData"/>, or 
-    ///     <see langword="null"/> if none was set.
+    ///     Describes that the animation loops in a ping-pong direction starting
+    ///     on the first frame and moving forward to the last frame, then moving
+    ///     back in reverse to the first frame.
     /// </summary>
-    public string? Text { get; internal set; } = default;
-
-    /// <summary>
-    ///     Gets the <see cref="Color"/> set for this <see cref="AsepriteUserData"/>, or 
-    ///     <see langword="null"/> if none was set.
-    /// </summary>
-    public Rgba32? Color { get; internal set; } = default;
-
-    internal AsepriteUserData() { }
+    PingPong = 2
 }

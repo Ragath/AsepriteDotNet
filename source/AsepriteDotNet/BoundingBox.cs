@@ -20,7 +20,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.Diagnostics.CodeAnalysis;
 
-namespace AsepriteDotNet.Common;
+namespace AsepriteDotNet;
 
 /// <summary>
 ///     Represents the width, height, x-coordinate, and y-coordinate components
@@ -58,7 +58,7 @@ public struct BoundingBox : IEquatable<BoundingBox>
     }
 
     /// <summary>
-    ///     Gets or Sets a <see cref="Common.Location"/> value that defines the x- and
+    ///     Gets or Sets a <see cref="AsepriteDotNet.Location"/> value that defines the x- and
     ///     y-coordinate location of this <see cref="BoundingBox"/>.
     /// </summary>
     public Location Location
@@ -155,7 +155,7 @@ public struct BoundingBox : IEquatable<BoundingBox>
     ///     Initializes a new <see cref="BoundingBox"/> value.
     /// </summary>
     /// <param name="location">
-    ///     A <see cref="Common.Location"/> value that defines the x- and y-coordinate
+    ///     A <see cref="AsepriteDotNet.Location"/> value that defines the x- and y-coordinate
     ///     elements of this <see cref="BoundingBox"/>.
     /// </param>
     /// <param name="size">

@@ -24,7 +24,6 @@ SOFTWARE.
 using System.Buffers.Binary;
 using System.IO.Compression;
 using System.Text;
-using AsepriteDotNet.Common;
 using AsepriteDotNet.Compression;
 
 namespace AsepriteDotNet.IO.Image;

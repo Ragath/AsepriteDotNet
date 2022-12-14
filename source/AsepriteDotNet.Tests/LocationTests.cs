@@ -21,54 +21,52 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Common;
-
 namespace AsepriteDotNet.Tests;
 
-public sealed class DimensionTests
+public sealed class LocationTests
 {
     [Fact]
-    public void Dimension_AddTest()
+    public void Location_AddTest()
     {
-        Dimension left = new Dimension(1, 2);
-        Dimension right = new Dimension(3, 4);
+        Location left = new Location(1, 2);
+        Location right = new Location(3, 4);
 
-        Dimension expected = new Dimension(4, 6);
+        Location expected = new Location(4, 6);
 
-        Assert.Equal(expected, Dimension.Add(left, right));
+        Assert.Equal(expected, Location.Add(left, right));
         Assert.Equal(expected, left + right);
     }
 
     [Fact]
-    public void Dimension_SubtractTest()
+    public void Location_SubtractTest()
     {
-        Dimension left = new Dimension(1, 2);
-        Dimension right = new Dimension(3, 4);
+        Location left = new Location(1, 2);
+        Location right = new Location(3, 4);
 
-        Dimension expected = new Dimension(-2, -2);
+        Location expected = new Location(-2, -2);
 
-        Assert.Equal(expected, Dimension.Subtract(left, right));
+        Assert.Equal(expected, Location.Subtract(left, right));
         Assert.Equal(expected, left - right);
     }
 
     [Fact]
-    public void Dimension_EqualTest()
+    public void Location_EqualTest()
     {
-        Dimension a = new Dimension(1, 2);
-        Dimension b = new Dimension(1, 2);
+        Location a = new Location(1, 2);
+        Location b = new Location(1, 2);
 
         Assert.True(a == b);
         Assert.True(a.Equals(b));
         Assert.True(a.Equals((object)b));
-        Assert.False(a == Dimension.Empty);
-        Assert.False(a.Equals(Dimension.Empty));
-        Assert.False(a.Equals((object)Dimension.Empty));
+        Assert.False(a == Location.Empty);
+        Assert.False(a.Equals(Location.Empty));
+        Assert.False(a.Equals((object)Location.Empty));
     }
 
     [Fact]
-    public void Dimension_NotEqualTest()
+    public void Location_NotEqualTest()
     {
-        Assert.True(Dimension.Empty != new Dimension(1, 2));
-        Assert.False(Dimension.Empty != new Dimension(0, 0));
+        Assert.True(Location.Empty != new Location(1, 2));
+        Assert.False(Location.Empty != new Location(0, 0));
     }
 }

@@ -24,7 +24,6 @@ SOFTWARE.
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using AsepriteDotNet.Common;
 
 namespace AsepriteDotNet.AsepriteTypes;
 

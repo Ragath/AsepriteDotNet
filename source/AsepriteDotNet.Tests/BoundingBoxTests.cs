@@ -21,19 +21,28 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-namespace AsepriteDotNet.AsepriteTypes;
+namespace AsepriteDotNet.Tests;
 
-/// <summary>
-///     Represents a tilemap layer in an Aseprite image.
-/// </summary>
-public class AsepriteTilemapLayer : AsepriteLayer
+public sealed class BoundingBoxTests
 {
-    /// <summary>
-    ///     Gets the <see cref="Tileset"/> used by this 
-    ///     <see cref="AsepriteTilemapLayer"/>.
-    /// </summary>
-    public AsepriteTileset Tileset { get; }
+    [Fact]
+    public void BoundingBox_EqualTest()
+    {
+        BoundingBox a = new BoundingBox(1, 2, 3, 4);
+        BoundingBox b = new BoundingBox(1, 2, 3, 4);
 
-    internal AsepriteTilemapLayer(AsepriteTileset tileset, bool isVisible, bool isBackground, bool isReference, int childLevel, BlendMode blend, int opacity, string name)
-        : base(isVisible, isBackground, isReference, childLevel, blend, opacity, name) => Tileset = tileset;
+        Assert.True(a == b);
+        Assert.True(a.Equals(b));
+        Assert.True(a.Equals((object)b));
+        Assert.False(a == BoundingBox.Empty);
+        Assert.False(a.Equals(BoundingBox.Empty));
+        Assert.False(a.Equals((object)BoundingBox.Empty));
+    }
+
+    [Fact]
+    public void BoundingBox_NotEqualTest()
+    {
+        Assert.True(BoundingBox.Empty != new BoundingBox(1, 2, 3, 4));
+        Assert.False(BoundingBox.Empty != new BoundingBox(0, 0, 0, 0));
+    }
 }
