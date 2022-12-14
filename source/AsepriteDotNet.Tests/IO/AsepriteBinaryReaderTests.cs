@@ -27,59 +27,39 @@ using AsepriteDotNet.IO;
 
 namespace AsepriteDotNet.Tests;
 
-public class AsepriteBinaryReaderTests
+public class StreamExtensionTests
 {
-    [Fact]
-    public void AsepriteBinaryReader_DisposeTests()
-    {
-        //  Multiple dispose should not throw an exception
-        using (AsepriteBinaryReader reader = new(new MemoryStream()))
-        {
-            reader.Dispose();
-            reader.Dispose();
-            reader.Dispose();
-        }
-    }
 
     [Fact]
-    public void AsepriteBinaryReader_DisposeTest_Negative()
+    public void StreamExtensions_EndOfStreamTest_Negative()
     {
-        using (AsepriteBinaryReader reader = new(new MemoryStream()))
-        {
-            reader.Dispose();
-            ValidateDisposedExceptions(reader);
-        }
-    }
-
-    [Fact]
-    public void AsepriteBinaryReader_EndOfStreamTest_Negative()
-    {
-        ValidateEndOfStreamException(writer => writer.Write(byte.MinValue), reader => reader.ReadByte());
-        ValidateEndOfStreamException(writer => writer.Write(byte.MaxValue), reader => reader.ReadByte());
-        ValidateEndOfStreamException(writer => writer.Write(ushort.MinValue), reader => reader.ReadWord());
-        ValidateEndOfStreamException(writer => writer.Write(ushort.MaxValue), reader => reader.ReadWord());
-        ValidateEndOfStreamException(writer => writer.Write(short.MinValue), reader => reader.ReadShort());
-        ValidateEndOfStreamException(writer => writer.Write(short.MaxValue), reader => reader.ReadShort());
-        ValidateEndOfStreamException(writer => writer.Write(uint.MinValue), reader => reader.ReadDword());
-        ValidateEndOfStreamException(writer => writer.Write(uint.MaxValue), reader => reader.ReadDword());
-        ValidateEndOfStreamException(writer => writer.Write(int.MinValue), reader => reader.ReadLong());
-        ValidateEndOfStreamException(writer => writer.Write(int.MaxValue), reader => reader.ReadLong());
-        ValidateEndOfStreamException(writer => writer.Write(float.MinValue), reader => reader.ReadFixed());
-        ValidateEndOfStreamException(writer => writer.Write(float.MaxValue), reader => reader.ReadFixed());
-        ValidateEndOfStreamException(writer => WriteValidAsepriteString(writer, string.Empty), reader => reader.ReadString());
-        ValidateEndOfStreamException(writer => WriteValidAsepriteString(writer, "Hello World"), reader => reader.ReadString());
+        ValidateEndOfStreamException(writer => writer.Write(byte.MinValue), stream => stream.ReadByteEx());
+        ValidateEndOfStreamException(writer => writer.Write(byte.MaxValue), stream => stream.ReadByteEx());
+        ValidateEndOfStreamException(writer => writer.Write(new byte[] { 0 }), stream => stream.ReadBytes(1));
+        ValidateEndOfStreamException(writer => writer.Write(ushort.MinValue), stream => stream.ReadWord());
+        ValidateEndOfStreamException(writer => writer.Write(ushort.MaxValue), stream => stream.ReadWord());
+        ValidateEndOfStreamException(writer => writer.Write(short.MinValue), stream => stream.ReadShort());
+        ValidateEndOfStreamException(writer => writer.Write(short.MaxValue), stream => stream.ReadShort());
+        ValidateEndOfStreamException(writer => writer.Write(uint.MinValue), stream => stream.ReadDword());
+        ValidateEndOfStreamException(writer => writer.Write(uint.MaxValue), stream => stream.ReadDword());
+        ValidateEndOfStreamException(writer => writer.Write(int.MinValue), stream => stream.ReadLong());
+        ValidateEndOfStreamException(writer => writer.Write(int.MaxValue), stream => stream.ReadLong());
+        ValidateEndOfStreamException(writer => writer.Write(float.MinValue), stream => stream.ReadFixed());
+        ValidateEndOfStreamException(writer => writer.Write(float.MaxValue), stream => stream.ReadFixed());
+        ValidateEndOfStreamException(writer => WriteValidAsepriteString(writer, string.Empty), stream => stream.ReadString());
+        ValidateEndOfStreamException(writer => WriteValidAsepriteString(writer, "Hello World"), stream => stream.ReadString());
 
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadByte()
+    public void StreamExtensions_ReadByteEx()
     {
-        ValidateRead(writer => writer.Write(byte.MinValue), reader => reader.ReadByte(), byte.MinValue);
-        ValidateRead(writer => writer.Write(byte.MaxValue), reader => reader.ReadByte(), byte.MaxValue);
+        ValidateRead(writer => writer.Write(byte.MinValue), stream => stream.ReadByteEx(), byte.MinValue);
+        ValidateRead(writer => writer.Write(byte.MaxValue), stream => stream.ReadByteEx(), byte.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadBytes()
+    public void StreamExtensions_ReadBytes()
     {
         byte[] expected = new byte[] { 0x0000, 0x0001, 0x0002, 0x0003 };
 
@@ -93,74 +73,49 @@ public class AsepriteBinaryReaderTests
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadWord()
+    public void StreamExtensions_ReadWord()
     {
-        ValidateRead(writer => writer.Write(ushort.MinValue), reader => reader.ReadWord(), ushort.MinValue);
-        ValidateRead(writer => writer.Write(ushort.MaxValue), reader => reader.ReadWord(), ushort.MaxValue);
+        ValidateRead(writer => writer.Write(ushort.MinValue), stream => stream.ReadWord(), ushort.MinValue);
+        ValidateRead(writer => writer.Write(ushort.MaxValue), stream => stream.ReadWord(), ushort.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadShort()
+    public void StreamExtensions_ReadShort()
     {
-        ValidateRead(writer => writer.Write(short.MinValue), reader => reader.ReadShort(), short.MinValue);
-        ValidateRead(writer => writer.Write(short.MaxValue), reader => reader.ReadShort(), short.MaxValue);
+        ValidateRead(writer => writer.Write(short.MinValue), stream => stream.ReadShort(), short.MinValue);
+        ValidateRead(writer => writer.Write(short.MaxValue), stream => stream.ReadShort(), short.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadDword()
+    public void StreamExtensions_ReadDword()
     {
-        ValidateRead(writer => writer.Write(uint.MinValue), reader => reader.ReadDword(), uint.MinValue);
-        ValidateRead(writer => writer.Write(uint.MaxValue), reader => reader.ReadDword(), uint.MaxValue);
+        ValidateRead(writer => writer.Write(uint.MinValue), stream => stream.ReadDword(), uint.MinValue);
+        ValidateRead(writer => writer.Write(uint.MaxValue), stream => stream.ReadDword(), uint.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadLong()
+    public void StreamExtensions_ReadLong()
     {
-        ValidateRead(writer => writer.Write(int.MinValue), reader => reader.ReadLong(), int.MinValue);
-        ValidateRead(writer => writer.Write(int.MaxValue), reader => reader.ReadLong(), int.MaxValue);
+        ValidateRead(writer => writer.Write(int.MinValue), stream => stream.ReadLong(), int.MinValue);
+        ValidateRead(writer => writer.Write(int.MaxValue), stream => stream.ReadLong(), int.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadFixed()
+    public void StreamExtensions_ReadFixed()
     {
-        ValidateRead(writer => writer.Write(float.MinValue), reader => reader.ReadFixed(), float.MinValue);
-        ValidateRead(writer => writer.Write(float.MaxValue), reader => reader.ReadFixed(), float.MaxValue);
+        ValidateRead(writer => writer.Write(float.MinValue), stream => stream.ReadFixed(), float.MinValue);
+        ValidateRead(writer => writer.Write(float.MaxValue), stream => stream.ReadFixed(), float.MaxValue);
     }
 
     [Fact]
-    public void AsepriteBinaryReader_ReadString()
+    public void StreamExtensions_ReadString()
     {
         string expected = "hello world";
-        ValidateRead(writer => WriteValidAsepriteString(writer, expected), reader => reader.ReadString(), expected);
+        ValidateRead(writer => WriteValidAsepriteString(writer, expected), stream => stream.ReadString(), expected);
     }
 
-    [Fact]
-    public void AsepriteBinaryReader_Skip()
-    {
-        byte expected = 0x0004;
-        byte[] buffer = new byte[] { 0x0000, expected };
-        MemoryStream stream = new(buffer);
 
-        using AsepriteBinaryReader reader = new(stream);
-        reader.Skip(1);
-        byte actual = reader.ReadByte();
-        Assert.Equal(expected, actual);
-    }
-
-    [Fact]
-    public void AsepriteBinaryReader_Seek()
-    {
-        byte expected = 0x0004;
-        byte[] buffer = new byte[] { 0x0000, expected };
-        MemoryStream stream = new(buffer);
-
-        using AsepriteBinaryReader reader = new(stream);
-        reader.Seek(1);
-        byte actual = reader.ReadByte();
-        Assert.Equal(expected, actual);
-    }
-
-    private void ValidateRead<T>(Action<BinaryWriter> writeAction, Func<AsepriteBinaryReader, T> readAction, T expected)
+    private void ValidateRead<T>(Action<BinaryWriter> writeAction, Func<Stream, T> readAction, T expected)
     {
         UTF8Encoding encoding = new(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
         MemoryStream stream = new();
@@ -179,8 +134,7 @@ public class AsepriteBinaryReaderTests
         stream.Position = 0;
 
         //  Read the value back
-        using AsepriteBinaryReader reader = new(stream);
-        T actual = readAction(reader);
+        T actual = readAction(stream);
         Assert.Equal(expected, actual);
         Assert.IsType<T>(actual);
     }
@@ -197,21 +151,7 @@ public class AsepriteBinaryReaderTests
         }
     }
 
-    private void ValidateDisposedExceptions(AsepriteBinaryReader reader)
-    {
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadByte());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadBytes(1));
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadWord());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadShort());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadDword());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadLong());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadFixed());
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadString());
-        Assert.Throws<ObjectDisposedException>(() => reader.Skip(1));
-        Assert.Throws<ObjectDisposedException>(() => reader.Seek(0));
-    }
-
-    private void ValidateEndOfStreamException(Action<BinaryWriter> writeAction, Action<AsepriteBinaryReader> readAction)
+    private void ValidateEndOfStreamException(Action<BinaryWriter> writeAction, Action<Stream> readAction)
     {
         UTF8Encoding encoding = new(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
         MemoryStream stream = new();
@@ -231,12 +171,14 @@ public class AsepriteBinaryReaderTests
         //  Truncate the last byte
         stream.SetLength(stream.Length - 1);
 
-        using AsepriteBinaryReader reader = new(stream);
-
         //  First one should always succeed.
-        readAction(reader);
+        readAction(stream);
+
+        Exception ex = Record.Exception(() => readAction(stream));
+        Assert.NotNull(ex);
+        Assert.IsType<EndOfStreamException>(ex);
 
         //  Second one should fail since we truncated the last byte
-        Assert.Throws<EndOfStreamException>(() => readAction(reader));
+        //Assert.Throws<EndOfStreamException>(() => readAction(stream));
     }
 }

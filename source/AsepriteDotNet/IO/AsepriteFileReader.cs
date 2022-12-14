@@ -135,52 +135,52 @@ public static class AsepriteFileReader
     /// </exception>
     internal static AsepriteFile ReadFile(string path)
     {
-        using AsepriteBinaryReader reader = new(File.OpenRead(path));
-        return ReadFile(reader);
+        using Stream stream = File.OpenRead(path);
+        return ReadFile(stream);
     }
 
-    internal static AsepriteFile ReadFile(AsepriteBinaryReader reader)
+    internal static AsepriteFile ReadFile(Stream stream)
     {
         //  Reference to the last group layer that is read so that subsequent
         //  child layers can be added to it.
         AsepriteGroupLayer? lastGroupLayer = default;
 
         //  Read the Aseprite file header
-        _ = reader.ReadDword();             //  File size (ignored, don't need)
-        ushort hMagic = reader.ReadWord();  //  Header magic number
+        _ = stream.ReadDword();             //  File size (ignored, don't need)
+        ushort hMagic = stream.ReadWord();  //  Header magic number
 
         if (hMagic != ASE_HEADER_MAGIC)
         {
-            reader.Dispose();
+            stream.Dispose();
             throw new InvalidOperationException($"Invalid header magic number (0x{hMagic:X4}). This does not appear to be a valid Aseprite file");
         }
 
-        ushort nFrames = reader.ReadWord(); //  Total number of frames
-        ushort width = reader.ReadWord();   //  Width, in pixels
-        ushort height = reader.ReadWord();  //  Height, in pixels
+        ushort nFrames = stream.ReadWord(); //  Total number of frames
+        ushort width = stream.ReadWord();   //  Width, in pixels
+        ushort height = stream.ReadWord();  //  Height, in pixels
 
         if (width < 1 || height < 1)
         {
-            reader.Dispose();
+            stream.Dispose();
             throw new InvalidOperationException($"Invalid canvas size {width}x{height}.");
         }
 
-        ushort depth = reader.ReadWord();   //  Color depth (bits per pixel)
+        ushort depth = stream.ReadWord();   //  Color depth (bits per pixel)
 
         if (!Enum.IsDefined<ColorDepth>((ColorDepth)depth))
         {
-            reader.Dispose();
+            stream.Dispose();
             throw new InvalidOperationException($"Invalid color depth: {depth}");
         }
 
-        uint hFlags = reader.ReadDword();   //  Header flags
+        uint hFlags = stream.ReadDword();   //  Header flags
 
         bool isLayerOpacityValid = HasFlag(hFlags, ASE_HEADER_FLAG_LAYER_OPACITY_VALID);
 
-        _ = reader.ReadWord();                      //  Speed (ms between frames) (deprecated)
-        _ = reader.ReadDword();                     //  Set to zero (ignored)
-        _ = reader.ReadDword();                     //  Set to zero (ignored)
-        byte transparentIndex = reader.ReadByte();  //  Index of transparent color in palette
+        _ = stream.ReadWord();                          //  Speed (ms between frames) (deprecated)
+        _ = stream.ReadDword();                         //  Set to zero (ignored)
+        _ = stream.ReadDword();                         //  Set to zero (ignored)
+        byte transparentIndex = stream.ReadByteEx();    //  Index of transparent color in palette
 
 
 
@@ -200,11 +200,11 @@ public static class AsepriteFileReader
         }
 
 
-        _ = reader.ReadBytes(3);            //  Ignore these bytes
-        ushort nColors = reader.ReadWord(); //  Number of colors
+        _ = stream.ReadBytes(3);            //  Ignore these bytes
+        ushort nColors = stream.ReadWord(); //  Number of colors
 
         //  Remainder of header is not needed, skipping to end of header
-        reader.Seek(ASE_HEADER_SIZE);
+        stream.Seek(ASE_HEADER_SIZE, SeekOrigin.Begin);
 
         //  Read frame-by-frame until all frames are read.
         for (int frameNum = 0; frameNum < nFrames; frameNum++)
@@ -220,19 +220,19 @@ public static class AsepriteFileReader
             int tagIterator = 0;
 
             //  Read the frame header
-            _ = reader.ReadDword();             //  Bytes in frame (don't need, ignored)
-            ushort fMagic = reader.ReadWord();  //  Frame magic number
+            _ = stream.ReadDword();             //  Bytes in frame (don't need, ignored)
+            ushort fMagic = stream.ReadWord();  //  Frame magic number
 
             if (fMagic != ASE_FRAME_MAGIC)
             {
-                reader.Dispose();
+                stream.Dispose();
                 throw new InvalidOperationException($"Invalid frame magic number (0x{fMagic:X4}) in frame {frameNum}.");
             }
 
-            int nChunks = reader.ReadWord();        //  Old field which specified chunk count
-            ushort duration = reader.ReadWord();    //  Frame duration, in millisecond
-            _ = reader.ReadBytes(2);                //  For future (set to zero)
-            uint moreChunks = reader.ReadDword();   //  New field which specifies chunk count
+            int nChunks = stream.ReadWord();        //  Old field which specified chunk count
+            ushort duration = stream.ReadWord();    //  Frame duration, in millisecond
+            _ = stream.ReadBytes(2);                //  For future (set to zero)
+            uint moreChunks = stream.ReadDword();   //  New field which specifies chunk count
 
             //  Determine which chunk count to use
             if (nChunks == 0xFFFF && nChunks < moreChunks)
@@ -243,22 +243,22 @@ public static class AsepriteFileReader
             //  Read chunk-by-chunk until all chunks in this frame are read.
             for (int chunkNum = 0; chunkNum < nChunks; chunkNum++)
             {
-                long chunkStart = reader.Position;
-                uint chunkLength = reader.ReadDword();  //  Size of chunk, in bytes
-                ushort chunkType = reader.ReadWord();   //  The type of chunk
+                long chunkStart = stream.Position;
+                uint chunkLength = stream.ReadDword();  //  Size of chunk, in bytes
+                ushort chunkType = stream.ReadWord();   //  The type of chunk
                 long chunkEnd = chunkStart + chunkLength;
 
                 if (chunkType == ASE_CHUNK_LAYER)
                 {
-                    ushort layerFlags = reader.ReadWord();  //  Layer flags
-                    ushort layerType = reader.ReadWord();   //  Layer type
-                    ushort level = reader.ReadWord();       //  Layer child level
-                    _ = reader.ReadWord();                  //  Default layer width (ignored)
-                    _ = reader.ReadWord();                  //  Default layer height (ignored)
-                    ushort blend = reader.ReadWord();       //  Blend mode
-                    byte opacity = reader.ReadByte();       //  Layer opacity
-                    _ = reader.ReadBytes(3);                //  For future (set to zero)
-                    string name = reader.ReadString();      //  Layer name
+                    ushort layerFlags = stream.ReadWord();  //  Layer flags
+                    ushort layerType = stream.ReadWord();   //  Layer type
+                    ushort level = stream.ReadWord();       //  Layer child level
+                    _ = stream.ReadWord();                  //  Default layer width (ignored)
+                    _ = stream.ReadWord();                  //  Default layer height (ignored)
+                    ushort blend = stream.ReadWord();       //  Blend mode
+                    byte opacity = stream.ReadByteEx();     //  Layer opacity
+                    _ = stream.ReadBytes(3);                //  For future (set to zero)
+                    string name = stream.ReadString();      //  Layer name
 
                     if (!isLayerOpacityValid)
                     {
@@ -268,7 +268,7 @@ public static class AsepriteFileReader
                     //  Validate blend mode
                     if (!Enum.IsDefined<BlendMode>((BlendMode)blend))
                     {
-                        reader.Dispose();
+                        stream.Dispose();
                         throw new InvalidOperationException($"Unknown blend mode '{blend}' found in layer '{name}'");
                     }
 
@@ -289,14 +289,14 @@ public static class AsepriteFileReader
                     }
                     else if (layerType == ASE_LAYER_TYPE_TILEMAP)
                     {
-                        uint index = reader.ReadDword();    //  Tileset index
+                        uint index = stream.ReadDword();    //  Tileset index
                         AsepriteTileset tileset = doc.Tilesets[(int)index];
 
                         layer = new AsepriteTilemapLayer(tileset, isVisible, isBackground, isReference, level, mode, opacity, name);
                     }
                     else
                     {
-                        reader.Dispose();
+                        stream.Dispose();
                         throw new InvalidOperationException($"Unknown layer type '{layerType}'");
                     }
 
@@ -316,12 +316,12 @@ public static class AsepriteFileReader
                 }
                 else if (chunkType == ASE_CHUNK_CEL)
                 {
-                    ushort index = reader.ReadWord();   //  Layer index
-                    short x = reader.ReadShort();       //  X position
-                    short y = reader.ReadShort();       //  Y position
-                    byte opacity = reader.ReadByte();   //  Opacity level
-                    ushort type = reader.ReadWord();    //  Cel type
-                    _ = reader.ReadBytes(7);            //  For future (set to zero)
+                    ushort index = stream.ReadWord();       //  Layer index
+                    short x = stream.ReadShort();           //  X position
+                    short y = stream.ReadShort();           //  Y position
+                    byte opacity = stream.ReadByteEx();     //  Opacity level
+                    ushort type = stream.ReadWord();        //  Cel type
+                    _ = stream.ReadBytes(7);                //  For future (set to zero)
 
                     AsepriteCel cel;
                     Point position = new Point(x, y);
@@ -329,9 +329,9 @@ public static class AsepriteFileReader
 
                     if (type == ASE_CEL_TYPE_RAW_IMAGE)
                     {
-                        ushort w = reader.ReadWord();                   //  Width, in pixels
-                        ushort h = reader.ReadWord();                   //  Height, in pixels
-                        byte[] pixelData = reader.ReadToPosition(chunkEnd); //  Raw pixel data
+                        ushort w = stream.ReadWord();               //  Width, in pixels
+                        ushort h = stream.ReadWord();               //  Height, in pixels
+                        byte[] pixelData = stream.ReadTo(chunkEnd); //  Raw pixel data
 
                         Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
                         Size size = new Size(w, h);
@@ -339,16 +339,16 @@ public static class AsepriteFileReader
                     }
                     else if (type == ASE_CEL_TYPE_LINKED)
                     {
-                        ushort frameIndex = reader.ReadWord();  //  Frame position to link with
+                        ushort frameIndex = stream.ReadWord();  //  Frame position to link with
 
                         AsepriteCel otherCel = doc.Frames[frameIndex].Cels[cels.Count];
                         cel = new AsepriteLinkedCel(otherCel, celLayer, position, opacity);
                     }
                     else if (type == ASE_CEL_TYPE_COMPRESSED_IMAGE)
                     {
-                        ushort w = reader.ReadWord();                   //  Width, in pixels
-                        ushort h = reader.ReadWord();                   //  Height, in pixels
-                        byte[] compressed = reader.ReadToPosition(chunkEnd); //  Raw pixel data compressed with Zlib
+                        ushort w = stream.ReadWord();                   //  Width, in pixels
+                        ushort h = stream.ReadWord();                   //  Height, in pixels
+                        byte[] compressed = stream.ReadTo(chunkEnd);    //  Raw pixel data compressed with Zlib
                         byte[] pixelData = Zlib.Deflate(compressed);
                         Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
 
@@ -357,15 +357,15 @@ public static class AsepriteFileReader
                     }
                     else if (type == ASE_CEL_TYPE_COMPRESSED_TILEMAP)
                     {
-                        ushort w = reader.ReadWord();                           //  Width, in number of tiles
-                        ushort h = reader.ReadWord();                           //  Height, in number of tiles
-                        ushort bpt = reader.ReadWord();                         //  Bits per tile
-                        uint id = reader.ReadDword();                           //  Bitmask for Tile ID
-                        uint xFlipBitmask = reader.ReadDword();                 //  Bitmask for X Flip
-                        uint yFlipBitmask = reader.ReadDword();                 //  Bitmask for Y Flip
-                        uint rotationBitmask = reader.ReadDword();              //  Bitmask for 90CW rotation
-                        _ = reader.ReadBytes(10);                               //  Reserved
-                        byte[] compressed = reader.ReadToPosition(chunkEnd);    //  Raw tile data compressed with Zlib
+                        ushort w = stream.ReadWord();                           //  Width, in number of tiles
+                        ushort h = stream.ReadWord();                           //  Height, in number of tiles
+                        ushort bpt = stream.ReadWord();                         //  Bits per tile
+                        uint id = stream.ReadDword();                           //  Bitmask for Tile ID
+                        uint xFlipBitmask = stream.ReadDword();                 //  Bitmask for X Flip
+                        uint yFlipBitmask = stream.ReadDword();                 //  Bitmask for Y Flip
+                        uint rotationBitmask = stream.ReadDword();              //  Bitmask for 90CW rotation
+                        _ = stream.ReadBytes(10);                               //  Reserved
+                        byte[] compressed = stream.ReadTo(chunkEnd);            //  Raw tile data compressed with Zlib
 
                         byte[] tileData = Zlib.Deflate(compressed);
 
@@ -395,7 +395,7 @@ public static class AsepriteFileReader
                     }
                     else
                     {
-                        reader.Dispose();
+                        stream.Dispose();
                         throw new InvalidOperationException($"Unknown cel type '{type}'");
                     }
 
@@ -404,28 +404,28 @@ public static class AsepriteFileReader
                 }
                 else if (chunkType == ASE_CHUNK_TAGS)
                 {
-                    ushort nTags = reader.ReadWord();   //  Number of tags
-                    _ = reader.ReadBytes(8);            //  For future (set to zero)
+                    ushort nTags = stream.ReadWord();   //  Number of tags
+                    _ = stream.ReadBytes(8);            //  For future (set to zero)
 
                     for (int i = 0; i < nTags; i++)
                     {
-                        ushort from = reader.ReadWord();    //  From frame
-                        ushort to = reader.ReadWord();      //  To frame
-                        byte direction = reader.ReadByte(); //  Loop Direction
+                        ushort from = stream.ReadWord();        //  From frame
+                        ushort to = stream.ReadWord();          //  To frame
+                        byte direction = stream.ReadByteEx();   //  Loop Direction
 
                         //  Validate direction value
                         if (!Enum.IsDefined<LoopDirection>((LoopDirection)direction))
                         {
-                            reader.Dispose();
+                            stream.Dispose();
                             throw new InvalidOperationException($"Unknown loop direction '{direction}'");
                         }
 
-                        _ = reader.ReadBytes(8);            //  For future (set to zero)
-                        byte r = reader.ReadByte();         //  Red RGB value of tag color
-                        byte g = reader.ReadByte();         //  Green RGB value of tag color
-                        byte b = reader.ReadByte();         //  Blue RGB value of tag color
-                        _ = reader.ReadByte();              //  Extra byte (zero)
-                        string name = reader.ReadString();  //  Tag name
+                        _ = stream.ReadBytes(8);            //  For future (set to zero)
+                        byte r = stream.ReadByteEx();       //  Red RGB value of tag color
+                        byte g = stream.ReadByteEx();       //  Green RGB value of tag color
+                        byte b = stream.ReadByteEx();       //  Blue RGB value of tag color
+                        _ = stream.ReadByteEx();            //  Extra byte (zero)
+                        string name = stream.ReadString();  //  Tag name
 
                         LoopDirection loopDirection = (LoopDirection)direction;
                         Color tagColor = Color.FromRGBA(r, g, b, 255);
@@ -440,10 +440,10 @@ public static class AsepriteFileReader
                 }
                 else if (chunkType == ASE_CHUNK_PALETTE)
                 {
-                    uint newSize = reader.ReadDword();    //  New palette size (total number of entries)
-                    uint from = reader.ReadDword();     //  First color index to change
-                    uint to = reader.ReadDword();       //  Last color index to change
-                    _ = reader.ReadBytes(8);            //  For future (set to zero)
+                    uint newSize = stream.ReadDword();  //  New palette size (total number of entries)
+                    uint from = stream.ReadDword();     //  First color index to change
+                    uint to = stream.ReadDword();       //  Last color index to change
+                    _ = stream.ReadBytes(8);            //  For future (set to zero)
 
                     if (newSize > 0)
                     {
@@ -452,36 +452,36 @@ public static class AsepriteFileReader
 
                     for (uint i = from; i <= to; i++)
                     {
-                        ushort flags = reader.ReadWord();
-                        byte r = reader.ReadByte();
-                        byte g = reader.ReadByte();
-                        byte b = reader.ReadByte();
-                        byte a = reader.ReadByte();
+                        ushort flags = stream.ReadWord();
+                        byte r = stream.ReadByteEx();
+                        byte g = stream.ReadByteEx();
+                        byte b = stream.ReadByteEx();
+                        byte a = stream.ReadByteEx();
 
                         if (HasFlag(flags, ASE_PALETTE_FLAG_HAS_NAME))
                         {
-                            _ = reader.ReadString();    //  Color name (ignored)
+                            _ = stream.ReadString();    //  Color name (ignored)
                         }
                         doc.Palette[(int)i] = Color.FromRGBA(r, g, b, a);
                     }
                 }
                 else if (chunkType == ASE_CHUNK_USER_DATA)
                 {
-                    uint flags = reader.ReadDword();    //  Flags
+                    uint flags = stream.ReadDword();    //  Flags
 
                     string? text = default;
                     if (HasFlag(flags, ASE_USER_DATA_FLAG_HAS_TEXT))
                     {
-                        text = reader.ReadString();     //  User Data text
+                        text = stream.ReadString();     //  User Data text
                     }
 
                     Color? color = default;
                     if (HasFlag(flags, ASE_USER_DATA_FLAG_HAS_COLOR))
                     {
-                        byte r = reader.ReadByte();     //  Color Red (0 - 255)
-                        byte g = reader.ReadByte();     //  Color Green (0 - 255)
-                        byte b = reader.ReadByte();     //  Color Blue (0 - 255)
-                        byte a = reader.ReadByte();     //  Color Alpha (0 - 255)
+                        byte r = stream.ReadByteEx();     //  Color Red (0 - 255)
+                        byte g = stream.ReadByteEx();     //  Color Green (0 - 255)
+                        byte b = stream.ReadByteEx();     //  Color Blue (0 - 255)
+                        byte a = stream.ReadByteEx();     //  Color Alpha (0 - 255)
 
                         color = Color.FromRGBA(r, g, b, a);
                     }
@@ -525,10 +525,10 @@ public static class AsepriteFileReader
                 }
                 else if (chunkType == ASE_CHUNK_SLICE)
                 {
-                    uint nKeys = reader.ReadDword();    //  Number of "slice keys"
-                    uint flags = reader.ReadDword();    //  Flags
-                    _ = reader.ReadDword();             //  Reserved
-                    string name = reader.ReadString();  //  Name
+                    uint nKeys = stream.ReadDword();    //  Number of "slice keys"
+                    uint flags = stream.ReadDword();    //  Flags
+                    _ = stream.ReadDword();             //  Reserved
+                    string name = stream.ReadString();  //  Name
 
                     bool isNinePatch = HasFlag(flags, ASE_SLICE_FLAGS_IS_NINE_PATCH);
                     bool hasPivot = HasFlag(flags, ASE_SLICE_FLAGS_HAS_PIVOT);
@@ -538,11 +538,11 @@ public static class AsepriteFileReader
 
                     for (uint i = 0; i < nKeys; i++)
                     {
-                        uint startFrame = reader.ReadDword();   //  Frame number this slice is valid starting from
-                        int x = reader.ReadLong();              //  Slice X origin coordinate in the sprite
-                        int y = reader.ReadLong();              //  Slice Y origin coordinate in the sprite
-                        uint w = reader.ReadDword();            //  Slice Width (can be 0 if slice is hidden)
-                        uint h = reader.ReadDword();            //  Slice Height (can be 0 if slice is hidden)
+                        uint startFrame = stream.ReadDword();   //  Frame number this slice is valid starting from
+                        int x = stream.ReadLong();              //  Slice X origin coordinate in the sprite
+                        int y = stream.ReadLong();              //  Slice Y origin coordinate in the sprite
+                        uint w = stream.ReadDword();            //  Slice Width (can be 0 if slice is hidden)
+                        uint h = stream.ReadDword();            //  Slice Height (can be 0 if slice is hidden)
 
                         Rectangle bounds = new Rectangle(x, y, (int)w, (int)h);
                         Rectangle? center = default;
@@ -550,18 +550,18 @@ public static class AsepriteFileReader
 
                         if (slice.IsNinePatch)
                         {
-                            int cx = reader.ReadLong();     //  Center X position (relative to slice bounds)
-                            int cy = reader.ReadLong();     //  Center Y position (relative to slice bounds)
-                            uint cw = reader.ReadDword();   //  Center width
-                            uint ch = reader.ReadDword();   //  Center height
+                            int cx = stream.ReadLong();     //  Center X position (relative to slice bounds)
+                            int cy = stream.ReadLong();     //  Center Y position (relative to slice bounds)
+                            uint cw = stream.ReadDword();   //  Center width
+                            uint ch = stream.ReadDword();   //  Center height
 
                             center = new Rectangle(cx, cy, (int)cw, (int)ch);
                         }
 
                         if (slice.HasPivot)
                         {
-                            int px = reader.ReadLong(); //  Pivot X position (relative to the slice origin)
-                            int py = reader.ReadLong(); //  Pivot Y position (relative to the slice origin)
+                            int px = stream.ReadLong(); //  Pivot X position (relative to the slice origin)
+                            int py = stream.ReadLong(); //  Pivot Y position (relative to the slice origin)
 
                             pivot = new Point(px, py);
                         }
@@ -574,26 +574,26 @@ public static class AsepriteFileReader
                 }
                 else if (chunkType == ASE_CHUNK_TILESET)
                 {
-                    uint id = reader.ReadDword();       //  Tileset ID
-                    uint flags = reader.ReadDword();    //  Tileset flags
-                    uint count = reader.ReadDword();    //  Number of tiles
-                    ushort w = reader.ReadWord();       //  Tile width
-                    ushort h = reader.ReadWord();       //  Tile height
-                    _ = reader.ReadShort();             //  Base index (ignoring, only used in Aseprite UI)
-                    _ = reader.ReadBytes(14);           //  Reserved
-                    string name = reader.ReadString();  //  Name of tileset
+                    uint id = stream.ReadDword();       //  Tileset ID
+                    uint flags = stream.ReadDword();    //  Tileset flags
+                    uint count = stream.ReadDword();    //  Number of tiles
+                    ushort w = stream.ReadWord();       //  Tile width
+                    ushort h = stream.ReadWord();       //  Tile height
+                    _ = stream.ReadShort();             //  Base index (ignoring, only used in Aseprite UI)
+                    _ = stream.ReadBytes(14);           //  Reserved
+                    string name = stream.ReadString();  //  Name of tileset
 
 
                     if (HasFlag(flags, ASE_TILESET_FLAG_EXTERNAL_FILE))
                     {
-                        reader.Dispose();
+                        stream.Dispose();
                         throw new InvalidOperationException($"Tileset '{name}' includes tileset in external file. This is not supported at this time");
                     }
 
                     if (HasFlag(flags, ASE_TILESET_FLAG_EMBEDDED))
                     {
-                        uint len = reader.ReadDword();                  //  Compressed data length
-                        byte[] compressed = reader.ReadBytes((int)len); //  Compressed tileset image
+                        uint len = stream.ReadDword();                  //  Compressed data length
+                        byte[] compressed = stream.ReadBytes((int)len); //  Compressed tileset image
 
                         byte[] pixelData = Zlib.Deflate(compressed);
                         Color[] pixels = PixelsToColor(pixelData, doc.ColorDepth, doc.Palette);
@@ -612,40 +612,40 @@ public static class AsepriteFileReader
                 else if (chunkType == ASE_CHUNK_OLD_PALETTE1)
                 {
                     doc.AddWarning($"Old Palette Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_OLD_PALETTE2)
                 {
                     doc.AddWarning($"Old Palette Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_CEL_EXTRA)
                 {
                     doc.AddWarning($"Cel Extra Chunk (0x{chunkType:x4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_COLOR_PROFILE)
                 {
                     doc.AddWarning($"Color Profile Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_EXTERNAL_FILES)
                 {
                     doc.AddWarning($"External Files Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_MASK)
                 {
                     doc.AddWarning($"Mask Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
                 else if (chunkType == ASE_CHUNK_PATH)
                 {
                     doc.AddWarning($"Path Chunk (0x{chunkType:X4}) ignored");
-                    reader.Seek(chunkEnd);
+                    stream.Seek(chunkEnd, SeekOrigin.Begin);
                 }
 
-                Debug.Assert(reader.Position == chunkEnd);
+                Debug.Assert(stream.Position == chunkEnd);
             }
 
             AsepriteFrame frame = new(duration, cels, doc.Size);
