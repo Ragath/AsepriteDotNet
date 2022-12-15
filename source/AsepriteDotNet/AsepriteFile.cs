@@ -19,9 +19,12 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
+
 using AsepriteDotNet.AsepriteTypes;
+using AsepriteDotNet.Color;
 using AsepriteDotNet.Image;
 using AsepriteDotNet.IO;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet;
 
@@ -41,7 +44,7 @@ public sealed class AsepriteFile
     ///     Gets the width and height, in pixels, of the sprite in this
     ///     <see cref="AsepriteFile"/>.
     /// </summary>
-    public Dimension Size { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Gets the <see cref="ColorDepth"/> (bits per pixel) used by this
@@ -91,7 +94,7 @@ public sealed class AsepriteFile
     /// </summary>
     public AsepritePalette Palette { get; }
 
-    internal AsepriteFile(AsepritePalette palette, Dimension size, ColorDepth colorDepth)
+    internal AsepriteFile(AsepritePalette palette, Size size, ColorDepth colorDepth)
     {
         Size = size;
         ColorDepth = colorDepth;
@@ -256,7 +259,7 @@ public sealed class AsepriteFile
                  (options.Spacing * (rows - 1)) +
                  (options.InnerPadding * 2 * rows);
 
-        Dimension sheetSize = new(width, height);
+        Size sheetSize = new(width, height);
 
         Rgba32[] sheetPixels = new Rgba32[width * height];
 
@@ -320,7 +323,7 @@ public sealed class AsepriteFile
                 }
 
                 //  Now create the frame data
-                Rect sourceRectangle = new(0, 0, Size.Width, Size.Height);
+                Rectangle sourceRectangle = new(0, 0, Size.Width, Size.Height);
                 sourceRectangle.X += options.BorderPadding;
                 sourceRectangle.Y += options.BorderPadding;
 
@@ -400,9 +403,9 @@ public sealed class AsepriteFile
 
                 string name = slice.Name;
                 Rgba32 color = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                Rect bounds = key.Bounds;
-                Rect? center = key.CenterBounds;
-                Location? pivot = key.Pivot;
+                Rectangle bounds = key.Bounds;
+                Rectangle? center = key.CenterBounds;
+                Point? pivot = key.Pivot;
                 SpritesheetSlice sheetSlice = new(bounds, center, pivot, name, color);
 
                 if (lastKey is not null && lastKey.Frame < key.Frame)
@@ -411,9 +414,9 @@ public sealed class AsepriteFile
                     {
                         string interpolatedName = slice.Name;
                         Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                        Rect interpolatedBounds = lastKey.Bounds;
-                        Rect? interpolatedCenter = lastKey.CenterBounds;
-                        Location? interpolatedPivot = lastKey.Pivot;
+                        Rectangle interpolatedBounds = lastKey.Bounds;
+                        Rectangle? interpolatedCenter = lastKey.CenterBounds;
+                        Point? interpolatedPivot = lastKey.Pivot;
 
                         SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
 
@@ -431,9 +434,9 @@ public sealed class AsepriteFile
                 {
                     string interpolatedName = slice.Name;
                     Rgba32 interpolatedColor = slice.UserData.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
-                    Rect interpolatedBounds = lastKey.Bounds;
-                    Rect? interpolatedCenter = lastKey.CenterBounds;
-                    Location? interpolatedPivot = lastKey.Pivot;
+                    Rectangle interpolatedBounds = lastKey.Bounds;
+                    Rectangle? interpolatedCenter = lastKey.CenterBounds;
+                    Point? interpolatedPivot = lastKey.Pivot;
 
                     SpritesheetSlice interpolated = new(interpolatedBounds, interpolatedCenter, interpolatedPivot, interpolatedName, interpolatedColor);
 

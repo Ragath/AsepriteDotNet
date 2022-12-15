@@ -21,28 +21,54 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.Tests;
 
-public sealed class RectTests
+public sealed class LocationTests
 {
     [Fact]
-    public void Rect_EqualTest()
+    public void Location_AddTest()
     {
-        Rect a = new Rect(1, 2, 3, 4);
-        Rect b = new Rect(1, 2, 3, 4);
+        Point left = new Point(1, 2);
+        Point right = new Point(3, 4);
+
+        Point expected = new Point(4, 6);
+
+        Assert.Equal(expected, Point.Add(left, right));
+        Assert.Equal(expected, left + right);
+    }
+
+    [Fact]
+    public void Location_SubtractTest()
+    {
+        Point left = new Point(1, 2);
+        Point right = new Point(3, 4);
+
+        Point expected = new Point(-2, -2);
+
+        Assert.Equal(expected, Point.Subtract(left, right));
+        Assert.Equal(expected, left - right);
+    }
+
+    [Fact]
+    public void Location_EqualTest()
+    {
+        Point a = new Point(1, 2);
+        Point b = new Point(1, 2);
 
         Assert.True(a == b);
         Assert.True(a.Equals(b));
         Assert.True(a.Equals((object)b));
-        Assert.False(a == Rect.Empty);
-        Assert.False(a.Equals(Rect.Empty));
-        Assert.False(a.Equals((object)Rect.Empty));
+        Assert.False(a == Point.Empty);
+        Assert.False(a.Equals(Point.Empty));
+        Assert.False(a.Equals((object)Point.Empty));
     }
 
     [Fact]
-    public void Rect_NotEqualTest()
+    public void Location_NotEqualTest()
     {
-        Assert.True(Rect.Empty != new Rect(1, 2, 3, 4));
-        Assert.False(Rect.Empty != new Rect(0, 0, 0, 0));
+        Assert.True(Point.Empty != new Point(1, 2));
+        Assert.False(Point.Empty != new Point(0, 0));
     }
 }

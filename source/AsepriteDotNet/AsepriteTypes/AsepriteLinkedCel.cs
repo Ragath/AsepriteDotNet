@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.AsepriteTypes;
 
 /// <summary>
@@ -35,6 +37,6 @@ public sealed class AsepriteLinkedCel : AsepriteCel
     /// </summary>
     public AsepriteCel Cel { get; }
 
-    internal AsepriteLinkedCel(AsepriteCel other, AsepriteLayer layer, Location position, int opacity)
+    internal AsepriteLinkedCel(AsepriteCel other, AsepriteLayer layer, Point position, int opacity)
         : base(layer, position, opacity) => Cel = other;
 }

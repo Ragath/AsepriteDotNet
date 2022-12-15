@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.AsepriteTypes;
 
 /// <summary>
@@ -37,7 +39,7 @@ public abstract class AsepriteCel : IAsepriteUserData
     ///     Gets the top-left coordinate position of this <see cref="AsepriteCel"/>
     ///     relative to the bounds of the sprite.
     /// </summary>
-    public Location Position { get; }
+    public Point Position { get; }
 
     /// <summary>
     ///     Gets the opacity level of this <see cref="AsepriteCel"/>,
@@ -49,6 +51,6 @@ public abstract class AsepriteCel : IAsepriteUserData
     /// </summary>
     public AsepriteUserData UserData { get; set; } = new();
 
-    internal AsepriteCel(AsepriteLayer layer, Location position, int opacity) =>
+    internal AsepriteCel(AsepriteLayer layer, Point position, int opacity) =>
         (Layer, Position, Opacity) = (layer, position, opacity);
 }

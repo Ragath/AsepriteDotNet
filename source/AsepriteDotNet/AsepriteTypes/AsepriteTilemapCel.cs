@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.AsepriteTypes;
 
 /// <summary>
@@ -32,7 +34,7 @@ public sealed class AsepriteTilemapCel : AsepriteCel
     ///     Gets the width and height components of this 
     ///     <see cref="AsepriteTilemapCel"/> in number of tiles.
     /// </summary> 
-    public Dimension Size { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Gets the number of bits per tile for this <see cref="AsepriteTilemapCel"/>.
@@ -70,7 +72,7 @@ public sealed class AsepriteTilemapCel : AsepriteCel
     /// </remarks>
     public AsepriteTile[] Tiles { get; }
 
-    internal AsepriteTilemapCel(Dimension size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Location position, int opacity)
+    internal AsepriteTilemapCel(Size size, int bitsPerTile, uint tileIdBitmask, uint xFlipBitmask, uint yFlipBitmask, uint rotationBitmask, AsepriteTile[] tiles, AsepriteLayer layer, Point position, int opacity)
         : base(layer, position, opacity)
     {
         Size = size;

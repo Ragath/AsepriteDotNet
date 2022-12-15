@@ -22,7 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.AsepriteTypes;
+using AsepriteDotNet.Color;
 using AsepriteDotNet.IO;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet.Tests;
 
@@ -111,8 +113,8 @@ public sealed class AsepriteFileReaderTest
         //  Validate Cels
         AsepriteImageCel fgCel = Assert.IsType<AsepriteImageCel>(doc.Frames[2].Cels[1]);
         Assert.Equal("foreground", fgCel.Layer.Name);
-        Assert.Equal(new Dimension(16, 16), fgCel.Size);
-        Assert.Equal(new Location(8, 8), fgCel.Position);
+        Assert.Equal(new Size(16, 16), fgCel.Size);
+        Assert.Equal(new Point(8, 8), fgCel.Position);
         Assert.Equal(fgCel.Size.Width * fgCel.Size.Height, fgCel.Pixels.Length);
     }
 
@@ -270,7 +272,7 @@ public sealed class AsepriteFileReaderTest
 
         Assert.Equal(0, tileset.ID);
         Assert.Equal(11, tileset.TileCount);
-        Assert.Equal(new Dimension(8, 8), tileset.TileSize);
+        Assert.Equal(new Size(8, 8), tileset.TileSize);
 
         Rgba32[] expectedTilesetPixels = new Rgba32[]
         {

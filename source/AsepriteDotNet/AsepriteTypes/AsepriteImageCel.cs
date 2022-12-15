@@ -21,7 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Color;
 using AsepriteDotNet.IO.Image;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet.AsepriteTypes;
 
@@ -35,7 +37,7 @@ public sealed class AsepriteImageCel : AsepriteCel
     ///     Gets the width and height components of this <see cref="AsepriteImageCel"/>
     ///     as a <see cref="Size"/> value.
     /// </summary> 
-    public Dimension Size { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Gets an <see cref="Array"/> of <see cref="Rgba32"/> elements that
@@ -47,7 +49,7 @@ public sealed class AsepriteImageCel : AsepriteCel
     /// </remarks>
     public Rgba32[] Pixels { get; } = Array.Empty<Rgba32>();
 
-    internal AsepriteImageCel(Dimension size, Rgba32[] pixels, AsepriteLayer layer, Location position, int opacity)
+    internal AsepriteImageCel(Size size, Rgba32[] pixels, AsepriteLayer layer, Point position, int opacity)
         : base(layer, position, opacity) => (Size, Pixels) = (size, pixels);
 
     /// <summary>

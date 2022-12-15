@@ -23,6 +23,8 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections;
 
+using AsepriteDotNet.Color;
+
 namespace AsepriteDotNet.AsepriteTypes;
 
 

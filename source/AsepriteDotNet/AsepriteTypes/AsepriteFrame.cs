@@ -21,7 +21,9 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 using System.Collections;
 using System.Collections.ObjectModel;
 
+using AsepriteDotNet.Color;
 using AsepriteDotNet.IO.Image;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet.AsepriteTypes;
 
@@ -33,7 +35,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// <summary>
     ///     Gets the width and height of this <see cref="AsepriteFrame"/>.
     /// </summary>
-    public Dimension Size { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Gets the duration, in milliseconds, of this <see cref="AsepriteFrame"/> when
@@ -62,7 +64,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// </summary>
     public ReadOnlyCollection<AsepriteCel> Cels { get; }
 
-    internal AsepriteFrame(int duration, List<AsepriteCel> cels, Dimension size)
+    internal AsepriteFrame(int duration, List<AsepriteCel> cels, Size size)
     {
         Duration = duration;
         Cels = cels.AsReadOnly();

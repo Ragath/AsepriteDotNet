@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.Image;
 
 /// <summary>
@@ -34,7 +36,7 @@ public sealed class SpritesheetFrame
     ///     Gets the bounds of this <see cref="SpritesheetFrame"/> relative to
     ///     the overall spritesheet.
     /// </summary>
-    public Rect SourceRectangle { get; }
+    public Rectangle SourceRectangle { get; }
 
     /// <summary>
     ///     Gets the duration of this <see cref="SpritesheetFrame"/> when used
@@ -42,7 +44,7 @@ public sealed class SpritesheetFrame
     /// </summary>
     public int Duration { get; }
 
-    internal SpritesheetFrame(Rect source, int duration)
+    internal SpritesheetFrame(Rectangle source, int duration)
     {
         SourceRectangle = source;
         Duration = duration;

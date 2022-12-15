@@ -20,19 +20,20 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.Diagnostics.CodeAnalysis;
 
-namespace AsepriteDotNet;
+namespace AsepriteDotNet.Primitives;
 
 /// <summary>
-///     Represents the width, height, x-coordinate, and y-coordinate components
-///     of a rectangular area on a two dimensional plane.
+///     Stores an ordered pair of 32-bit integers which specify the width,
+///     height, x-coordinate, and y-coordinate components of a rectangular area
+///     on a two dimensional plan.
 /// </summary>
-public struct Rect : IEquatable<Rect>
+public struct Rectangle : IEquatable<Rectangle>
 {
     /// <summary>
-    ///     Represents a <see cref="Rect"/> value who's width, height,
+    ///     Represents a <see cref="Rectangle"/> value who's width, height,
     ///     x-coordinate, and y-coordinate elements are initialized to zero.
     /// </summary>
-    public static Rect Empty = new Rect(0, 0, 0, 0);
+    public static Rectangle Empty = new Rectangle(0, 0, 0, 0);
 
     private int _x;
     private int _y;
@@ -40,7 +41,7 @@ public struct Rect : IEquatable<Rect>
     private int _h;
 
     /// <summary>
-    ///     Gets or Sets the x-coordinate element of this <see cref="Rect"/>.
+    ///     Gets or Sets the x-coordinate element of this <see cref="Rectangle"/>.
     /// </summary>
     public int X
     {
@@ -49,7 +50,7 @@ public struct Rect : IEquatable<Rect>
     }
 
     /// <summary>
-    ///     Gets or Sets the y-coordinate element of this <see cref="Rect"/>.
+    ///     Gets or Sets the y-coordinate element of this <see cref="Rectangle"/>.
     /// </summary>
     public int Y
     {
@@ -58,12 +59,12 @@ public struct Rect : IEquatable<Rect>
     }
 
     /// <summary>
-    ///     Gets or Sets a <see cref="AsepriteDotNet.Location"/> value that defines the x- and
-    ///     y-coordinate location of this <see cref="Rect"/>.
+    ///     Gets or Sets a <see cref="Point"/> value that defines the x- and
+    ///     y-coordinate location of this <see cref="Rectangle"/>.
     /// </summary>
-    public Location Location
+    public Point Location
     {
-        readonly get => new Location(X, Y);
+        readonly get => new Point(X, Y);
         set
         {
             X = value.X;
@@ -72,7 +73,7 @@ public struct Rect : IEquatable<Rect>
     }
 
     /// <summary>
-    ///     Gets or Sets the width element of this <see cref="Rect"/>.
+    ///     Gets or Sets the width element of this <see cref="Rectangle"/>.
     /// </summary>
     public int Width
     {
@@ -81,7 +82,7 @@ public struct Rect : IEquatable<Rect>
     }
 
     /// <summary>
-    ///     Gets or Sets the height element of this <see cref="Rect"/>.
+    ///     Gets or Sets the height element of this <see cref="Rectangle"/>.
     /// </summary>
     public int Height
     {
@@ -91,11 +92,11 @@ public struct Rect : IEquatable<Rect>
 
     /// <summary>
     ///     Gets or Sets a <see cref="Size"/> value that defines the width and 
-    ///     height elements of this <see cref="Rect"/>.
+    ///     height elements of this <see cref="Rectangle"/>.
     /// </summary>
-    public Dimension Size
+    public Size Size
     {
-        readonly get => new Dimension(Width, Height);
+        readonly get => new Size(Width, Height);
         set
         {
             Width = value.Height;
@@ -105,143 +106,143 @@ public struct Rect : IEquatable<Rect>
 
     /// <summary>
     ///     Gets the y-coordinate position of the top-left corner of this
-    ///     <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/>.
     /// </summary>
     public readonly int Top => Y;
 
     /// <summary>
     ///     Gets the y-coordinate position of the bottom-right corner of this
-    ///     <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/>.
     /// </summary>
     public readonly int Bottom => Y + Height;
 
     /// <summary>
     ///     Gets the x-coordinate position of the top-left corner of this
-    ///     <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/>.
     /// </summary>
     public readonly int Left => X;
 
     /// <summary>
     ///     Gets the x-coordinate position of the bottom-right corner of this
-    ///     <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/>.
     /// </summary>
     public readonly int Right => X + Width;
 
     /// <summary>
-    ///     Gets a value that indicates whether this <see cref="Rect"/>
+    ///     Gets a value that indicates whether this <see cref="Rectangle"/>
     ///     is empty, meaning that its width, height, x-coordinate, and
     ///     y-coordinate elements are all set to zero.
     /// </summary>
     public readonly bool IsEmpty => _x == 0 && _y == 0 && _w == 0 && _h == 0;
 
     /// <summary>
-    ///     Initializes a new <see cref="Rect"/> value.
+    ///     Initializes a new <see cref="Rectangle"/> value.
     /// </summary>
     /// <param name="x">
-    ///     The x-coordinate element of this <see cref="Rect"/>.
+    ///     The x-coordinate element of this <see cref="Rectangle"/>.
     /// </param>
     /// <param name="y">
-    ///     The y-coordinate element of this <see cref="Rect"/>.
+    ///     The y-coordinate element of this <see cref="Rectangle"/>.
     /// </param>
     /// <param name="width">
-    ///     The width element of this <see cref="Rect"/>.
+    ///     The width element of this <see cref="Rectangle"/>.
     /// </param>
     /// <param name="height">
-    ///     The height element of this <see cref="Rect"/>.
+    ///     The height element of this <see cref="Rectangle"/>.
     /// </param>
-    public Rect(int x, int y, int width, int height) => (_x, _y, _w, _h) = (x, y, width, height);
+    public Rectangle(int x, int y, int width, int height) => (_x, _y, _w, _h) = (x, y, width, height);
 
     /// <summary>
-    ///     Initializes a new <see cref="Rect"/> value.
+    ///     Initializes a new <see cref="Rectangle"/> value.
     /// </summary>
     /// <param name="location">
-    ///     A <see cref="AsepriteDotNet.Location"/> value that defines the x- and y-coordinate
-    ///     elements of this <see cref="Rect"/>.
+    ///     A <see cref="Point"/> value that defines the x- and y-coordinate
+    ///     elements of this <see cref="Rectangle"/>.
     /// </param>
     /// <param name="size">
     ///     A <see cref="Size"/> value that defines the width and height
-    ///     elements of this <see cref="Rect"/>.
+    ///     elements of this <see cref="Rectangle"/>.
     /// </param>
-    public Rect(Location location, Dimension size) : this(location.X, location.Y, size.Width, size.Height) { }
+    public Rectangle(Point location, Size size) : this(location.X, location.Y, size.Width, size.Height) { }
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 
-    ///     <see cref="object"/> is equal to this <see cref="Rect"/>.
+    ///     <see cref="object"/> is equal to this <see cref="Rectangle"/>.
     /// </summary>
     /// <param name="obj">
     ///     The <see cref="object"/> to check for equality with this 
-    ///     <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/>.
     /// </param>
     /// <returns>
     ///     <see langword="true"/> if the specified <see cref="object"/> is
-    ///     equal to this <see cref="Rect"/>; otherwise, 
+    ///     equal to this <see cref="Rectangle"/>; otherwise, 
     ///     <see langword="false"/>.
     /// </returns>
-    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Rect other && Equals(other);
+    public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is Rectangle other && Equals(other);
 
     /// <summary>
     ///     Returns a value that indicates whether the specified 
-    ///     <see cref="Rect"/> is equal to this <see cref="Rect"/>.
+    ///     <see cref="Rectangle"/> is equal to this <see cref="Rectangle"/>.
     /// </summary>
     /// <param name="other">
-    ///     The other <see cref="Rect"/> to check for equality
+    ///     The other <see cref="Rectangle"/> to check for equality
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the specified <see cref="Rect"/>
-    ///     value is equal to this <see cref="Rect"/> value; otherwise,
+    ///     <see langword="true"/> if the specified <see cref="Rectangle"/>
+    ///     value is equal to this <see cref="Rectangle"/> value; otherwise,
     ///     <see langword="false"/>.
     /// </returns>
-    public readonly bool Equals(Rect other) => this == other;
+    public readonly bool Equals(Rectangle other) => this == other;
 
     /// <summary>   
-    ///     Returns the hash code for this <see cref="Rect"/> value.
+    ///     Returns the hash code for this <see cref="Rectangle"/> value.
     /// </summary>
     /// <returns>
     ///     A 32-bit signed integer that is the hash code for this
-    ///     <see cref="Rect"/> value.
+    ///     <see cref="Rectangle"/> value.
     /// </returns>
     public override readonly int GetHashCode() => HashCode.Combine(_x, _y, _w, _h);
 
     /// <summary>
-    ///     Compares two <see cref="Rect"/> values for equality.
+    ///     Compares two <see cref="Rectangle"/> values for equality.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Rect"/> value on the left side of the equality
+    ///     The <see cref="Rectangle"/> value on the left side of the equality
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Rect"/> value on the right side of the equality
+    ///     The <see cref="Rectangle"/> value on the right side of the equality
     ///     operator.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the two <see cref="Rect"/> values are
+    ///     <see langword="true"/> if the two <see cref="Rectangle"/> values are
     ///     equal; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool operator ==(Rect left, Rect right) =>
+    public static bool operator ==(Rectangle left, Rectangle right) =>
      left._x == right._x && left._y == right._y && left._w == right._w && left._h == right._h;
 
     /// <summary>
-    ///     Compares two <see cref="Rect"/> values for inequality.
+    ///     Compares two <see cref="Rectangle"/> values for inequality.
     /// </summary>
     /// <param name="left">
-    ///     The <see cref="Rect"/> value on the left side of the inequality
+    ///     The <see cref="Rectangle"/> value on the left side of the inequality
     ///     operator.
     /// </param>
     /// <param name="right">
-    ///     The <see cref="Rect"/> value on the right side of the 
+    ///     The <see cref="Rectangle"/> value on the right side of the 
     ///     inequality operator.
     /// </param>
     /// <returns>
-    ///     <see langword="true"/> if the two <see cref="Rect"/> values are
+    ///     <see langword="true"/> if the two <see cref="Rectangle"/> values are
     ///     unequal; otherwise, <see langword="false"/>.
     /// </returns>
-    public static bool operator !=(Rect left, Rect right) => !(left == right);
+    public static bool operator !=(Rectangle left, Rectangle right) => !(left == right);
 
     /// <summary>
-    ///     Returns a string representation of this <see cref="Rect"/>.
+    ///     Returns a string representation of this <see cref="Rectangle"/>.
     /// </summary>
     /// <returns>
-    ///     A new string representation of this <see cref="Rect"/>.
+    ///     A new string representation of this <see cref="Rectangle"/>.
     /// </returns>
     public override readonly string ToString() =>
         $"{{X={X}, Y={Y}, Width={Width}, Height={Height}}}";

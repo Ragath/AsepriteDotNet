@@ -23,7 +23,9 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
 
+using AsepriteDotNet.Color;
 using AsepriteDotNet.IO.Image;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet.Image;
 
@@ -36,7 +38,7 @@ public sealed class Spritesheet
     /// <summary>
     ///     Gets the width and height of this <see cref="Spritesheet"/>.
     /// </summary>
-    public Dimension Size { get; }
+    public Size Size { get; }
 
     /// <summary>
     ///     Gets a read-only collection of all <see cref="SpritesheetFrame"/>
@@ -58,7 +60,7 @@ public sealed class Spritesheet
     /// </summary>
     public ReadOnlyCollection<Rgba32> Pixels { get; }
 
-    internal Spritesheet(Dimension size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Rgba32[] pixels)
+    internal Spritesheet(Size size, List<SpritesheetFrame> frames, List<SpritesheetAnimation> animations, Rgba32[] pixels)
     {
         Size = size;
         Frames = frames.AsReadOnly();

@@ -23,18 +23,52 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.Tests;
 
-/// <summary>
-///     Represents a single tile within a tilesheet.
-/// </summary>
-public sealed class TilesheetTile
+public sealed class DimensionTests
 {
-    /// <summary>
-    ///     Gets the bounds of this <see cref="TilesheetTile"/> relative to the
-    ///     overall tilesheet.
-    /// </summary>
-    public Rectangle SourceRectangle { get; }
+    [Fact]
+    public void Dimension_AddTest()
+    {
+        Size left = new Size(1, 2);
+        Size right = new Size(3, 4);
 
-    internal TilesheetTile(Rectangle source) => SourceRectangle = source;
+        Size expected = new Size(4, 6);
+
+        Assert.Equal(expected, Size.Add(left, right));
+        Assert.Equal(expected, left + right);
+    }
+
+    [Fact]
+    public void Dimension_SubtractTest()
+    {
+        Size left = new Size(1, 2);
+        Size right = new Size(3, 4);
+
+        Size expected = new Size(-2, -2);
+
+        Assert.Equal(expected, Size.Subtract(left, right));
+        Assert.Equal(expected, left - right);
+    }
+
+    [Fact]
+    public void Dimension_EqualTest()
+    {
+        Size a = new Size(1, 2);
+        Size b = new Size(1, 2);
+
+        Assert.True(a == b);
+        Assert.True(a.Equals(b));
+        Assert.True(a.Equals((object)b));
+        Assert.False(a == Size.Empty);
+        Assert.False(a.Equals(Size.Empty));
+        Assert.False(a.Equals((object)Size.Empty));
+    }
+
+    [Fact]
+    public void Dimension_NotEqualTest()
+    {
+        Assert.True(Size.Empty != new Size(1, 2));
+        Assert.False(Size.Empty != new Size(0, 0));
+    }
 }

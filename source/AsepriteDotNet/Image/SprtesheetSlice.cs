@@ -21,6 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
+using AsepriteDotNet.Color;
+using AsepriteDotNet.Primitives;
+
 namespace AsepriteDotNet.Image;
 
 /// <summary>
@@ -33,20 +36,20 @@ public sealed class SpritesheetSlice
     ///     Gets the bounds of this <see cref="SpritesheetSlice"/>, relative to 
     ///     the bounds of the <see cref="SpritesheetFrame"/> it is in.
     /// </summary>
-    public Rect Bounds { get; }
+    public Rectangle Bounds { get; }
 
     /// <summary>
     ///     Gets the bounds for the center rectangle of this 
     ///     <see cref="SpritesheetSlice"/> if it is a 9-patches slice; 
     ///     otherwise, <see langword="null"/>.
     /// </summary>
-    public Rect? CenterBounds { get; }
+    public Rectangle? CenterBounds { get; }
 
     /// <summary>
     ///     Gets the pivot point for this slice if it has a pivot point;
     ///     otherwise, <see langword="null"/>.
     /// </summary>
-    public Location? Pivot { get; }
+    public Point? Pivot { get; }
 
     /// <summary>
     ///     Gets the name of this <see cref="SpritesheetSlice"/>.
@@ -58,6 +61,6 @@ public sealed class SpritesheetSlice
     /// </summary>
     public Rgba32 Color { get; }
 
-    internal SpritesheetSlice(Rect bounds, Rect? centerBounds, Location? pivot, string name, Rgba32 color) =>
+    internal SpritesheetSlice(Rectangle bounds, Rectangle? centerBounds, Point? pivot, string name, Rgba32 color) =>
         (Bounds, CenterBounds, Pivot, Name, Color) = (bounds, centerBounds, pivot, name, color);
 }

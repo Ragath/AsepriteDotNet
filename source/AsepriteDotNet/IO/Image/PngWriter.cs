@@ -24,7 +24,10 @@ SOFTWARE.
 using System.Buffers.Binary;
 using System.IO.Compression;
 using System.Text;
+
+using AsepriteDotNet.Color;
 using AsepriteDotNet.Compression;
+using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet.IO.Image;
 
@@ -43,13 +46,13 @@ internal static class PngWriter
     ///     The absolute path to where the file should be saved.
     /// </param>
     /// <param name="size">
-    ///     A <see cref="Dimension"/> value that defines the width and height
+    ///     A <see cref="Size"/> value that defines the width and height
     ///     of the final image.
     /// </param>
     /// <param name="data">
     ///     The pixel data of the image.
     /// </param>
-    public static void SaveTo(string path, Dimension size, Rgba32[] data)
+    public static void SaveTo(string path, Size size, Rgba32[] data)
     {
         try
         {
@@ -159,7 +162,7 @@ internal static class PngWriter
     //       ---------------------------------------
     //
     //  Reference: https://www.w3.org/TR/png-3/#11IHDR
-    private static void WriteIHDR(BinaryWriter writer, Dimension size)
+    private static void WriteIHDR(BinaryWriter writer, Size size)
     {
         Span<byte> ihdr = stackalloc byte[13];
         ihdr.Clear();
@@ -195,7 +198,7 @@ internal static class PngWriter
     //             https://www.w3.org/TR/png-3/#10Compression
     //             https://www.w3.org/TR/png-3/#7Scanline
     //             https://www.w3.org/TR/png-3/#7Filtering
-    private static void WriteIDAT(BinaryWriter writer, Dimension size, Rgba32[] data)
+    private static void WriteIDAT(BinaryWriter writer, Size size, Rgba32[] data)
     {
         void Flush(MemoryStream stream)
         {
