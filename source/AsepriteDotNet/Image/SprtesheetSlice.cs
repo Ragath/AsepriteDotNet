@@ -24,7 +24,7 @@ SOFTWARE.
 using AsepriteDotNet.Color;
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a rectangular boundary within a

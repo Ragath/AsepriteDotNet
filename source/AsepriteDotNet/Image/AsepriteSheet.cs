@@ -23,7 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a spritesheet generated form an Aseprite file.

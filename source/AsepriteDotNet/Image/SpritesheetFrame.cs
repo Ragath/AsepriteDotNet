@@ -23,7 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a single frame within a spritesheet.

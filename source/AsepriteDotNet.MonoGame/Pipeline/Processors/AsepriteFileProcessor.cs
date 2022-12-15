@@ -20,7 +20,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.ComponentModel;
 
-using AsepriteDotNet.Image;
+using AsepriteDotNet.ImageInternal;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content.Pipeline;
@@ -123,27 +123,10 @@ public sealed class AsepriteFileProcessor : ContentProcessor<AsepriteFile, Asepr
     /// <returns>
     ///     A new <see cref="AsepriteSheet"/> class instance 
     /// </returns>
-    public AsepriteFileProcessorResult Process(AsepriteDoc input) => Process(input, null);
-    public override AsepriteFileProcessorResult Process(AsepriteDoc input, ContentProcessorContext? context)
+    public AsepriteFileProcessorResult Process(AsepriteFile input) => Process(input, null);
+    public override AsepriteFileProcessorResult Process(AsepriteFile input, ContentProcessorContext? context)
     {
-        SpritesheetOptions sOptions = new()
-        {
-            OnlyVisibleLayers = OnlyVisibleLayers,
-            MergeDuplicates = MergeDuplicates,
-            PackingMethod = PackingMethod,
-            BorderPadding = BorderPadding,
-            Spacing = Spacing,
-            InnerPadding = InnerPadding
-        };
-
-        TilesheetOptions tOptions = new()
-        {
-            MergeDuplicates = MergeDuplicates,
-            PackingMethod = PackingMethod,
-            BorderPadding = BorderPadding,
-            Spacing = Spacing,
-            InnerPadding = InnerPadding
-        };
+        var aseSpriteSheet = input.ToSpritesheet()
 
         AsepriteSheet aseSheet = input.ToAsepriteSheet(sOptions, tOptions);
 
@@ -170,7 +153,7 @@ public sealed class AsepriteFileProcessor : ContentProcessor<AsepriteFile, Asepr
 
 
 
-    
+
 
     private List<Frame> GetFrames(AsepriteSheet aseSheet)
     {

@@ -28,7 +28,7 @@ using AsepriteDotNet.Color;
 using AsepriteDotNet.IO.Image;
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a tilesheet generated from a tileset in an Aseprite file.

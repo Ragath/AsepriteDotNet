@@ -63,7 +63,24 @@ internal static class PngWriter
             WriteIDAT(writer, size, data);
             WriteIEND(writer);
         }
-        catch(Exception ex)
+        catch (Exception ex)
+        {
+            throw new PngException("An exception occurred while saving the data as a PNG file. Refer to the inner exception for exact details", ex);
+        }
+    }
+
+    public static void SaveTo(string path, AsepriteDotNet.Image image)
+    {
+        try
+        {
+            using FileStream fs = File.OpenWrite(path);
+            using BinaryWriter writer = new(fs, Encoding.UTF8);
+            WriteSignature(writer);
+            WriteIHDR(writer, image.Size);
+            WriteIDAT(writer, image.Size, image.Pixels);
+            WriteIEND(writer);
+        }
+        catch (Exception ex)
         {
             throw new PngException("An exception occurred while saving the data as a PNG file. Refer to the inner exception for exact details", ex);
         }

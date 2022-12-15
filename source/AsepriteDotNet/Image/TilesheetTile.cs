@@ -23,7 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a single tile within a tilesheet.

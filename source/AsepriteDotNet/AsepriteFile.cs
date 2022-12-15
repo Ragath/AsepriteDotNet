@@ -22,7 +22,7 @@ using System.Collections.ObjectModel;
 
 using AsepriteDotNet.AsepriteTypes;
 using AsepriteDotNet.Color;
-using AsepriteDotNet.Image;
+using AsepriteDotNet.ImageInternal;
 using AsepriteDotNet.IO;
 using AsepriteDotNet.Primitives;
 
@@ -158,14 +158,18 @@ public sealed class AsepriteFile
     /// <returns>
     ///     The <see cref="AsepriteSheet"/> that is created by this method.
     /// </returns>
-    public AsepriteSheet ToAsepriteSheet(SpritesheetOptions spritesheetOptions, TilesheetOptions tilesheetOptions)
+    public AsepriteSheet ToAsepriteSheet(bool onlyVisibleLayers = true,
+                                         bool mergeDuplicates = true,
+                                         int borderPadding = 0,
+                                         int spacing = 0,
+                                         int innerPadding = 0)
     {
-        Spritesheet spritesheet = ToSpritesheet(spritesheetOptions);
+        Spritesheet spritesheet = ToSpritesheet(onlyVisibleLayers, mergeDuplicates, borderPadding, spacing, innerPadding);
         List<Tilesheet> tilesheets = new();
 
         for (int i = 0; i < Tilesets.Count; i++)
         {
-            Tilesheet tilesheet = Tilesets[i].ToTilesheet(tilesheetOptions);
+            Tilesheet tilesheet = Tilesets[i].ToTilesheet(mergeDuplicates, borderPadding, spacing, innerPadding);
             tilesheets.Add(tilesheet);
         }
 
@@ -183,7 +187,7 @@ public sealed class AsepriteFile
     /// <returns>
     ///     The <see cref="Spritesheet"/> that is created by this method.
     /// </returns>
-    public Spritesheet ToSpritesheet(SpritesheetOptions options)
+    public Spritesheet ToSpritesheet(bool onlyVisibleLayers = true, bool mergeDuplicates = true, int borderPadding = 0, int spacing = 0, int innerPadding = 0)
     {
         List<SpritesheetFrame> sheetFrames = new();
         List<SpritesheetAnimation> sheetAnimations = new();
@@ -195,15 +199,12 @@ public sealed class AsepriteFile
 
         for (int frameNum = 0; frameNum < Frames.Count; frameNum++)
         {
-            frameColorLookup.Add(frameNum, Frames[frameNum].FlattenFrame(options.OnlyVisibleLayers));
+            frameColorLookup.Add(frameNum, Frames[frameNum].FlattenFrame(onlyVisibleLayers).Pixels);
         }
-
-        int columns, rows;
-        int width, height;
 
         int totalFrames = frameColorLookup.Count;
 
-        if (options.MergeDuplicates)
+        if (mergeDuplicates)
         {
             for (int i = 0; i < frameColorLookup.Count; i++)
             {
@@ -222,42 +223,32 @@ public sealed class AsepriteFile
             totalFrames -= frameDuplicateMap.Count;
         }
 
-        if (options.PackingMethod == PackingMethod.HorizontalStrip)
+        //  Determine the number of columns and rows needed to pack the frames
+        //  into the spritesheet
+        double sqrt = Math.Sqrt(totalFrames);
+        int columns = (int)Math.Floor(sqrt);
+        if (Math.Abs(sqrt % 1) >= double.Epsilon)
         {
-            columns = totalFrames;
-            rows = 1;
-        }
-        else if (options.PackingMethod == PackingMethod.VerticalStrip)
-        {
-            columns = 1;
-            rows = totalFrames;
-        }
-        else
-        {
-            // https://en.wikipedia.org/wiki/Square_packing_in_a_square
-            double sqrt = Math.Sqrt(totalFrames);
-            columns = (int)Math.Floor(sqrt);
-            if (Math.Abs(sqrt % 1) >= double.Epsilon)
-            {
-                columns++;
-            }
-
-            rows = totalFrames / columns;
-            if (totalFrames % columns != 0)
-            {
-                rows++;
-            }
+            columns++;
         }
 
-        width = (columns * Size.Width) +
-                (options.BorderPadding * 2) +
-                (options.Spacing * (columns - 1)) +
-                (options.InnerPadding * 2 * columns);
+        int rows = totalFrames / columns;
+        if (totalFrames % columns != 0)
+        {
+            rows++;
+        }
 
-        height = (rows * Size.Height) +
-                 (options.BorderPadding * 2) +
-                 (options.Spacing * (rows - 1)) +
-                 (options.InnerPadding * 2 * rows);
+        //  Determine the final width and height of the spritesheet based on the
+        //  number of columns and rows and adjusting for padding and spacing
+        int width = (columns * Size.Width) +
+                    (borderPadding * 2) +
+                    (spacing * (columns - 1)) +
+                    (innerPadding * 2 * columns);
+
+        int height = (rows * Size.Height) +
+                     (borderPadding * 2) +
+                     (spacing * (rows - 1)) +
+                     (innerPadding * 2 * rows);
 
         Size sheetSize = new(width, height);
 
@@ -269,7 +260,7 @@ public sealed class AsepriteFile
 
         for (int frameNum = 0; frameNum < Frames.Count; frameNum++)
         {
-            if (!options.MergeDuplicates || !frameDuplicateMap.ContainsKey(frameNum))
+            if (!mergeDuplicates || !frameDuplicateMap.ContainsKey(frameNum))
             {
                 //  Calculate the x and y position of the frame's top-left
                 //  pixel relative to the top-left of the final spritesheet
@@ -286,35 +277,37 @@ public sealed class AsepriteFile
                     int y = (pixelNum / Size.Width) + (frameRow * Size.Height);
 
                     //  Adjust for padding/spacing
-                    x += options.BorderPadding;
-                    y += options.BorderPadding;
+                    x += borderPadding;
+                    y += borderPadding;
 
-                    if (options.Spacing > 0)
+                    if (spacing > 0)
                     {
                         if (frameCol > 0)
                         {
-                            x += options.Spacing * frameCol;
+                            x += spacing * frameCol;
                         }
 
                         if (frameRow > 0)
                         {
-                            y += options.Spacing * frameRow;
+                            y += spacing * frameRow;
                         }
                     }
+                    Dictionary<string, int> a = new();
+                    List<string> b = a.Keys.ToList();
 
-                    if (options.InnerPadding > 0)
+                    if (innerPadding > 0)
                     {
-                        x += options.InnerPadding * (frameCol + 1);
-                        y += options.InnerPadding * (frameRow + 1);
+                        x += innerPadding * (frameCol + 1);
+                        y += innerPadding * (frameRow + 1);
 
                         if (frameCol > 0)
                         {
-                            x += options.InnerPadding * frameCol;
+                            x += innerPadding * frameCol;
                         }
 
                         if (frameRow > 0)
                         {
-                            y += options.InnerPadding * frameRow;
+                            y += innerPadding * frameRow;
                         }
                     }
 
@@ -324,34 +317,34 @@ public sealed class AsepriteFile
 
                 //  Now create the frame data
                 Rectangle sourceRectangle = new(0, 0, Size.Width, Size.Height);
-                sourceRectangle.X += options.BorderPadding;
-                sourceRectangle.Y += options.BorderPadding;
+                sourceRectangle.X += borderPadding;
+                sourceRectangle.Y += borderPadding;
 
-                if (options.Spacing > 0)
+                if (spacing > 0)
                 {
                     if (frameCol > 0)
                     {
-                        sourceRectangle.X += options.Spacing * frameCol;
+                        sourceRectangle.X += spacing * frameCol;
                     }
 
                     if (frameRow > 0)
                     {
-                        sourceRectangle.Y += options.Spacing * frameRow;
+                        sourceRectangle.Y += spacing * frameRow;
                     }
                 }
 
-                if (options.InnerPadding > 0)
+                if (innerPadding > 0)
                 {
-                    sourceRectangle.X += options.InnerPadding * (frameCol + 1);
-                    sourceRectangle.Y += options.InnerPadding * (frameRow + 1);
+                    sourceRectangle.X += innerPadding * (frameCol + 1);
+                    sourceRectangle.Y += innerPadding * (frameRow + 1);
 
                     if (frameCol > 0)
                     {
-                        sourceRectangle.X += options.InnerPadding * frameCol;
+                        sourceRectangle.X += innerPadding * frameCol;
                     }
                     if (frameRow > 0)
                     {
-                        sourceRectangle.Y += options.InnerPadding * frameRow;
+                        sourceRectangle.Y += innerPadding * frameRow;
                     }
                 }
 
@@ -447,4 +440,72 @@ public sealed class AsepriteFile
 
         return new Spritesheet(sheetSize, sheetFrames, sheetAnimations, sheetPixels);
     }
+
+    public Image ExportSpritesheet(bool onlyVisibleLayers = true,
+                                   bool mergeDuplicates = true,
+                                   int borderPadding = 0,
+                                   int spacing = 0,
+                                   int innerPadding = 0)
+
+    {
+        //  Create spritesheet image
+        List<Image> frames = new();
+
+        for (int i = 0; i < Frames.Count; i++)
+        {
+            AsepriteFrame frame = Frames[i];
+            frames.Add(frame.FlattenFrame(onlyVisibleLayers));
+        }
+
+        return Image.Pack(Size, frames, true, borderPadding, spacing, innerPadding);
+    }
+
+    public List<Animation> ExportAnimationData()
+    {
+        List<Animation> animations = new();
+
+        //  Create the animation data
+        for (int tNum = 0; tNum < Tags.Count; tNum++)
+        {
+            AsepriteTag tag = Tags[tNum];
+            string name = tag.Name;
+            LoopDirection direction = tag.LoopDirection;
+
+            List<AnimationKey> keys = new();
+
+            for (int start = tag.From; start <= tag.To; start++)
+            {
+                int fIndex = start;
+                int duration = Frames[fIndex].Duration;
+
+                keys.Add(new(fIndex, duration));
+            }
+
+            animations.Add(new(name, direction, keys));
+        }
+
+        return animations;
+    }
+
+    //  This is wrong. We're packing, then double packing.
+    //
+    //
+    // public Image ExportTilesheets(bool onlyVisibleLayers = true,
+    //                              bool mergeDuplicates = true,
+    //                              int borderPadding = 0,
+    //                              int spacing = 0,
+    //                              int innerPadding = 0)
+
+    // {
+    //     //  Create spritesheet image
+    //     List<Image> tiles = new();
+
+    //     for (int tNum = 0; tNum < Tilesets.Count; tNum++)
+    //     {
+    //         AsepriteTileset tileSet = Tilesets[tNum];
+    //         tiles.Add(tileSet.Export(mergeDuplicates, borderPadding, spacing, innerPadding));
+    //     }
+
+    //     return Image.Pack(Size, tiles, true, borderPadding, spacing, innerPadding);
+    // }
 }

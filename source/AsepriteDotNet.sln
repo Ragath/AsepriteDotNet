@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsepriteDotNet.MonoGame", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Demo", "Demo\Demo.csproj", "{0A11F7F5-ADE0-4F9D-8400-07A96286856C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AseConsole", "AseConsole\AseConsole.csproj", "{157C4B01-E890-42FE-A813-272893499F5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{0A11F7F5-ADE0-4F9D-8400-07A96286856C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A11F7F5-ADE0-4F9D-8400-07A96286856C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A11F7F5-ADE0-4F9D-8400-07A96286856C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{157C4B01-E890-42FE-A813-272893499F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{157C4B01-E890-42FE-A813-272893499F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{157C4B01-E890-42FE-A813-272893499F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{157C4B01-E890-42FE-A813-272893499F5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

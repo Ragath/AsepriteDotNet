@@ -23,7 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents the definition for an animation in a spritesheet.

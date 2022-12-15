@@ -27,7 +27,7 @@ using AsepriteDotNet.Color;
 using AsepriteDotNet.IO.Image;
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.Image;
+namespace AsepriteDotNet.ImageInternal;
 
 /// <summary>
 ///     Represents a generated spritesheet from all frames in an Aseprite file,

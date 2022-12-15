@@ -97,9 +97,9 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     ///     A new <see cref="Array"/> of <see cref="Rgba32"/> elements that
     ///     represent the flattened image of this <see cref="AsepriteFrame"/>.
     /// </returns>
-    public Rgba32[] FlattenFrame(bool onlyVisibleLayers = true)
+    public Image FlattenFrame(bool onlyVisibleLayers = true)
     {
-        Rgba32[] result = new Rgba32[Size.Width * Size.Height];
+        Rgba32[] pixels = new Rgba32[Size.Width * Size.Height];
 
         for (int celNum = 0; celNum < Cels.Count; celNum++)
         {
@@ -140,15 +140,15 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
                 //  We don't care about these pixels so if the index is outside
                 //  the range of the array to store them in then we'll just
                 //  ignore them.
-                if (index < 0 || index >= result.Length) { continue; }
+                if (index < 0 || index >= pixels.Length) { continue; }
 
-                Rgba32 backdrop = result[index];
+                Rgba32 backdrop = pixels[index];
                 Rgba32 source = imageCel.Pixels[pixelNum];
-                result[index] = Rgba32.Blend(imageCel.Layer.BlendMode, backdrop, source, opacity);
+                pixels[index] = Rgba32.Blend(imageCel.Layer.BlendMode, backdrop, source, opacity);
             }
         }
 
-        return result;
+        return new Image(Size, pixels, new List<Rectangle>() { new Rectangle(0, 0, Size.Width, Size.Height) });
     }
 
     /// <summary>
@@ -164,7 +164,7 @@ public sealed class AsepriteFrame : IEnumerable<AsepriteCel>
     /// </param>
     public void ToPng(string path, bool onlyVisibleLayers = true)
     {
-        Rgba32[] frame = FlattenFrame(onlyVisibleLayers);
-        PngWriter.SaveTo(path, Size, frame);
+        Image frame = FlattenFrame(onlyVisibleLayers);
+        PngWriter.SaveTo(path, frame);
     }
 }

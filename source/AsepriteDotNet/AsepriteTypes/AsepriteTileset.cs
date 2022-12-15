@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
 using AsepriteDotNet.Color;
-using AsepriteDotNet.Image;
+using AsepriteDotNet.ImageInternal;
 using AsepriteDotNet.IO.Image;
 using AsepriteDotNet.Primitives;
 
@@ -73,18 +73,18 @@ public class AsepriteTileset
     /// <returns>
     ///     The <see cref="Tilesheet"/> that is created by this method.
     /// </returns>
-    public Tilesheet ToTilesheet(TilesheetOptions options)
+    public Tilesheet ToTilesheet(bool mergeDuplicates = true,
+                                 int borderPadding = 0,
+                                 int spacing = 0,
+                                 int innerPadding = 0)
     {
         List<TilesheetTile> sheetTiles = new();
         List<Rgba32[]> tileColorLookup = SplitTiles();
         Dictionary<int, int> tileDuplicateMap = new();
 
-        int columns, rows;
-        int width, height;
-
         int totalTiles = tileColorLookup.Count;
 
-        if (options.MergeDuplicates)
+        if (mergeDuplicates)
         {
             for (int i = 0; i < tileColorLookup.Count; i++)
             {
@@ -97,47 +97,38 @@ public class AsepriteTileset
                     }
                 }
             }
+            //  Since we are merging duplicates, we need to subtract the number of
+            //  duplicates from the total tiles
+            totalTiles -= tileDuplicateMap.Count;
         }
 
-        //  Since we are merging duplicates, we need to subtract the number of
-        //  duplicates from the total tiles
-        totalTiles -= tileDuplicateMap.Count;
-
-        if (options.PackingMethod == PackingMethod.HorizontalStrip)
+        //  Determine the number of columns and rows needed to pack the tiles
+        //  into the tilesheet
+        double sqrt = Math.Sqrt(totalTiles);
+        int columns = (int)Math.Floor(sqrt);
+        if (Math.Abs(sqrt % 1) >= double.Epsilon)
         {
-            columns = totalTiles;
-            rows = 1;
+            columns++;
         }
-        else if (options.PackingMethod == PackingMethod.VerticalStrip)
+
+        int rows = totalTiles / columns;
+        if (totalTiles % columns != 0)
         {
-            columns = 1;
-            rows = totalTiles;
-        }
-        else
-        {
-            double sqrt = Math.Sqrt(totalTiles);
-            columns = (int)Math.Floor(sqrt);
-            if (Math.Abs(sqrt % 1) >= double.Epsilon)
-            {
-                columns++;
-            }
-
-            rows = totalTiles / columns;
-            if (totalTiles % columns != 0)
-            {
-                rows++;
-            }
+            rows++;
         }
 
-        width = (columns * TileSize.Width) +
-                (options.BorderPadding * 2) +
-                (options.Spacing * (columns - 1)) +
-                (options.InnerPadding * 2 * columns);
 
-        height = (rows * TileSize.Height) +
-                 (options.BorderPadding * 2) +
-                 (options.Spacing * (rows - 1)) +
-                 (options.InnerPadding * 2 * rows);
+        //  Determine the final width and height of the tile sheet based on the
+        //  number of columns and rows and adjusting for padding and spacing
+        int width = (columns * TileSize.Width) +
+                    (borderPadding * 2) +
+                    (spacing * (columns - 1)) +
+                    (innerPadding * 2 * columns);
+
+        int height = (rows * TileSize.Height) +
+                     (borderPadding * 2) +
+                     (spacing * (rows - 1)) +
+                     (innerPadding * 2 * rows);
 
         Size sheetSize = new(width, height);
 
@@ -149,7 +140,7 @@ public class AsepriteTileset
 
         for (int tileNum = 0; tileNum < TileCount; tileNum++)
         {
-            if (!options.MergeDuplicates || !tileDuplicateMap.ContainsKey(tileNum))
+            if (!mergeDuplicates || !tileDuplicateMap.ContainsKey(tileNum))
             {
                 //  Calculate the x and y position of the tile's top-left pixel
                 //  relative to the top-left of the file tilesheet
@@ -166,35 +157,35 @@ public class AsepriteTileset
                     int y = (pixelNum / TileSize.Width) + (tileRow * TileSize.Height);
 
                     //  Adjust for padding/spacing
-                    x += options.BorderPadding;
-                    y += options.BorderPadding;
+                    x += borderPadding;
+                    y += borderPadding;
 
-                    if (options.Spacing > 0)
+                    if (spacing > 0)
                     {
                         if (tileCol > 0)
                         {
-                            x += options.Spacing * tileCol;
+                            x += spacing * tileCol;
                         }
 
                         if (tileRow > 0)
                         {
-                            y += options.Spacing * tileRow;
+                            y += spacing * tileRow;
                         }
                     }
 
-                    if (options.InnerPadding > 0)
+                    if (innerPadding > 0)
                     {
-                        x += options.InnerPadding * (tileCol + 1);
-                        y += options.InnerPadding * (tileRow + 1);
+                        x += innerPadding * (tileCol + 1);
+                        y += innerPadding * (tileRow + 1);
 
                         if (tileCol > 0)
                         {
-                            x += options.InnerPadding * tileCol;
+                            x += innerPadding * tileCol;
                         }
 
                         if (tileRow > 0)
                         {
-                            y += options.InnerPadding * tileRow;
+                            y += innerPadding * tileRow;
                         }
                     }
 
@@ -204,35 +195,35 @@ public class AsepriteTileset
 
                 //  Now create the tile source rectangle data
                 Rectangle sourceRectangle = new(0, 0, TileSize.Width, TileSize.Height);
-                sourceRectangle.X += options.BorderPadding;
-                sourceRectangle.Y += options.BorderPadding;
+                sourceRectangle.X += borderPadding;
+                sourceRectangle.Y += borderPadding;
 
-                if (options.Spacing > 0)
+                if (spacing > 0)
                 {
                     if (tileCol > 0)
                     {
-                        sourceRectangle.X += options.Spacing * tileCol;
+                        sourceRectangle.X += spacing * tileCol;
                     }
 
                     if (tileRow > 0)
                     {
-                        sourceRectangle.Y += options.Spacing * tileRow;
+                        sourceRectangle.Y += spacing * tileRow;
                     }
                 }
 
-                if (options.InnerPadding > 0)
+                if (innerPadding > 0)
                 {
-                    sourceRectangle.X += options.InnerPadding * (tileCol + 1);
-                    sourceRectangle.Y += options.InnerPadding * (tileRow + 1);
+                    sourceRectangle.X += innerPadding * (tileCol + 1);
+                    sourceRectangle.Y += innerPadding * (tileRow + 1);
 
                     if (tileCol > 0)
                     {
-                        sourceRectangle.X += options.InnerPadding * tileCol;
+                        sourceRectangle.X += innerPadding * tileCol;
                     }
 
                     if (tileRow > 0)
                     {
-                        sourceRectangle.Y += options.InnerPadding * tileRow;
+                        sourceRectangle.Y += innerPadding * tileRow;
                     }
                 }
 
@@ -267,75 +258,54 @@ public class AsepriteTileset
     /// <param name="method">
     ///     The packing method to use when creating the tileset image.
     /// </param>
-    public void ToPng(string path, PackingMethod method)
+    public void ToPng(string path)
     {
-        //  Aseprite stores the pixel data for a tileset such that the image
-        //  is a vertical packed sprite.  If the packing method being requested
-        //  is vertical packing, then we can just output, otherwise, we need to
-        //  repack the pixel data for the packing method requested
-        if (method == PackingMethod.VerticalStrip)
+
+
+        List<Rgba32[]> tiles = SplitTiles();
+
+        int columns, rows;
+        int width, height;
+
+        //  Determine the number of columns and rows needed to pack the tiles
+        //  into the tilesheet
+        double sqrt = Math.Sqrt(TileCount);
+        columns = (int)Math.Floor(sqrt);
+        if (Math.Abs(sqrt % 1) >= double.Epsilon)
         {
-            PngWriter.SaveTo(path, new Size(TileSize.Width, TileSize.Height * TileCount), Pixels);
+            columns++;
         }
-        else
+
+        rows = TileCount / columns;
+        if (TileCount % columns != 0)
         {
-            //  Separate each tile into a separate array of pixels
-            // Color[][] tiles = new Color[TileCount][];
-            // int tileLen = TileSize.Width * TileSize.Height;
-
-            // for (int i = 0; i < TileCount; i++)
-            // {
-            //     tiles[i] = Pixels[(i * tileLen)..((i * tileLen) + tileLen)];
-            // }
-
-            List<Rgba32[]> tiles = SplitTiles();
-
-            int columns, rows;
-            int width, height;
-
-            if (method == PackingMethod.HorizontalStrip)
-            {
-                columns = TileCount;
-                rows = 1;
-            }
-            else
-            {
-                double sqrt = Math.Sqrt(TileCount);
-                columns = (int)Math.Floor(sqrt);
-                if (Math.Abs(sqrt % 1) >= double.Epsilon)
-                {
-                    columns++;
-                }
-
-                rows = TileCount / columns;
-                if (TileCount % columns != 0)
-                {
-                    rows++;
-                }
-            }
-
-            width = columns * TileSize.Width;
-            height = rows * TileSize.Height;
-
-            Rgba32[] pixels = new Rgba32[width * height];
-
-            for (int tileNum = 0; tileNum < TileCount; tileNum++)
-            {
-                int tileCol = tileNum % columns;
-                int tileRow = tileNum / columns;
-                Rgba32[] tilePixels = tiles[tileNum];
-
-                for (int pixelNum = 0; pixelNum < tilePixels.Length; pixelNum++)
-                {
-                    int x = (pixelNum % TileSize.Width) + (tileCol * TileSize.Width);
-                    int y = (pixelNum / TileSize.Width) + (tileRow * TileSize.Height);
-                    int index = y * width + x;
-                    pixels[index] = tilePixels[pixelNum];
-                }
-            }
-
-            PngWriter.SaveTo(path, new Size(width, height), pixels);
+            rows++;
         }
+
+        //  Determine the final width and height of the tile sheet based on the
+        //  number of columns and rows and adjusting for padding and spacing
+        width = columns * TileSize.Width;
+        height = rows * TileSize.Height;
+
+        Rgba32[] pixels = new Rgba32[width * height];
+
+        for (int tileNum = 0; tileNum < TileCount; tileNum++)
+        {
+            int tileCol = tileNum % columns;
+            int tileRow = tileNum / columns;
+            Rgba32[] tilePixels = tiles[tileNum];
+
+            for (int pixelNum = 0; pixelNum < tilePixels.Length; pixelNum++)
+            {
+                int x = (pixelNum % TileSize.Width) + (tileCol * TileSize.Width);
+                int y = (pixelNum / TileSize.Width) + (tileRow * TileSize.Height);
+                int index = y * width + x;
+                pixels[index] = tilePixels[pixelNum];
+            }
+        }
+
+        PngWriter.SaveTo(path, new Size(width, height), pixels);
+
     }
 
     internal List<Rgba32[]> SplitTiles()
@@ -350,5 +320,22 @@ public class AsepriteTileset
         }
 
         return tiles;
+    }
+
+    public Image Export(bool mergeDuplicates = true,
+                        int borderPadding = 0,
+                        int spacing = 0,
+                        int innerPadding = 0)
+    {
+        List<Rgba32[]> tilesPixels = SplitTiles();
+        List<Image> tiles = new();
+
+        for (int tNum = 0; tNum < tilesPixels.Count; tNum++)
+        {
+            Image tImage = new(TileSize, tilesPixels[tNum], new List<Rectangle>() { new(0, 0, TileSize.Width, TileSize.Height) });
+            tiles.Add(tImage);
+        }
+
+        return Image.Pack(TileSize, tiles, mergeDuplicates, borderPadding, spacing, innerPadding);
     }
 }
