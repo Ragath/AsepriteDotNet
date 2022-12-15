@@ -201,7 +201,7 @@ public class AsepriteTileset
                 }
 
                 //  Now create the tile source rectangle data
-                BoundingBox sourceRectangle = new(0, 0, TileSize.Width, TileSize.Height);
+                Rect sourceRectangle = new(0, 0, TileSize.Width, TileSize.Height);
                 sourceRectangle.X += options.BorderPadding;
                 sourceRectangle.Y += options.BorderPadding;
 

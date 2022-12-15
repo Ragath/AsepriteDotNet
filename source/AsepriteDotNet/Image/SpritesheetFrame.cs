@@ -34,7 +34,7 @@ public sealed class SpritesheetFrame
     ///     Gets the bounds of this <see cref="SpritesheetFrame"/> relative to
     ///     the overall spritesheet.
     /// </summary>
-    public BoundingBox SourceRectangle { get; }
+    public Rect SourceRectangle { get; }
 
     /// <summary>
     ///     Gets the duration of this <see cref="SpritesheetFrame"/> when used
@@ -42,7 +42,7 @@ public sealed class SpritesheetFrame
     /// </summary>
     public int Duration { get; }
 
-    internal SpritesheetFrame(BoundingBox source, int duration)
+    internal SpritesheetFrame(Rect source, int duration)
     {
         SourceRectangle = source;
         Duration = duration;

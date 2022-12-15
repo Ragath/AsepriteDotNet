@@ -23,26 +23,26 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 namespace AsepriteDotNet.Tests;
 
-public sealed class BoundingBoxTests
+public sealed class RectTests
 {
     [Fact]
-    public void BoundingBox_EqualTest()
+    public void Rect_EqualTest()
     {
-        BoundingBox a = new BoundingBox(1, 2, 3, 4);
-        BoundingBox b = new BoundingBox(1, 2, 3, 4);
+        Rect a = new Rect(1, 2, 3, 4);
+        Rect b = new Rect(1, 2, 3, 4);
 
         Assert.True(a == b);
         Assert.True(a.Equals(b));
         Assert.True(a.Equals((object)b));
-        Assert.False(a == BoundingBox.Empty);
-        Assert.False(a.Equals(BoundingBox.Empty));
-        Assert.False(a.Equals((object)BoundingBox.Empty));
+        Assert.False(a == Rect.Empty);
+        Assert.False(a.Equals(Rect.Empty));
+        Assert.False(a.Equals((object)Rect.Empty));
     }
 
     [Fact]
-    public void BoundingBox_NotEqualTest()
+    public void Rect_NotEqualTest()
     {
-        Assert.True(BoundingBox.Empty != new BoundingBox(1, 2, 3, 4));
-        Assert.False(BoundingBox.Empty != new BoundingBox(0, 0, 0, 0));
+        Assert.True(Rect.Empty != new Rect(1, 2, 3, 4));
+        Assert.False(Rect.Empty != new Rect(0, 0, 0, 0));
     }
 }

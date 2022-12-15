@@ -33,14 +33,14 @@ public sealed class SpritesheetSlice
     ///     Gets the bounds of this <see cref="SpritesheetSlice"/>, relative to 
     ///     the bounds of the <see cref="SpritesheetFrame"/> it is in.
     /// </summary>
-    public BoundingBox Bounds { get; }
+    public Rect Bounds { get; }
 
     /// <summary>
     ///     Gets the bounds for the center rectangle of this 
     ///     <see cref="SpritesheetSlice"/> if it is a 9-patches slice; 
     ///     otherwise, <see langword="null"/>.
     /// </summary>
-    public BoundingBox? CenterBounds { get; }
+    public Rect? CenterBounds { get; }
 
     /// <summary>
     ///     Gets the pivot point for this slice if it has a pivot point;
@@ -58,6 +58,6 @@ public sealed class SpritesheetSlice
     /// </summary>
     public Rgba32 Color { get; }
 
-    internal SpritesheetSlice(BoundingBox bounds, BoundingBox? centerBounds, Location? pivot, string name, Rgba32 color) =>
+    internal SpritesheetSlice(Rect bounds, Rect? centerBounds, Location? pivot, string name, Rgba32 color) =>
         (Bounds, CenterBounds, Pivot, Name, Color) = (bounds, centerBounds, pivot, name, color);
 }
