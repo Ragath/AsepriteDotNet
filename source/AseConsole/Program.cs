@@ -1,25 +1,32 @@
-﻿using AsepriteDotNet;
-using AsepriteDotNet.IO;
+﻿using System.Text.Json;
+
+using AsepriteDotNet;
+using AsepriteDotNet.Core;
+using AsepriteDotNet.Core.Serialization;
 
 string inPath = Path.Combine(Environment.CurrentDirectory, "adventurer.aseprite");
 string outPath = Path.Combine(Environment.CurrentDirectory, "output.png");
+string jsonOut = Path.Combine(Environment.CurrentDirectory, "adventurer.json");
 
-FileReadOptions options = new()
+AsepriteFile aseFile = AsepriteFile.Load(inPath);
+Spritesheet spritesheet = aseFile.GenerateSpritesheet();
+spritesheet.ExportAsPng(outPath);
+
+JsonSerializerOptions options = new()
 {
-    OnlyVisibleLayers = true,
-    MergeDuplicates = true,
-    BorderPadding = 0,
-    Spacing = 0,
-    InnerPadding = 0,
+    WriteIndented = false,
+    Converters =
+    {
+        new SpritesheetConverter()
+    }
 };
 
-Aseprite ase = Aseprite.Load(inPath, options);
+string json = JsonSerializer.Serialize(spritesheet, options);
+File.WriteAllText(jsonOut, json);
 
-ase.Spritesheet.Image.ToPng(outPath);
-
-System.Text.Json.JsonSerializerOptions jsonOptions = new()
+Spritesheet? deserialized = JsonSerializer.Deserialize<Spritesheet>(json, options);
+if (deserialized is not null)
 {
-    WriteIndented = true
-};
-string json = System.Text.Json.JsonSerializer.Serialize(ase.Spritesheet.Animations, jsonOptions);
-Console.WriteLine(json);
+    deserialized.ExportAsPng(outPath);
+}
+// Console.WriteLine(json);

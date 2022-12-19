@@ -1,0 +1,1446 @@
+{
+  "frameCount": 179,
+  "frames": {
+    "Spritesheet 0": {
+      "frame": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 1": {
+      "frame": { "x": 50, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 2": {
+      "frame": { "x": 100, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 3": {
+      "frame": { "x": 150, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 4": {
+      "frame": { "x": 200, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 5": {
+      "frame": { "x": 250, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 6": {
+      "frame": { "x": 300, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 7": {
+      "frame": { "x": 350, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 8": {
+      "frame": { "x": 400, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 9": {
+      "frame": { "x": 450, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 10": {
+      "frame": { "x": 500, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 11": {
+      "frame": { "x": 550, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 12": {
+      "frame": { "x": 600, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 13": {
+      "frame": { "x": 650, "y": 0, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 14": {
+      "frame": { "x": 0, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 15": {
+      "frame": { "x": 50, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 16": {
+      "frame": { "x": 100, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 17": {
+      "frame": { "x": 150, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 18": {
+      "frame": { "x": 200, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 19": {
+      "frame": { "x": 250, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 20": {
+      "frame": { "x": 300, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 21": {
+      "frame": { "x": 350, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 22": {
+      "frame": { "x": 400, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 23": {
+      "frame": { "x": 450, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 24": {
+      "frame": { "x": 500, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 25": {
+      "frame": { "x": 550, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 26": {
+      "frame": { "x": 600, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 27": {
+      "frame": { "x": 650, "y": 37, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 28": {
+      "frame": { "x": 0, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 29": {
+      "frame": { "x": 50, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 30": {
+      "frame": { "x": 100, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 31": {
+      "frame": { "x": 150, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 32": {
+      "frame": { "x": 200, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 33": {
+      "frame": { "x": 250, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 34": {
+      "frame": { "x": 300, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 35": {
+      "frame": { "x": 350, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 36": {
+      "frame": { "x": 400, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 37": {
+      "frame": { "x": 450, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 38": {
+      "frame": { "x": 500, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 39": {
+      "frame": { "x": 550, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 40": {
+      "frame": { "x": 600, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 41": {
+      "frame": { "x": 650, "y": 74, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 42": {
+      "frame": { "x": 0, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 43": {
+      "frame": { "x": 50, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 44": {
+      "frame": { "x": 100, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 45": {
+      "frame": { "x": 150, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 46": {
+      "frame": { "x": 200, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 47": {
+      "frame": { "x": 250, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 48": {
+      "frame": { "x": 300, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 49": {
+      "frame": { "x": 350, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 50": {
+      "frame": { "x": 400, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 51": {
+      "frame": { "x": 450, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 52": {
+      "frame": { "x": 500, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 50
+    },
+    "Spritesheet 53": {
+      "frame": { "x": 550, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 54": {
+      "frame": { "x": 600, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 55": {
+      "frame": { "x": 650, "y": 111, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 56": {
+      "frame": { "x": 0, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 57": {
+      "frame": { "x": 50, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 58": {
+      "frame": { "x": 100, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 75
+    },
+    "Spritesheet 59": {
+      "frame": { "x": 150, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 60": {
+      "frame": { "x": 200, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 61": {
+      "frame": { "x": 250, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 62": {
+      "frame": { "x": 150, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 63": {
+      "frame": { "x": 200, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 64": {
+      "frame": { "x": 300, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 65": {
+      "frame": { "x": 350, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 66": {
+      "frame": { "x": 400, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 67": {
+      "frame": { "x": 450, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 68": {
+      "frame": { "x": 400, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 69": {
+      "frame": { "x": 500, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 70": {
+      "frame": { "x": 550, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 71": {
+      "frame": { "x": 600, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 72": {
+      "frame": { "x": 650, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 73": {
+      "frame": { "x": 650, "y": 148, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 74": {
+      "frame": { "x": 0, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 75": {
+      "frame": { "x": 50, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 76": {
+      "frame": { "x": 100, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 77": {
+      "frame": { "x": 150, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 78": {
+      "frame": { "x": 200, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 79": {
+      "frame": { "x": 250, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 80": {
+      "frame": { "x": 300, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 81": {
+      "frame": { "x": 350, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 150
+    },
+    "Spritesheet 82": {
+      "frame": { "x": 400, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 150
+    },
+    "Spritesheet 83": {
+      "frame": { "x": 450, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 150
+    },
+    "Spritesheet 84": {
+      "frame": { "x": 500, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 150
+    },
+    "Spritesheet 85": {
+      "frame": { "x": 550, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 86": {
+      "frame": { "x": 600, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 87": {
+      "frame": { "x": 650, "y": 185, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 88": {
+      "frame": { "x": 0, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 89": {
+      "frame": { "x": 50, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 90": {
+      "frame": { "x": 100, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 91": {
+      "frame": { "x": 50, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 92": {
+      "frame": { "x": 100, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 93": {
+      "frame": { "x": 150, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 94": {
+      "frame": { "x": 200, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 95": {
+      "frame": { "x": 250, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 96": {
+      "frame": { "x": 300, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 97": {
+      "frame": { "x": 350, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 98": {
+      "frame": { "x": 400, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 99": {
+      "frame": { "x": 450, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 100": {
+      "frame": { "x": 500, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 101": {
+      "frame": { "x": 550, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 102": {
+      "frame": { "x": 600, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 103": {
+      "frame": { "x": 650, "y": 222, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 104": {
+      "frame": { "x": 0, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 105": {
+      "frame": { "x": 50, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 106": {
+      "frame": { "x": 100, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 107": {
+      "frame": { "x": 150, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 108": {
+      "frame": { "x": 200, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 109": {
+      "frame": { "x": 250, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 110": {
+      "frame": { "x": 300, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 111": {
+      "frame": { "x": 350, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 112": {
+      "frame": { "x": 400, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 113": {
+      "frame": { "x": 450, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 114": {
+      "frame": { "x": 500, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 115": {
+      "frame": { "x": 550, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 116": {
+      "frame": { "x": 600, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 117": {
+      "frame": { "x": 650, "y": 259, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 118": {
+      "frame": { "x": 0, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 119": {
+      "frame": { "x": 50, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 120": {
+      "frame": { "x": 100, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 121": {
+      "frame": { "x": 150, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 122": {
+      "frame": { "x": 200, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 123": {
+      "frame": { "x": 250, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 124": {
+      "frame": { "x": 300, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 125": {
+      "frame": { "x": 350, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 126": {
+      "frame": { "x": 400, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 127": {
+      "frame": { "x": 450, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 128": {
+      "frame": { "x": 500, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 129": {
+      "frame": { "x": 550, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 130": {
+      "frame": { "x": 600, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 131": {
+      "frame": { "x": 650, "y": 296, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 132": {
+      "frame": { "x": 0, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 133": {
+      "frame": { "x": 50, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 134": {
+      "frame": { "x": 100, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 135": {
+      "frame": { "x": 150, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 136": {
+      "frame": { "x": 200, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 137": {
+      "frame": { "x": 250, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 138": {
+      "frame": { "x": 300, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 139": {
+      "frame": { "x": 350, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 140": {
+      "frame": { "x": 400, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 141": {
+      "frame": { "x": 450, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 142": {
+      "frame": { "x": 500, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 143": {
+      "frame": { "x": 550, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 144": {
+      "frame": { "x": 600, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 145": {
+      "frame": { "x": 650, "y": 333, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 146": {
+      "frame": { "x": 0, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 147": {
+      "frame": { "x": 50, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 148": {
+      "frame": { "x": 50, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 149": {
+      "frame": { "x": 100, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 150": {
+      "frame": { "x": 150, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 151": {
+      "frame": { "x": 200, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 152": {
+      "frame": { "x": 250, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 153": {
+      "frame": { "x": 300, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 154": {
+      "frame": { "x": 350, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 155": {
+      "frame": { "x": 400, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 156": {
+      "frame": { "x": 450, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 157": {
+      "frame": { "x": 500, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 158": {
+      "frame": { "x": 550, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 159": {
+      "frame": { "x": 600, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 160": {
+      "frame": { "x": 650, "y": 370, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 161": {
+      "frame": { "x": 0, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 162": {
+      "frame": { "x": 50, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 163": {
+      "frame": { "x": 100, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 164": {
+      "frame": { "x": 150, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 165": {
+      "frame": { "x": 200, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 166": {
+      "frame": { "x": 250, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 175
+    },
+    "Spritesheet 167": {
+      "frame": { "x": 300, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 168": {
+      "frame": { "x": 350, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 169": {
+      "frame": { "x": 400, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 170": {
+      "frame": { "x": 450, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 171": {
+      "frame": { "x": 500, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 172": {
+      "frame": { "x": 550, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 90
+    },
+    "Spritesheet 173": {
+      "frame": { "x": 600, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 174": {
+      "frame": { "x": 650, "y": 407, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 175": {
+      "frame": { "x": 0, "y": 444, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 176": {
+      "frame": { "x": 50, "y": 444, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 177": {
+      "frame": { "x": 100, "y": 444, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    },
+    "Spritesheet 178": {
+      "frame": { "x": 150, "y": 444, "w": 50, "h": 37 },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": { "x": 0, "y": 0, "w": 50, "h": 37 },
+      "sourceSize": { "w": 50, "h": 37 },
+      "duration": 100
+    }
+  },
+  "meta": { "size": { "w": 700, "h": 481 }, "scale": "1" },
+  "palette": [
+    0, 4286551497, 4281615984, 4284380843, 4283524254, 4280172626, 4280769385,
+    4281506227, 4282598315, 4294761419, 4288251958, 4284915929, 4284073707,
+    4293570213, 4281479823, 4288332782, 4284700633, 4288647301, 4287069828,
+    4285557099, 4282078863, 4281748864, 4290227611, 4283586137, 4281677869,
+    4282533178, 4281024865, 4282867343
+  ],
+  "pixels": "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"
+}

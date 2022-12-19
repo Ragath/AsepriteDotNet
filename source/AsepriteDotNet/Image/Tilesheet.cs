@@ -24,9 +24,9 @@ SOFTWARE.
 using System.Collections;
 using System.Collections.ObjectModel;
 
-using AsepriteDotNet.Color;
-using AsepriteDotNet.IO;
-using AsepriteDotNet.Primitives;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.IO;
+using AsepriteDotNet.Core.Primitives;
 
 namespace AsepriteDotNet.ImageInternal;
 
