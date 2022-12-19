@@ -19,19 +19,36 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using System.Collections.ObjectModel;
+using System.Text.Json.Serialization;
 
 namespace AsepriteDotNet;
 
 public sealed class Animation
 {
-    public ReadOnlyCollection<AnimationKey> Keys { get; }
+    /// <summary>
+    ///     Gets a read-only collection of the <see cref="AnimationKey"/>
+    ///     elements that define the frame and duration for each keyframe of
+    ///     this <see cref="Animation"/>.  Collection is in order of start frame
+    ///     to end frame of the animation.
+    /// </summary>
+    public List<AnimationKey> Keys { get; }
+
+    /// <summary>
+    ///     Gets the name of this <see cref="Animation"/>.
+    /// </summary>
     public string Name { get; }
+
+    /// <summary>
+    ///     Get the <see cref="LoopDirection"/> used by this
+    ///     <see cref="Animation"/>.
+    /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public LoopDirection Direction { get; }
 
     internal Animation(string name, LoopDirection direction, List<AnimationKey> keys)
     {
         Name = name;
         Direction = direction;
-        Keys = keys.AsReadOnly();
+        Keys = keys;
     }
 }

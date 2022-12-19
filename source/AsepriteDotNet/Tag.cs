@@ -21,22 +21,24 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Primitives;
-
-namespace AsepriteDotNet.AsepriteTypes;
+namespace AsepriteDotNet;
 
 /// <summary>
-///     Represents a cel in an Aseprite image that is linked with another cel
-///     in a different frame.
+///     Represents a tag that defines an animation.
 /// </summary>
-public sealed class AsepriteLinkedCel : AsepriteCel
-{
-    /// <summary>
-    ///     Gets the <see cref="Cel"/> that this <see cref="AsepriteLinkedCel"/> is
-    ///     linked to.
-    /// </summary>
-    public AsepriteCel Cel { get; }
-
-    internal AsepriteLinkedCel(AsepriteCel other, AsepriteLayer layer, Point position, int opacity)
-        : base(layer, position, opacity) => Cel = other;
-}
+/// <param name="Name">
+///     The name of this <see cref="Tag"/>.
+/// </param>
+/// <param name="Direction">
+///     The <see cref="LoopDirection"/> that defines the direction the animation
+///     plays for this <see cref="Tag"/>.
+/// </param>
+/// <param name="Start">
+///     The index of the <see cref="Frame"/> that the animation for this
+///     <see cref="Tag"/> begins on.
+/// </param>
+/// <param name="End">
+///     The index of the <see cref="Frame"/> that the animation for this
+///     <see cref="Tag"/> ends on.
+/// </param>
+public sealed record Tag(string Name, LoopDirection Direction, int Start, int End);

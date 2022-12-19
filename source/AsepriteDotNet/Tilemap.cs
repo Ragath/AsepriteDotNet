@@ -21,36 +21,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Primitives;
+namespace AsepriteDotNet;
 
-namespace AsepriteDotNet.AsepriteTypes;
-
-/// <summary>
-///     Represents a single frame cel of an Aseprite image.
-/// </summary>
-public abstract class AsepriteCel : IAsepriteUserData
+public sealed class Tilemap
 {
-    /// <summary>
-    ///     Gets the <see cref="Layer"/> that this <see cref="AsepriteCel"/> is on.
-    /// </summary>
-    public AsepriteLayer Layer { get; internal set; }
-
-    /// <summary>
-    ///     Gets the top-left coordinate position of this <see cref="AsepriteCel"/>
-    ///     relative to the bounds of the sprite.
-    /// </summary>
-    public Point Position { get; }
-
-    /// <summary>
-    ///     Gets the opacity level of this <see cref="AsepriteCel"/>,
-    /// </summary>
-    public int Opacity { get; }
-
-    /// <summary>
-    ///     Gets the <see cref="UserData"/> set for this <see cref="AsepriteCel"/>.
-    /// </summary>
-    public AsepriteUserData UserData { get; set; } = new();
-
-    internal AsepriteCel(AsepriteLayer layer, Point position, int opacity) =>
-        (Layer, Position, Opacity) = (layer, position, opacity);
+    
 }

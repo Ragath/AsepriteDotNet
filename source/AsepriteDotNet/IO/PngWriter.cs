@@ -29,7 +29,7 @@ using AsepriteDotNet.Color;
 using AsepriteDotNet.Compression;
 using AsepriteDotNet.Primitives;
 
-namespace AsepriteDotNet.IO.Image;
+namespace AsepriteDotNet.IO;
 
 //  Reference: https://www.w3.org/TR/png-3
 internal static class PngWriter

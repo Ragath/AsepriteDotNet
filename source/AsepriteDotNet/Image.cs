@@ -19,7 +19,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 using AsepriteDotNet.Color;
-using AsepriteDotNet.IO.Image;
+using AsepriteDotNet.IO;
 using AsepriteDotNet.Primitives;
 
 namespace AsepriteDotNet;
@@ -30,6 +30,13 @@ public sealed class Image : IEquatable<Image>
     public Size Size { get; set; }
     public Rgba32[] Pixels { get; set; }
     public List<Rectangle> Frames { get; set; }
+
+    internal Image(Size size, Rgba32[] pixels)
+    {
+        Size = size;
+        Pixels = pixels;
+        Frames = new() { new Rectangle(0, 0, size.Width, size.Height) };
+    }
 
     internal Image(Size size, Rgba32[] pixels, List<Rectangle> frames)
     {

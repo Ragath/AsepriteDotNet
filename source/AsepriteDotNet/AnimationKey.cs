@@ -20,9 +20,19 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ----------------------------------------------------------------------------- */
 namespace AsepriteDotNet;
 
+/// <summary>
+///     Represents a key frame of an <see cref="Animation"/>.
+/// </summary>
 public sealed class AnimationKey
 {
+    /// <summary>
+    ///     Gets the index of the frame during this key in the animation.
+    /// </summary>
     public int FrameIndex { get; }
+
+    /// <summary>
+    ///     Gets the duration of the frame during this key in the animation.
+    /// </summary>
     public TimeSpan Duration { get; }
 
     internal AnimationKey(int frame, int duration)
