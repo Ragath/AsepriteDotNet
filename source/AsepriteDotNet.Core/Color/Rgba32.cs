@@ -48,6 +48,27 @@ public struct Rgba32 : IEquatable<Rgba32>
     /// </summary>
     public static readonly Rgba32 Transparent = Rgba32.FromRGBA(0, 0, 0, 0);
 
+    /// <summary>
+    ///     Represents a <see cref="Rgba32"/> values who's red and alpha
+    ///     components are set to 255 and the green and blue components set to
+    ///     zero.
+    /// </summary>
+    public static readonly Rgba32 Red = Rgba32.FromRGBA(255, 0, 0, 255);
+
+    /// <summary>
+    ///     Represents a <see cref="Rgba32"/> values who's green and alpha
+    ///     components are set to 255 and the red and blue components set to
+    ///     zero.
+    /// </summary>
+    public static readonly Rgba32 Green = Rgba32.FromRGBA(0, 255, 0, 255);
+
+    /// <summary>
+    ///     Represents a <see cref="Rgba32"/> values who's blue and alpha
+    ///     components are set to 255 and the red and green components set to
+    ///     zero.
+    /// </summary>
+    public static readonly Rgba32 Blue = Rgba32.FromRGBA(0, 0, 255, 255);
+
     private uint _value;
 
     /// <summary>

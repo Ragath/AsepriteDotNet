@@ -28,6 +28,34 @@ namespace AsepriteDotNet.Tests;
 
 public sealed class Rgba32Tests
 {
+
+    [Fact]
+    public void Rgba32_DefaultConstructorTest()
+    {
+        Rgba32 empty = new(0);
+        Assert.Equal(empty, new Rgba32());
+    }
+
+    [Theory]
+    [InlineData(uint.MinValue)]
+    [InlineData(uint.MaxValue)]
+    [InlineData(0)]
+    public void Rgba32_NonDefaultConstructorTest(uint value)
+    {
+        Rgba32 rgba = new(value);
+        Assert.Equal(value, rgba.Value);
+    }
+
+    [Fact]
+    public void Rgba32_StaticColorsTest()
+    {
+        Assert.Equal(Rgba32.FromRGBA(255, 0, 0, 255), Rgba32.Red);
+        Assert.Equal(Rgba32.FromRGBA(0, 255, 0, 255), Rgba32.Green);
+        Assert.Equal(Rgba32.FromRGBA(0, 0, 255, 255), Rgba32.Blue);
+        Assert.Equal(Rgba32.FromRGBA(0, 0, 0, 0), Rgba32.Transparent);
+    }
+
+
     private static readonly Rgba32 _green = Rgba32.FromRGBA(106, 190, 48, 255);
     private static readonly Rgba32 _purple = Rgba32.FromRGBA(63, 63, 116, 255);
     private static readonly Rgba32 _pink = Rgba32.FromRGBA(215, 123, 186, 255);

@@ -103,7 +103,7 @@ public record AsepriteFile(Size FrameSize, AsePalette Palette, List<AseFrame> Fr
     /// </summary>
     public int PaletteCount => Palette.Count;
 
-    public Spritesheet GenerateSpritesheet(bool onlyVisibleLayers = true, bool mergeDuplicates = true, int borderPadding = 0, int spacing = 0, int innerPadding = 0)
+    public Spritesheet ExportSpritesheet(bool onlyVisibleLayers = true, bool mergeDuplicates = true, int borderPadding = 0, int spacing = 0, int innerPadding = 0)
     {
         //  Flatten all frames
         List<Rgba32[]> flattenedFrames = new();
@@ -292,6 +292,7 @@ public record AsepriteFile(Size FrameSize, AsePalette Palette, List<AseFrame> Fr
                                                       Color: color,
                                                       CenterBounds: lastKey.CenterBounds,
                                                       Pivot: lastKey.Pivot);
+                        slices.Add(interpolatedSlice);
                     }
                 }
 
