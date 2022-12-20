@@ -21,54 +21,48 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Primitives;
+using AsepriteDotNet.Core.AseTypes;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.Primitives;
 
-namespace AsepriteDotNet.Tests;
+namespace AsepriteDotNet.Core.Tests;
 
-public sealed class DimensionTests
+public class AseSliceTests
 {
+
     [Fact]
-    public void Dimension_AddTest()
+    public void AseSlice_ConstructorTest()
     {
-        Size left = new Size(1, 2);
-        Size right = new Size(3, 4);
+        bool isNinePatch = false;
+        bool hasPivot = true;
+        string name = "Slice";
+        List<AseSliceKey> keys = new();
 
-        Size expected = new Size(4, 6);
+        AseSlice slice = new(isNinePatch, hasPivot, name, keys);
+        Assert.Equal(isNinePatch, slice.IsNinePatch);
+        Assert.Equal(hasPivot, slice.HasPivot);
+        Assert.Equal(name, slice.Name);
+        Assert.Empty(slice.Keys);
+        Assert.Equal(0, slice.KeyCount);
+        Assert.Null(slice.UserData);
 
-        Assert.Equal(expected, Size.Add(left, right));
-        Assert.Equal(expected, left + right);
+        string text = "Hello World";
+        Rgba32 color = Rgba32.FromRGBA(1, 2, 3, 4);
+        AseUserData userdata = new(text, color);
+
+        slice = new(isNinePatch, hasPivot, name, keys, userdata);
+        Assert.NotNull(slice.UserData);
+        Assert.Equal(color, slice.UserData.Color);
+        Assert.Equal(text, slice.UserData.Text);
     }
 
     [Fact]
-    public void Dimension_SubtractTest()
+    public void AseSlice_IndexerTest()
     {
-        Size left = new Size(1, 2);
-        Size right = new Size(3, 4);
+        AseSliceKey key = new(0, Rectangle.Empty);
+        List<AseSliceKey> keys = new() { key };
+        AseSlice slice = new(false, false, string.Empty, keys);
 
-        Size expected = new Size(-2, -2);
-
-        Assert.Equal(expected, Size.Subtract(left, right));
-        Assert.Equal(expected, left - right);
-    }
-
-    [Fact]
-    public void Dimension_EqualTest()
-    {
-        Size a = new Size(1, 2);
-        Size b = new Size(1, 2);
-
-        Assert.True(a == b);
-        Assert.True(a.Equals(b));
-        Assert.True(a.Equals((object)b));
-        Assert.False(a == Size.Empty);
-        Assert.False(a.Equals(Size.Empty));
-        Assert.False(a.Equals((object)Size.Empty));
-    }
-
-    [Fact]
-    public void Dimension_NotEqualTest()
-    {
-        Assert.True(Size.Empty != new Size(1, 2));
-        Assert.False(Size.Empty != new Size(0, 0));
+        Assert.Equal(keys[0], slice[0]);
     }
 }

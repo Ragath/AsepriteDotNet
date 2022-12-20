@@ -21,41 +21,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using System.IO.Compression;
+using AsepriteDotNet.Core.AseTypes;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.Primitives;
 
-using AsepriteDotNet.Compression;
+namespace AsepriteDotNet.Core.Tests;
 
-namespace AsepriteDotNet.Tests;
-
-public class ZlibTests
+public class AseTilesetTests
 {
-    [Theory]
-    [InlineData(1)]
-    [InlineData(100)]
-    [InlineData(1000)]
-    public void Zlib_DeflateTest(int size)
-    {
-        byte[] expected = GetRandomBytes(size);
-        byte[] compressed = CompressBytes(expected);
-        byte[] decompressed = Zlib.Deflate(compressed);
-        string s = System.Text.Encoding.UTF8.GetString(decompressed);
 
-        Assert.Equal(expected, decompressed);
+    [Fact]
+    public void AseTileset_ConstructorTest()
+    {
+        int id = 1;
+        int tileCount = 2;
+        Size tileSize = new(3, 4);
+        string name = "Tileset";
+        Rgba32[] pixels = Array.Empty<Rgba32>();
+
+        AseTileset tileset = new(id, tileCount, tileSize, name, pixels);
+
+        Assert.Equal(id, tileset.ID);
+        Assert.Equal(tileCount, tileset.TileCount);
+        Assert.Equal(tileSize, tileset.TileSize);
+        Assert.Equal(tileSize.Width, tileset.TileWidth);
+        Assert.Equal(tileSize.Height, tileset.TileHeight);
+        Assert.Equal(pixels, tileset.Pixels);
     }
-
-    private byte[] GetRandomBytes(int size)
-    {
-        byte[] data = new byte[size];
-        Random.Shared.NextBytes(data);
-        return data;
-    }
-
-    private byte[] CompressBytes(byte[] data)
-    {
-        using MemoryStream ms = new();
-        using ZLibStream zOut = new(ms, CompressionMode.Compress);
-        zOut.Write(data);
-        zOut.Flush();
-        return ms.ToArray();
-    }   
 }

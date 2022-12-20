@@ -24,7 +24,6 @@ using AsepriteDotNet.Core.AseTypes;
 using AsepriteDotNet.Core.Color;
 using AsepriteDotNet.Core.IO;
 using AsepriteDotNet.Core.Primitives;
-using AsepriteDotNet.Core.Serialization;
 
 namespace AsepriteDotNet.Core;
 
@@ -228,7 +227,95 @@ public record AsepriteFile(Size FrameSize, AsePalette Palette, List<AseFrame> Fr
             }
         }
 
-        return new Spritesheet(spritesheetSize, spritesheetPixels, frames);
+        List<Tag> tags = ExportTags();
+        List<Slice> slices = ExportSlices();
+
+        return new Spritesheet(spritesheetSize, spritesheetPixels, frames, tags, slices);
+    }
+
+    public List<Tag> ExportTags()
+    {
+        List<Tag> tags = new();
+
+        for (int i = 0; i < TagCount; i++)
+        {
+            AseTag aseTag = Tags[i];
+            //  Prefer UserData color (Aseprite 1.3) over tag color 
+            Rgba32 color = aseTag.UserData?.Color ?? aseTag.Color;
+
+            Tag tag = new(aseTag.Name, aseTag.From, aseTag.To, aseTag.Direction, color);
+            tags.Add(tag);
+        }
+
+        return tags;
+    }
+
+    public List<Slice> ExportSlices()
+    {
+        List<Slice> slices = new();
+
+        //  Slice keys in Aseprite are defined with a frame index that indicates
+        //  the frame the key starts on, but doesn't give a value for what frame
+        //  it ends on or is transformed on.  So, we'll interpolate the keys to
+        //  create the Slice elements
+
+        for (int i = 0; i < SliceCount; i++)
+        {
+            AseSlice aseSlice = Slices[i];
+            string name = aseSlice.Name;
+
+            //  If no color defined in user data, use Aseprite default,
+            //  which is just blue
+            Rgba32 color = aseSlice.UserData?.Color ?? Rgba32.FromRGBA(0, 0, 255, 255);
+
+            AseSliceKey? lastKey = default;
+
+            for (int k = 0; k < aseSlice.KeyCount; k++)
+            {
+                AseSliceKey key = aseSlice[k];
+
+                Slice slice = new(Name: name,
+                                  FrameIndex: key.Frame,
+                                  Bounds: key.Bounds,
+                                  Color: color,
+                                  CenterBounds: key.CenterBounds,
+                                  Pivot: key.Pivot);
+
+                //  Perform interpolation before adding the slice
+                if (lastKey is not null && lastKey.Frame < key.Frame)
+                {
+                    for (int offset = 1; offset < key.Frame - lastKey.Frame; offset++)
+                    {
+                        Slice interpolatedSlice = new(Name: name,
+                                                      FrameIndex: lastKey.Frame + offset,
+                                                      Bounds: lastKey.Bounds,
+                                                      Color: color,
+                                                      CenterBounds: lastKey.CenterBounds,
+                                                      Pivot: lastKey.Pivot);
+                    }
+                }
+
+                slices.Add(slice);
+                lastKey = key;
+            }
+
+            if (lastKey?.Frame < FrameCount)
+            {
+                for (int offset = 1; offset < FrameCount - lastKey.Frame; offset++)
+                {
+                    Slice interpolatedSlice = new(Name: name,
+                                                  FrameIndex: lastKey.Frame + offset,
+                                                  Bounds: lastKey.Bounds,
+                                                  Color: color,
+                                                  CenterBounds: lastKey.CenterBounds,
+                                                  Pivot: lastKey.Pivot);
+
+                    slices.Add(interpolatedSlice);
+                }
+            }
+        }
+
+        return slices;
     }
 
     /// <summary>

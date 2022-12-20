@@ -23,7 +23,6 @@ using System.Text.Json.Serialization;
 using AsepriteDotNet.Core.Color;
 using AsepriteDotNet.Core.IO;
 using AsepriteDotNet.Core.Primitives;
-using AsepriteDotNet.Core.Serialization;
 
 namespace AsepriteDotNet.Core;
 
@@ -45,8 +44,15 @@ namespace AsepriteDotNet.Core;
 ///     The collection of all <see cref="Frame"/> elements in this
 ///     <see cref="Spritesheet"/>.
 /// </param>
-[JsonConverter(typeof(SpritesheetConverter))]
-public record Spritesheet(Size Size, Rgba32[] Pixels, List<Frame> Frames)
+/// <param name="Tags">
+///     The collection of all <see cref="Tag"/> elements in this
+///     <see cref="Spritesheet"/>.
+/// </param>
+/// <param name="Slices">
+///     The collection of all <see cref="Slice"/> elements in this
+///     <see cref="Spritesheet"/>.
+/// </param>
+public record Spritesheet(Size Size, Rgba32[] Pixels, List<Frame> Frames, List<Tag> Tags, List<Slice> Slices)
 {
     /// <summary>
     ///     The width, in pixels, of this <see cref="Spritesheet"/>/
@@ -59,16 +65,28 @@ public record Spritesheet(Size Size, Rgba32[] Pixels, List<Frame> Frames)
     public int Height => Size.Height;
 
     /// <summary>
-    ///     The total number of <see cref="Rgba32"/> pixel color elements in
-    ///     this <see cref="Spritesheet"/>.
+    ///     The total number of <see cref="Rgba32"/> pixel color elements in the
+    ///     <see cref="Pixels"/> collection for this <see cref="Spritesheet"/>.
     /// </summary>
     public int PixelCount => Pixels.Length;
 
     /// <summary>
-    ///     The total number of <see cref="Frame"/> elements in this
-    ///     <see cref="Spritesheet"/>.
+    ///     The total number of <see cref="Frame"/> elements in the
+    ///     <see cref="Frames"/> collection for this <see cref="Spritesheet"/>.
     /// </summary>
     public int FrameCount => Frames.Count;
+
+    /// <summary>
+    ///     The total number of <see cref="Tag"/> elements in the
+    ///     <see cref="Tags"/> collection for this <see cref="Spritesheet"/>.
+    /// </summary>
+    public int TagCount => Tags.Count;
+
+    /// <summary>
+    ///     The total number of <see cref="Slice"/> elements in the
+    ///     <see cref="Slices"/> collection for this <see cref="Spritesheet"/>.
+    /// </summary>
+    public int SliceCount => Slices.Count;
 
     /// <summary>
     ///     Returns the <see cref="Frame"/> element at the specified

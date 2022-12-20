@@ -21,10 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.AsepriteTypes;
-using AsepriteDotNet.Color;
-using AsepriteDotNet.IO;
-using AsepriteDotNet.Primitives;
+using AsepriteDotNet.Core;
+using AsepriteDotNet.Core.AseTypes;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.IO;
+using AsepriteDotNet.Core.Primitives;
 
 namespace AsepriteDotNet.Tests;
 
@@ -68,24 +69,24 @@ public sealed class AsepriteFileReaderTest
 
         //  Validate Layers
         Assert.Equal(11, doc.Layers.Count);
-        Assert.IsType<AsepriteImageLayer>(doc.Layers[0]);
-        Assert.True(doc.Layers[0].IsBackgroundLayer);
+        Assert.IsType<AseImageLayer>(doc.Layers[0]);
+        Assert.True(doc.Layers[0].IsBackground);
         Assert.Equal("background", doc.Layers[0].Name);
         Assert.True(doc.Layers[0].IsVisible);
         Assert.Equal("hidden", doc.Layers[1].Name);
         Assert.False(doc.Layers[1].IsVisible);
         Assert.Equal("user-data", doc.Layers[2].Name);
-        Assert.Equal("user-data text", doc.Layers[2].UserData.Text);
-        Assert.Equal(Rgba32.FromRGBA(223, 7, 114, 255), doc.Layers[2].UserData.Color);
+        Assert.Equal("user-data text", doc.Layers[2].UserData?.Text);
+        Assert.Equal(Rgba32.FromRGBA(223, 7, 114, 255), doc.Layers[2].UserData?.Color);
         Assert.Equal("reference", doc.Layers[3].Name);
-        Assert.True(doc.Layers[3].IsReferenceLayer);
+        Assert.True(doc.Layers[3].IsReference);
         Assert.Equal("75-opacity", doc.Layers[4].Name);
         Assert.Equal(75, doc.Layers[4].Opacity);
         Assert.Equal("blendmode-difference", doc.Layers[5].Name);
         Assert.Equal(BlendMode.Difference, doc.Layers[5].BlendMode);
         Assert.Equal("tilemap", doc.Layers[6].Name);
-        Assert.Equal(0, Assert.IsType<AsepriteTilemapLayer>(doc.Layers[6]).Tileset.ID);
-        Assert.Equal(2, Assert.IsType<AsepriteGroupLayer>(doc.Layers[7]).Children.Count);
+        Assert.Equal(0, Assert.IsType<AseTilemapLayer>(doc.Layers[6]).Tileset.ID);
+        Assert.Equal(2, Assert.IsType<AseGroupLayer>(doc.Layers[7]).Children.Count);
         Assert.Equal(1, doc.Layers[8].ChildLevel);
         Assert.Equal(1, doc.Layers[9].ChildLevel);
 
@@ -95,13 +96,13 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal(0, doc.Tags[0].From);
         Assert.Equal(2, doc.Tags[0].To);
         Assert.Equal(Rgba32.FromRGBA(0, 0, 0, 255), doc.Tags[0].Color);
-        Assert.Equal(LoopDirection.Forward, doc.Tags[0].LoopDirection);
+        Assert.Equal(LoopDirection.Forward, doc.Tags[0].Direction);
         Assert.Equal("tag3pingpong", doc.Tags[1].Name);
-        Assert.Equal(LoopDirection.PingPong, doc.Tags[1].LoopDirection);
+        Assert.Equal(LoopDirection.PingPong, doc.Tags[1].Direction);
         Assert.Equal("tag4userdata", doc.Tags[2].Name);
         Assert.Equal(Rgba32.FromRGBA(11, 255, 230, 255), doc.Tags[2].Color);
-        Assert.Equal(Rgba32.FromRGBA(11, 255, 230, 255), doc.Tags[2].UserData.Color);
-        Assert.Equal("tag-4-user-data", doc.Tags[2].UserData.Text);
+        Assert.Equal(Rgba32.FromRGBA(11, 255, 230, 255), doc.Tags[2].UserData?.Color);
+        Assert.Equal("tag-4-user-data", doc.Tags[2].UserData?.Text);
 
         //  Validate Frames
         Assert.Equal(7, doc.Frames.Count);
@@ -111,7 +112,7 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal(2, doc.Frames[0].Cels.Count);  //  Background and Reference Layer cels
 
         //  Validate Cels
-        AsepriteImageCel fgCel = Assert.IsType<AsepriteImageCel>(doc.Frames[2].Cels[1]);
+        AseImageCel fgCel = Assert.IsType<AseImageCel>(doc.Frames[2].Cels[1]);
         Assert.Equal("foreground", fgCel.Layer.Name);
         Assert.Equal(new Size(16, 16), fgCel.Size);
         Assert.Equal(new Point(8, 8), fgCel.Position);
@@ -158,7 +159,7 @@ public sealed class AsepriteFileReaderTest
             pal0, pal9, pal1, pal8, pal2, pal7, pal3, pal6, tran, tran, tran, tran, tran, tran, tran, tran
         };
 
-        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
+        AseImageCel cel = Assert.IsType<AseImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -202,7 +203,7 @@ public sealed class AsepriteFileReaderTest
             pal1, pal10, pal2, pal9, pal3, pal8, pal4, pal7, pal0, pal0, pal0, pal0, pal0, pal0, pal0, pal0
         };
 
-        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
+        AseImageCel cel = Assert.IsType<AseImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -244,7 +245,7 @@ public sealed class AsepriteFileReaderTest
             pal7, pal6, pal5, pal4, pal3, pal2, pal1, pal0, tran, tran, tran, tran, tran, tran, tran, tran
         };
 
-        AsepriteImageCel cel = Assert.IsType<AsepriteImageCel>(doc.Frames[0].Cels[0]);
+        AseImageCel cel = Assert.IsType<AseImageCel>(doc.Frames[0].Cels[0]);
         Assert.Equal(expected, cel.Pixels);
     }
 
@@ -267,7 +268,7 @@ public sealed class AsepriteFileReaderTest
         Rgba32 pal9 = doc.Palette[9];
 
         Assert.Single(doc.Tilesets);
-        AsepriteTileset tileset = doc.Tilesets[0];
+        AseTileset tileset = doc.Tilesets[0];
         Assert.Equal("test-tileset", tileset.Name);
 
         Assert.Equal(0, tileset.ID);
@@ -379,18 +380,18 @@ public sealed class AsepriteFileReaderTest
         Assert.Equal(expectedTilesetPixels, tileset.Pixels);
 
 
-        AsepriteTilemapLayer tilesLayer = Assert.IsType<AsepriteTilemapLayer>(doc.Layers[1]);
+        AseTilemapLayer tilesLayer = Assert.IsType<AseTilemapLayer>(doc.Layers[1]);
         Assert.Equal(tileset, tilesLayer.Tileset);
         // Assert.Equal(tileset.ID, tilesLayer.TilesetIndex);
 
-        AsepriteTilemapCel tilesCel = Assert.IsType<AsepriteTilemapCel>(doc.Frames[0].Cels[1]);
+        AseTilemapCel tilesCel = Assert.IsType<AseTilemapCel>(doc.Frames[0].Cels[1]);
 
-        Assert.Equal(32, tilesCel.BitsPerTile);
-        Assert.Equal((uint)0x1fffffff, tilesCel.TileIdBitmask);
-        Assert.Equal((uint)0x20000000, tilesCel.XFlipBitmask);
-        Assert.Equal((uint)0x40000000, tilesCel.YFlipBitmask);
-        Assert.Equal(0x80000000, tilesCel.RotationBitmask);
-        Assert.Equal(16, tilesCel.Tiles.Length);
+        Assert.Equal(new Size(4, 4), tilesCel.Size);
+        Assert.Equal(new Size(8, 8), tilesCel.TileSize);
+        Assert.Equal(16, tilesCel.TileCount);
+        Assert.Equal(doc.Layers[1], tilesCel.Layer);
+        Assert.Equal(new Point(0, 0), tilesCel.Position);
+        Assert.Equal(255, tilesCel.Opacity);
 
         uint[] ids = new uint[]
         {
@@ -400,7 +401,7 @@ public sealed class AsepriteFileReaderTest
             1, 3, 2, 1
         };
 
-        Assert.Equal(ids, tilesCel.Tiles.Select(tile => tile.TileID).ToArray());
+        Assert.Equal(ids, tilesCel.Tiles.Select(tile => tile.ID).ToArray());
 
         //  Can't test Tile.XFlip, Tile.YFlip, and Tile.Rotate90 because these
         //  aren't actually implemented in Aseprite yet.

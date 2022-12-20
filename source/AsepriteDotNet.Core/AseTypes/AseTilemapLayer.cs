@@ -54,5 +54,5 @@ namespace AsepriteDotNet.Core.AseTypes;
 ///     <see cref="AseTilemapLayer"/> in Aseprite, if any was set; otherwise,
 ///     <see langword="null"/>.
 /// </param>
-public record AseTilemapLayer(AseTileset Tileset, bool IsVisible, bool IsBackground, bool IsReference, int ChildLevel, BlendMode BlendMode, int Opacity, string Name)
-    : AseLayer(IsVisible, IsBackground, IsReference, ChildLevel, BlendMode, Opacity, Name);
+public record AseTilemapLayer(AseTileset Tileset, bool IsVisible, bool IsBackground, bool IsReference, int ChildLevel, BlendMode BlendMode, int Opacity, string Name, AseUserData? UserData = default)
+    : AseLayer(IsVisible, IsBackground, IsReference, ChildLevel, BlendMode, Opacity, Name, UserData);

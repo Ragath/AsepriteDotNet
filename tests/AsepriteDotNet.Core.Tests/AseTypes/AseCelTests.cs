@@ -21,30 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Primitives;
+using AsepriteDotNet.Core.AseTypes;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.Primitives;
 
-namespace AsepriteDotNet.Tests;
+namespace AsepriteDotNet.Core.Tests;
 
-public sealed class RectTests
+public class AseCelTests
 {
-    [Fact]
-    public void Rect_EqualTest()
-    {
-        Rectangle a = new Rectangle(1, 2, 3, 4);
-        Rectangle b = new Rectangle(1, 2, 3, 4);
-
-        Assert.True(a == b);
-        Assert.True(a.Equals(b));
-        Assert.True(a.Equals((object)b));
-        Assert.False(a == Rectangle.Empty);
-        Assert.False(a.Equals(Rectangle.Empty));
-        Assert.False(a.Equals((object)Rectangle.Empty));
-    }
 
     [Fact]
-    public void Rect_NotEqualTest()
+    public void AseCel_ConstructorTest()
     {
-        Assert.True(Rectangle.Empty != new Rectangle(1, 2, 3, 4));
-        Assert.False(Rectangle.Empty != new Rectangle(0, 0, 0, 0));
+
+        AseLayer layer = new(true, true, true, 0, BlendMode.Normal, 255, "Layer");
+        Point position = new(1, 2);
+        int opacity = 3;
+        AseCel cel = new AseImageCel(Size.Empty, Array.Empty<Rgba32>(), layer, position, opacity);
+
+        Assert.Equal(layer, cel.Layer);
+        Assert.Equal(position, cel.Position);
+        Assert.Equal(position.X, cel.X);
+        Assert.Equal(position.Y, cel.Y);
+        Assert.Equal(opacity, cel.Opacity);
+        Assert.Null(cel.UserData);
+
+        string text = "Hello World";
+        Rgba32 color = Rgba32.FromRGBA(1, 2, 3, 4);
+        AseUserData userdata = new(text, color);
+
+        cel = new AseImageCel(Size.Empty, Array.Empty<Rgba32>(), layer, position, opacity, userdata);
+        Assert.NotNull(cel.UserData);
+        Assert.Equal(color, cel.UserData.Color);
+        Assert.Equal(text, cel.UserData.Text);
     }
 }

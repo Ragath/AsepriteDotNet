@@ -21,54 +21,35 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ---------------------------------------------------------------------------- */
-using AsepriteDotNet.Primitives;
+using AsepriteDotNet.Core.AseTypes;
+using AsepriteDotNet.Core.Color;
+using AsepriteDotNet.Core.Primitives;
 
-namespace AsepriteDotNet.Tests;
+namespace AsepriteDotNet.Core.Tests;
 
-public sealed class LocationTests
+public class FrameTests
 {
-    [Fact]
-    public void Location_AddTest()
-    {
-        Point left = new Point(1, 2);
-        Point right = new Point(3, 4);
-
-        Point expected = new Point(4, 6);
-
-        Assert.Equal(expected, Point.Add(left, right));
-        Assert.Equal(expected, left + right);
-    }
 
     [Fact]
-    public void Location_SubtractTest()
+    public void Frame_ConstructorTest()
     {
-        Point left = new Point(1, 2);
-        Point right = new Point(3, 4);
+        Rectangle bounds = new(10, 20, 30, 40);
+        TimeSpan duration = TimeSpan.FromMilliseconds(50);
 
-        Point expected = new Point(-2, -2);
+        Frame frame = new(bounds, duration);
 
-        Assert.Equal(expected, Point.Subtract(left, right));
-        Assert.Equal(expected, left - right);
-    }
-
-    [Fact]
-    public void Location_EqualTest()
-    {
-        Point a = new Point(1, 2);
-        Point b = new Point(1, 2);
-
-        Assert.True(a == b);
-        Assert.True(a.Equals(b));
-        Assert.True(a.Equals((object)b));
-        Assert.False(a == Point.Empty);
-        Assert.False(a.Equals(Point.Empty));
-        Assert.False(a.Equals((object)Point.Empty));
-    }
-
-    [Fact]
-    public void Location_NotEqualTest()
-    {
-        Assert.True(Point.Empty != new Point(1, 2));
-        Assert.False(Point.Empty != new Point(0, 0));
+        Assert.Equal(bounds, frame.Source);
+        Assert.Equal(bounds.Size, frame.Size);
+        Assert.Equal(bounds.Width, frame.Width);
+        Assert.Equal(bounds.Height, frame.Height);
+        Assert.Equal(bounds.Location, frame.Location);
+        Assert.Equal(bounds.X, frame.X);
+        Assert.Equal(bounds.Y, frame.Y);
+        Assert.Equal(bounds.Top, frame.Top);
+        Assert.Equal(bounds.Bottom, frame.Bottom);
+        Assert.Equal(bounds.Left, frame.Left);
+        Assert.Equal(bounds.Right, frame.Right);
+        Assert.Equal(duration.TotalMilliseconds, frame.TotalMilliseconds);
+        Assert.Equal(duration.TotalSeconds, frame.TotalSeconds);
     }
 }

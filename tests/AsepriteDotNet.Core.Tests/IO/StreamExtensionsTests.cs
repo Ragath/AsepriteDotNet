@@ -23,7 +23,7 @@ SOFTWARE.
 ---------------------------------------------------------------------------- */
 using System.Text;
 
-using AsepriteDotNet.IO;
+using AsepriteDotNet.Core.IO;
 
 namespace AsepriteDotNet.Tests;
 
@@ -174,11 +174,9 @@ public class StreamExtensionTests
         //  First one should always succeed.
         readAction(stream);
 
+        //  Second one should fail since we truncated the last byte
         Exception ex = Record.Exception(() => readAction(stream));
         Assert.NotNull(ex);
         Assert.IsType<EndOfStreamException>(ex);
-
-        //  Second one should fail since we truncated the last byte
-        //Assert.Throws<EndOfStreamException>(() => readAction(stream));
     }
 }

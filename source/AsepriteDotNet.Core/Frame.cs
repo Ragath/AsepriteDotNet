@@ -117,13 +117,13 @@ public record Frame(Rectangle Source, TimeSpan Duration)
     ///     when used in an animation.
     /// </summary>
     [JsonIgnore]
-    public int TotalMilliseconds = unchecked((int)Duration.TotalMilliseconds);
+    public double TotalMilliseconds = Duration.TotalMilliseconds;
 
     /// <summary>
     ///     The total duration, in seconds, of this <see cref="Frame"/>, when
     ///     used in an animation.
     /// </summary>
     [JsonIgnore]
-    public int TotalSeconds = unchecked((int)Duration.TotalSeconds);
+    public double TotalSeconds = Duration.TotalSeconds;
 
 }

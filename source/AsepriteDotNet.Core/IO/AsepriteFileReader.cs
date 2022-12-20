@@ -344,9 +344,10 @@ public static class AsepriteFileReader
                         //  per tile (32 / 8 = 4).  Meaning that each tile value
                         //  is a uint (DWORD)
                         int bytesPerTile = 4;
-                        List<AseTile> tiles = new(data.Length / bytesPerTile);
+                        int tileCount = data.Length / bytesPerTile;
+                        List<AseTile> tiles = new(tileCount);
 
-                        for (int i = 0, b = 0; i < tiles.Count; i++, b += bytesPerTile)
+                        for (int i = 0, b = 0; i < tileCount; i++, b += bytesPerTile)
                         {
                             byte[] dword = data[b..(b + bytesPerTile)];
                             uint value = BitConverter.ToUInt32(dword);
@@ -359,7 +360,7 @@ public static class AsepriteFileReader
                             tiles.Add(tile);
                         }
 
-                        Debug.Assert(tiles.Count == data.Length / bytesPerTile);
+                        Debug.Assert(tiles.Count == data.Length / bytesPerTile, $"Tile Count '{tiles.Count}' does not equal '{data.Length / bytesPerTile}'");
 
                         Size tileSize = ((AseTilemapLayer)celLayer).Tileset.TileSize;
 
