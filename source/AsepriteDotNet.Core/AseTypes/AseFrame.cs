@@ -106,13 +106,18 @@ public record AseFrame(Size Size, int Duration, List<AseCel> Cels)
     ///     on <see cref="AseLayer"/> elements that are visible should be
     ///     included.
     /// </param>
+    /// <param name="includeBackgroundLayer">
+    ///     indicates whether <see cref="AseImageCel"/> elements that are on
+    ///     a <see cref="AseLayer"/> that is marked as a background layer should
+    ///     be included.
+    /// </param>
     /// <returns>
     ///     A new <see cref="Array"/> of <see cref="Rgba32"/> elements that
     ///     represents the pixel data for the image produced from flattening
     ///     this <see cref="AseFrame"/>.  Order of pixel data is from
     ///     top-to-bottom, read left-to-right.
     /// </returns>
-    public Rgba32[] FlattenFrame(bool onlyVisibleLayers = true)
+    public Rgba32[] FlattenFrame(bool onlyVisibleLayers = true, bool includeBackgroundLayer = false)
     {
         Rgba32[] result = new Rgba32[Width * Height];
 
@@ -122,6 +127,9 @@ public record AseFrame(Size Size, int Duration, List<AseCel> Cels)
 
             //  Are we only processing cels on visible layers?
             if (onlyVisibleLayers && !cel.Layer.IsVisible) { continue; }
+
+            //  Are we processing cels on a background layer?
+            if (cel.Layer.IsBackground && !includeBackgroundLayer) { continue; }
 
             //  Only process image cels
             if (cel is AseImageCel imageCel)

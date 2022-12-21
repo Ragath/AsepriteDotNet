@@ -103,13 +103,13 @@ public record AsepriteFile(Size FrameSize, AsePalette Palette, List<AseFrame> Fr
     /// </summary>
     public int PaletteCount => Palette.Count;
 
-    public Spritesheet ExportSpritesheet(bool onlyVisibleLayers = true, bool mergeDuplicates = true, int borderPadding = 0, int spacing = 0, int innerPadding = 0)
+    public Spritesheet ExportSpritesheet(bool onlyVisibleLayers = true, bool includeBackgroundLayer = false, bool mergeDuplicates = true, int borderPadding = 0, int spacing = 0, int innerPadding = 0)
     {
         //  Flatten all frames
         List<Rgba32[]> flattenedFrames = new();
         for (int frameNum = 0; frameNum < FrameCount; frameNum++)
         {
-            flattenedFrames.Add(Frames[frameNum].FlattenFrame(onlyVisibleLayers));
+            flattenedFrames.Add(Frames[frameNum].FlattenFrame(onlyVisibleLayers, includeBackgroundLayer));
         }
 
         //  Pack frames

@@ -69,6 +69,12 @@ public struct Rgba32 : IEquatable<Rgba32>
     /// </summary>
     public static readonly Rgba32 Blue = Rgba32.FromRGBA(0, 0, 255, 255);
 
+    public static readonly Rgba32 Yellow = Rgba32.FromRGBA(255, 255, 0, 255);
+    public static readonly Rgba32 Magenta = Rgba32.FromRGBA(255, 0, 255, 255);
+    public static readonly Rgba32 Aqua = Rgba32.FromRGBA(0, 255, 255, 255);
+    public static readonly Rgba32 White = Rgba32.FromRGBA(255, 255, 255, 255);
+    public static readonly Rgba32 Black = Rgba32.FromRGBA(0, 0, 0, 255);
+
     private uint _value;
 
     /// <summary>
